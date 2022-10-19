@@ -486,6 +486,7 @@
                     }).then((willDelete) => {
                         if (willDelete) {
                             eliminarPDF(auxResguardos.id_bien, auxResguardos.archivo);
+                            $($table).bootstrapTable('refresh');
                         } else {
                             swal(
                                 'Sin cambios',

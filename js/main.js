@@ -4,7 +4,7 @@ var auxClases= [];
 var auxIDSubC, auxDesSubC = "";
 
 var fecha = new Date();
-var fechaHoy = fecha.toLocaleDateString() + " a la(s) " + fecha.toLocaleTimeString("en-US", {
+var fechaHoy = fecha.toLocaleDateString() + " a la(s) " + fecha.toLocaleTimeString("es-MX", {
     hour: "2-digit",
     minute: "2-digit",
 });

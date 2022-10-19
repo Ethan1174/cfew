@@ -19,7 +19,7 @@
                                     <td><label class="control-label"><strong>RPE: </strong></span></td>
                                     <td><input type="text" name="rpeRes" id="rpeResBaja" class="inputMod form-control" value="" disabled></input></td>
                                     <td><label class="control-label"><strong>Fecha de Captura: </strong></label></td>
-                                    <td><input type="date" name="fechaCapRes" id="fechaCapRes" step="1" class="inputMod form-control " required></td>
+                                    <td><input type="date" name="fechaCapResBaja" id="fechaCapResBaja" step="1" class="inputMod form-control " required></td>
                                 </tr>
                             </table>
                         </div>
@@ -104,7 +104,15 @@
                                         </tr>
                                         <tr>
                                             <td><label class="control-label"><strong>Archivo: </strong></span></td>
-                                            <td><input class="form-control" type="file" id="formFileBaja" name="formFile" accept=”.pdf”></td>
+                                            <td><input class="form-control" type="file" id="fileToUpload" name="fileToUpload">
+                                            </td>
+                                            <td id="tdPdf" colspan="2">
+                                                <div id="archivoPDF"></div>
+
+                                            </td>
+                                            <td>
+                                                <div id="eliminarPdf"></div>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
@@ -144,10 +152,10 @@
                                 <select name="areaRep" id="area" class="form-control" title="Seleccione la Zona"></select>
                             </div>
                             <div class="col-xs-12 col-md-4 col-lg-4">
-                                <input type="date" name="fecha_inicioRep" id="fecha_inicioRep" class="form-control" title="Seleccione la especialidad"></input>
+                                <input type="date" name="fecha_inicioRep" id="fecha_inicioRep" class="form-control"></input>
                             </div>
                             <div class="col-xs-12 col-md-4 col-lg-4">
-                                <input type="date" name="fecha_terminoRep" id="fecha_terminoRep" class="form-control" title="Seleccione el RPE"></input>
+                                <input type="date" name="fecha_terminoRep" id="fecha_terminoRep" class="form-control"></input>
                             </div>
                         </div>
                     </form>
@@ -174,7 +182,7 @@
                     <th data-field="rpe" data-sortable="true">RPE</th>
                     <th data-field="motivo_baja" data-sortable="true">Motivo de Baja</th>
                     <th data-field="fecha_baja" data-sortable="true">Fecha de baja</th>
-                    <th data-field="archivo" data-sortable="true">Dictamen</th>
+                    <th data-field="archivo" data-sortable="true" data-formatter="operateFormatter">Dictamen</th>
                 </tr>
             </thead>
             <tbody>
@@ -188,23 +196,37 @@
     // -----------------------------------------------------------Tabla reportes_baja---------------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------------------------
     $(document).ready(function() {
+        var $table = $('#tablaReporteBajas');
+        var select = $('#botonEditarRepoBajas');
+        var select1 = $('#botonDetallesRepoBaja');
+        var dataResBaja = [];
         $(function() {
-            cargarTablaBT('#tablaReporteBajas');
+            cargarTablaBT($table);
 
         });
-
         f_datos("php/areas.php", {}, function(data) {
-
+            let fecha = new Date();
             $("#area").empty();
             $.each(data, function(key, value) {
                 $("#area").append('<option value="' + value.clave + '" >' + value.nombre_corto + '</option>');
             });
             $("#area").val(dataUser.area);
-            $("#area").trigger("change");
+            $("#area").trigger("change");   
         });
-        var $table = $('#tablaReporteBajas');
-        var select = $('#botonEditarRepoBajas');
-        var select1 = $('#botonDetallesRepoBaja');
+        
+        $("#fecha_terminoRep").off("change").on("change", function(e) {
+            var fecha_inicio = $("#fecha_inicioRep").val();
+            var fecha_termino = $("#fecha_terminoRep").val();
+            if ($table) $table.bootstrapTable('removeAll');
+            f_datos("php/selectAllRepoBaja.php", {
+                fecha_inicio: fecha_inicio,
+                fecha_termino: fecha_termino
+            }, function(bajas) {
+                // console.log(bajas);
+                $table.bootstrapTable('load', bajas);
+            });
+        });
+
 
         $(function() {
 
@@ -244,16 +266,16 @@
         // -------------------------------------------------------------------------------------------
         function operarResguardoBaja() {
             // Dentro de la funcion, se llega a iterar.
-            $('#formResguardo').off("submit").on("submit", function(event) {
+            $('#formRepoBajas').off("submit").on("submit", function(event) {
                 event.preventDefault();
-                parametros = formToObject($("#formResguardo"));
-                console.log(parametros);
-                // console.log(accion);
-                // console.log(parametros);
                 $.ajax({
                     url: 'php/operacionesResguardo.php',
                     method: 'POST',
-                    data: parametros,
+                    data: new FormData(this),
+                    dataType: 'json',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
                     success: function(data) {
                         // console.log(data);
                         if (data.success) {
@@ -262,8 +284,8 @@
                                         icon: "success",
                                     })
                                 .then(function() {
-                                    $('#modalOperarResguardo').modal('hide');
-                                    $('#tablaResguardo').bootstrapTable('refresh');
+                                    $('#modalOperarRepoBajas').modal('hide');
+                                    $('#tablaReporteBajas').bootstrapTable('refresh');
                                 });
                         } else {
                             swal(
@@ -272,7 +294,7 @@
                                     'error'
                                 )
                                 .then(function() {
-                                    $('#modalOperarResguardo').modal('hide');
+                                    $('#modalOperarRepoBajas').modal('hide');
                                 });
                         }
                     }
@@ -286,6 +308,16 @@
                 $.each(data, function(key, value) {
                     $("#claseSelRes").append('<option value="' + value.id_clase + '" >' + value.id_clase + ' ' + value.descripcion + '</option>');
                 });
+                if (auxResguardosBajas.archivo != "") {
+                    // $('#archivoPDF').html("");   
+                    $('#tdPdf').removeAttr('colspan');
+                    $('#archivoPDF').html('<a href="pdf/' + auxResguardosBajas.archivo + '" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardosBajas.archivo + '">' + auxResguardosBajas.archivo + '</a>');
+                    $("#eliminarPdf").html('<button id="botonEliminarPDF" type="button" class="btn btn-outline-danger"><svg xmlns = "http://www.w3.org/2000/svg"width = "16"height = "16"fill = "currentColor"class = "bi bi-trash3-fill"viewBox = "0 0 16 16" ><path d = "M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" / ></svg>Eliminar PDF </button>')
+                } else {
+                    $('#tdPdf').attr('colspan', "2");
+                    $('#archivoPDF').html("No se encontrarón archivos del bien " + auxResguardosBajas.id_bien + " del trabajador " + auxResguardosBajas.rpe);
+                    $("#eliminarPdf").html("");
+                }
                 // console.log(auxResguardosBajas);
                 $('#rpeResBaja').val(auxResguardosBajas.rpe);
                 $('#rpeResBaja2').val(auxResguardosBajas.rpe);
@@ -305,7 +337,28 @@
                 $("#posicionResFacBaja").val(auxResguardosBajas.posicion);
                 $("#claseSelRes").val(auxResguardosBajas.clase);
                 $("select#claseSelRes").trigger("change", auxResguardosBajas.subclase);
+                $('#botonEliminarPDF').click(function() {
+                    swal({
+                        title: "¿Estás seguro de eliminar el archivo " + auxResguardosBajas.archivo + " ?",
+                        text: "El archivo no se podrá recuperar una vez hecha esta operación.",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            eliminarPDF(auxResguardosBajas.id_bien, auxResguardosBajas.archivo);
+                            $($table).bootstrapTable('refresh');
+                        } else {
+                            swal(
+                                'Sin cambios',
+                                'Tu archivo sigue guardado',
+                                'error'
+                            )
+                        }
+                    });
+                });
             });
+
 
             $("select#claseSelRes").change(function(event, valor) {
                 // console.log(valor);
@@ -325,12 +378,61 @@
 
     });
 
+    function operateFormatter(value, row, index) {
+        console.log(row.url_dictamen);
+        if (row.url_dictamen != "La carpeta no existe") {
+            return [
+                '<a href="' + row.url_dictamen + '" target="_blank"><img src="imagenes/pdf.ico"></a>'
+            ].join('')
+        } else {
+            return [
+                ''
+            ].join('')
+        }
+
+    }
+
+
+    function eliminarPDF(id, nombreArchivo) {
+        $.ajax({
+            url: 'php/operacionesResguardo.php',
+            method: 'POST',
+            data: {
+                idBien: id,
+                archivo: nombreArchivo,
+                accionRes: "eliminarPDF"
+            },
+            success: function(data) {
+                // console.log(data);
+                if (data.success) {
+                    swal(
+                            "El reguardo fue eliminado con exito.", {
+                                icon: "success",
+                            }
+                        )
+                        .then(function() {
+                            $('#tdPdf').attr('colspan', "2");
+                            $('#archivoPDF').html("No se encontrarón archivos del bien " + auxResguardosBajas.id_bien + " del trabajador " + auxResguardosBajas.rpe);
+                            $("#eliminarPdf").html("");
+                            $('#tablaResguardo').bootstrapTable('refresh');
+                        });
+                } else {
+                    swal(
+                        'Error de Operacion',
+                        'Hubo un error en la base de datos. ' + data.message,
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+
     function ajaxRequestRepoBaja(params) {
         var url = 'php/selectAllRepoBaja.php';
-
         $.get(url, jQuery.parseJSON(params.data)).then(function(res) {
-            // console.log(res);
-            params.success(res);
+            // console.log(res.data);
+            dataResBaja = res.data;
+            params.success(res["data"]);
         });
     }
 </script>

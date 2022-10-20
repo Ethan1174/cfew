@@ -18,7 +18,7 @@ else
 	$sql = sprintf("SELECT * FROM usuario_scate WHERE area_clave LIKE ('%s') AND cenco LIKE ('%s') ORDER BY RPE", $Sarea, $Sdepto);
 
 if ($act == "ShowAll") {
-	$sql = "SELECT `rpe`, `nombre` FROM `usuario_scate`";
+	$sql = "SELECT `rpe`, `nombre` FROM `usuario_scate` ORDER BY rpe  ASC";
 }
 
 $resArray = getArraySQL($sql, "usuarios", true);

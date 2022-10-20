@@ -93,7 +93,7 @@
                                         <tr>
                                             <td><label class="control-label"><strong>Número: </strong></span></td>
                                             <td><input type="text" name="numResFac" id="numResFac" class="inputMod form-control "></input></td>
-                                            <td><label class="control-label"><strong>Fecha: </strong></label></td>
+                                            <td><label class="control-label"><strong>Fecha de Factura: </strong></label></td>
                                             <td><input type="date" name="fechaResFac" id="fechaResFac" step="1" class="inputMod form-control"></td>
                                         </tr>
                                         <tr>
@@ -122,7 +122,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success" id="guardarCambiosResguardos">Registrar Resguardo</button>
+                            <button type="submit" class="btn btn-success" id="btnguardarCambiosResguardos">Registrar Resguardo</button>
                             <input type="hidden" id="rpeRes2" name="rpeRes2" value="" />
                             <input type="hidden" id="idBien" name="idBien" value="" />
                             <input type="hidden" id="accionRes" name="accion" value="Agregar" />
@@ -157,7 +157,7 @@
                             <table class="table table-condensed">
                                 <tr>
                                     <td><label class="control-label"><strong>RPE Actual: </strong></span></td>
-                                    <td><input type="text" name="rpeAct" id="rpeAct" class="inputMod form-control" value="" disabled></input></td>
+                                    <td><input type="text" name="rpeRes" id="rpeAct" class="inputMod form-control" value="" disabled></input></td>
                                     <td><label class="control-label"><strong>Fecha de Captura: </strong></label></td>
                                     <td><input type="date" name="fechaCap" id="fechaCap" step="1" class="inputMod form-control" disabled></td>
                                 </tr>
@@ -193,9 +193,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success" id="traspasarResguardo">Traspasar</button>
-                            <input type="hidden" id="rpeRes2Tras" name="rpeRes2Tras" value="" />
-                            <input type="hidden" id="idBienTras" name="idBienTras" value="" />
+                            <button type="submit" class="btn btn-success" id="btntraspasarResguardo">Traspasar</button>
+                            <input type="hidden" id="rpeRes2Tras" name="rpeRes" value="" />
+                            <input type="hidden" id="idBienTras" name="idBien" value="" />
+                            <input type="hidden" id="archivoTras" name="archivo" value="" />
                             <input type="hidden" id="accionResTras" name="accion" value="Traspasar" />
                         </div>
                     </div>
@@ -208,6 +209,9 @@
     <!-- Fin del modal para traspasar Resguardos -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+
+
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- Inicio del modal para dar de baja Resguardos -->
@@ -220,7 +224,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Dar de Baja Resguardo Id. N</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form class="form-horizontal" role="form" accept-charset="UTF-8" name="formDarBaja" id="formDarBaja" method="POST">
+                <form class="form-horizontal" role="form" accept-charset="UTF-8" name="formDarBaja" id="formDarBaja" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="container-fluid">
                             <table class="table table-condensed">
@@ -232,7 +236,7 @@
                                 </tr>
                                 <tr>
                                     <td><label class="control-label"><strong>Archivo Dictamen: </strong></span></td>
-                                    <td><input class="form-control" type="file" id="fileToUploadDictamen" name="fileToUploadDictamen"></input></td>
+                                    <td><input class="form-control" type="file" id="fileToUploadDictamen" name="fileToUploadDictamen" required></input></td>
                                     <!-- <td id="tdPdf" colspan="2">
                                         <div id="archivoPDF"></div>
                                     </td>
@@ -242,7 +246,7 @@
                                 </tr>
                                 <tr>
                                     <td><label class="control-label"><strong>RPE Actual: </strong></span></td>
-                                    <td><input type="text" name="rpeActBaja" id="rpeActBaja" class="inputMod form-control" value="" disabled></input></td>
+                                    <td><input type="text" name="rpeRes" id="rpeActBaja" class="inputMod form-control" value="" disabled></input></td>
                                     <td><label class="control-label"><strong>Fecha de Captura: </strong></label></td>
                                     <td><input type="date" name="fechaCapBaja" id="fechaCapBaja" step="1" class="inputMod form-control" disabled></td>
                                 </tr>
@@ -266,9 +270,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success" id="darDeBajaResguardo">Dar de Baja</button>
-                            <input type="hidden" id="rpeRes3" name="rpeRes3" value="" />
-                            <input type="hidden" id="idBienBaja" name="idBienBaja" value="" />
+                            <button type="submit" class="btn btn-success" id="btndarDeBajaResguardo">Dar de Baja</button>
+                            <input type="hidden" id="rpeRes3" name="rpeRes" value="" />
+                            <input type="hidden" id="idBienBaja" name="idBien" value="" />
                             <input type="hidden" id="accionResBaja" name="accion" value="Bajar" />
                         </div>
                     </div>
@@ -278,9 +282,79 @@
     </div>
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
-    <!-- Fin del modal para dar de baja Resguardos -->
+    <!-- Fin del modal para dar de bajas Resguardos -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- Inicio del modal para DETALLES reguardos -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+    <div class="modal fade" id="modalDetalles" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalles</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td><label class="control-label"><strong>RPE: </strong></span></td>
+                                <td><input type="text" id="rpeResDetalle" class="inputMod form-control" value="" disabled></input></td>
+                                <td><label class="control-label"><strong>Fecha de Captura: </strong></label></td>
+                                <td><input type="date" name="fechaCapDetalle" id="fechaCapDetalle" step="1" class="inputMod form-control" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label"><strong>Descripcion: </strong></span></td>
+                                <td colspan="3">
+                                    <textarea cols="40" id="desResDetalles" class="form-control" disabled></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="4">
+                                    <label class="control-label"><strong>HISTORIAL DEL BIEN</strong></span>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <small>
+                                        <table id="historico" class="table table-condensed table-bordered table-stripped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fecha</th>
+                                                    <th>Acción</th>
+                                                    <th>Resguardante</th>
+                                                    <th>Usuario</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </small>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- Fin del modal para DETALLES Resguardos -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+
     <div class="container">
         <div class="row-fluid">
             <div class="panel panel-info" id="opciones">
@@ -309,27 +383,27 @@
     </div>
     <div class="container">
         <div id="toolbar">
-            <button type="button" class="btn btn-success" id="botonAgregarResguardo" data-bs-toggle="modal" data-bs-target="#modalOperarResguardo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+            <button type="button" class="btn btn-success" id="btnAgregarResguardo" data-bs-toggle="modal" data-bs-target="#modalOperarResguardo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
                 </svg> Agregar</button>
-            <button type="button" disabled class="btn btn-primary dropdown-toggle" id="botonOpcionesResguardos" data-bs-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+            <button type="button" disabled class="btn btn-primary dropdown-toggle" id="btnOpcionesResguardos" data-bs-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
                 </svg> Opciones</button>
             <ul class="dropdown-menu">
-                <li><button type="button" class="btn btn-primary dropdown-item" id="botonEditarResguardo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                <li><button type="button" class="btn btn-primary dropdown-item" id="btnEditarResguardo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
                         </svg> Editar</button></li>
-                <li><button type="button" class="btn btn-primary dropdown-item" id="botonDarBaja"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-down" viewBox="0 0 16 16">
+                <li><button type="button" class="btn btn-primary dropdown-item" id="btnDarBaja"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-down" viewBox="0 0 16 16">
                             <path d="M8.864 15.674c-.956.24-1.843-.484-1.908-1.42-.072-1.05-.23-2.015-.428-2.59-.125-.36-.479-1.012-1.04-1.638-.557-.624-1.282-1.179-2.131-1.41C2.685 8.432 2 7.85 2 7V3c0-.845.682-1.464 1.448-1.546 1.07-.113 1.564-.415 2.068-.723l.048-.029c.272-.166.578-.349.97-.484C6.931.08 7.395 0 8 0h3.5c.937 0 1.599.478 1.934 1.064.164.287.254.607.254.913 0 .152-.023.312-.077.464.201.262.38.577.488.9.11.33.172.762.004 1.15.069.13.12.268.159.403.077.27.113.567.113.856 0 .289-.036.586-.113.856-.035.12-.08.244-.138.363.394.571.418 1.2.234 1.733-.206.592-.682 1.1-1.2 1.272-.847.283-1.803.276-2.516.211a9.877 9.877 0 0 1-.443-.05 9.364 9.364 0 0 1-.062 4.51c-.138.508-.55.848-1.012.964l-.261.065zM11.5 1H8c-.51 0-.863.068-1.14.163-.281.097-.506.229-.776.393l-.04.025c-.555.338-1.198.73-2.49.868-.333.035-.554.29-.554.55V7c0 .255.226.543.62.65 1.095.3 1.977.997 2.614 1.709.635.71 1.064 1.475 1.238 1.977.243.7.407 1.768.482 2.85.025.362.36.595.667.518l.262-.065c.16-.04.258-.144.288-.255a8.34 8.34 0 0 0-.145-4.726.5.5 0 0 1 .595-.643h.003l.014.004.058.013a8.912 8.912 0 0 0 1.036.157c.663.06 1.457.054 2.11-.163.175-.059.45-.301.57-.651.107-.308.087-.67-.266-1.021L12.793 7l.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315l-.353-.354.353-.354c.047-.047.109-.176.005-.488a2.224 2.224 0 0 0-.505-.804l-.353-.354.353-.354c.006-.005.041-.05.041-.17a.866.866 0 0 0-.121-.415C12.4 1.272 12.063 1 11.5 1z" />
-                        </svg> Bajas</button></li>
-                <li><button type="button" class="btn btn-primary dropdown-item" id="botonTraspasar"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
+                        </svg> Bajar</button></li>
+                <li><button type="button" class="btn btn-primary dropdown-item" id="btnTraspasar"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z" />
                         </svg> Traspasar</button></li>
-                <li><button type="button" class="btn btn-primary dropdown-item" id="botonDetalles"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                <li><button type="button" class="btn btn-primary dropdown-item" id="btnDetalles"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                             <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                         </svg> Detalles</button></li>
-                <li><button type="button" class="btn btn-danger dropdown-item" id="botonEliminarResguardo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                <li><button type="button" class="btn btn-danger dropdown-item" id="btnEliminarResguardo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                         </svg> Eliminar</button></li>
             </ul>
@@ -359,7 +433,7 @@
     // -----------------------------------------------------------------------------------------------------------------------------------
     $(document).ready(function() {
         var $table = $('#tablaResguardo');
-        var select = $('#botonOpcionesResguardos');
+        var select = $('#btnOpcionesResguardos');
         var rpeR = "";
         // -----------------------------------------------------------------------------------------------------------------------------------
         // -----------------------------------------------------------Funciones del Panel Resguardo---------------------------------------------------------
@@ -427,8 +501,8 @@
 
             select.click(function() {
                 var ids = $.map($table.bootstrapTable('getSelections'), function(row) {
-                    // console.log(row);
                     auxResguardos = row;
+                    // console.log(auxResguardos);
                     return row.id
                 });
                 $table.bootstrapTable('remove', {
@@ -441,18 +515,18 @@
         // -------------------------------------------------------------------------------------------
         // -------------------------------------CRUD Resguardos-------------------------------------
         // -------------------------------------------------------------------------------------------
-        $('#botonAgregarResguardo').click(function() {
+        $('#btnAgregarResguardo').click(function() {
 
             agregar();
         });
-        $("#guardarCambiosResguardos").click(function() {
+        $("#btnguardarCambiosResguardos").click(function() {
             operarResguardo();
         });
-        $('#botonEditarResguardo').click(function() {
+        $('#btnEditarResguardo').click(function() {
 
             modificar();
         });
-        $('#botonEliminarResguardo').click(function() {
+        $('#btnEliminarResguardo').click(function() {
             swal({
                 title: "¿Estás seguro de eliminar la clase " + auxResguardos.id_bien + " ?",
                 text: "El resguardo no se podrá recuperar una vez hecha esta operación.",
@@ -461,7 +535,7 @@
                 dangerMode: true,
             }).then((willDelete) => {
                 if (willDelete) {
-                    eliminarResguardo(auxResguardos.id_bien);
+                    eliminarResguardo(auxResguardos.id_bien, auxResguardos.rpe, auxResguardos.archivo);
                 } else {
                     swal(
                         'Sin cambios',
@@ -471,19 +545,22 @@
                 }
             });
         });
-        $('#botonTraspasar').click(function() {
+        $('#btnTraspasar').click(function() {
             traspasar();
         });
 
-        $("#traspasarResguardo").click(function() {
+        $("#btntraspasarResguardo").click(function() {
             traspasarResguardo();
         });
-        $('#botonDarBaja').click(function() {
+        $('#btnDarBaja').click(function() {
             bajar();
         });
 
-        $("#darDeBajaResguardo").click(function() {
+        $("#btndarDeBajaResguardo").click(function() {
             bajarResguardo();
+        });
+        $("#btnDetalles").click(function() {
+            detallesShow();
         });
 
         // -------------------------------------------------------------------------------------------
@@ -493,9 +570,6 @@
             // Dentro de la funcion, se llega a iterar.
             $('#formResguardo').off("submit").on("submit", function(event) {
                 event.preventDefault();
-                // parametros = formToObject($("#formResguardo"));
-                // console.log(accion);
-                // console.log(parametros);
                 $.ajax({
                     url: 'php/operacionesResguardo.php',
                     method: 'POST',
@@ -505,7 +579,7 @@
                     cache: false,
                     processData: false,
                     success: function(data) {
-                        console.log(data);
+                        // console.log(data);
                         if (data.success) {
                             swal(
                                     "El resguardo fue operado con exito.", {
@@ -573,7 +647,7 @@
             $('.modal-title').text('Agregar Resguardo');
             $('#formResguardo')[0].reset();
             $('#accionRes').val('Agregar');
-            $('#guardarCambiosResguardos').text('Registrar Resguardo');
+            $('#btnguardarCambiosResguardos').text('Registrar Resguardo');
             $("#fechaCapRes").val(hoy_input_date());
             $("select#claseSelRes").trigger("change");
 
@@ -603,10 +677,12 @@
                 //
                 if (auxResguardos.archivo != "") {
                     // $('#archivoPDF').html("");   
+                    $('#fileToUpload').attr('disabled', 'disabled');
                     $('#tdPdf').removeAttr('colspan');
-                    $('#archivoPDF').html('<a href="pdf/' + auxResguardos.rpe + '/'+ auxResguardos.archivo+'" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardos.archivo + '">' + auxResguardos.archivo + '</a>');
+                    $('#archivoPDF').html('<a href="pdf/' + auxResguardos.rpe + '/' + auxResguardos.archivo + '" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardos.archivo + '">' + auxResguardos.archivo + '</a>');
                     $("#eliminarPdf").html('<button id="botonEliminarPDF" type="button" class="btn btn-outline-danger"><svg xmlns = "http://www.w3.org/2000/svg"width = "16"height = "16"fill = "currentColor"class = "bi bi-trash3-fill"viewBox = "0 0 16 16" ><path d = "M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" / ></svg>Eliminar PDF </button>')
                 } else {
+                    $('#fileToUpload').removeAttr('disabled');
                     $('#tdPdf').attr('colspan', "2");
                     $('#archivoPDF').html("No se encontrarón archivos del bien " + auxResguardos.id_bien + " del trabajador " + auxResguardos.rpe);
                     $("#eliminarPdf").html("");
@@ -616,7 +692,7 @@
                 $('#rpeRes2').val(auxResguardos.rpe);
                 $('#modalOperarResguardo').modal('show');
                 $('.modal-title').text('Editar resguardo');
-                $('#guardarCambiosResguardos').text('Editar resguardo');
+                $('#btnguardarCambiosResguardos').text('Editar resguardo');
                 $('#accionRes').val('Modificar');
                 $("#idBien").val(auxResguardos.id_bien);
                 $("#desRes").val(auxResguardos.descripcion);
@@ -654,7 +730,6 @@
                     });
                 });
             });
-
             $("select#claseSelRes").change(function(event, valor) {
                 // console.log(valor);
                 f_datos("php/subclases.php", {
@@ -668,19 +743,19 @@
                     });
                     if (valor)
                         $("#subClaseSelRes").val(valor);
-
                 });
-
             });
         }
 
-        function eliminarResguardo(id) {
+        function eliminarResguardo(id, rpe, archivo) {
             $.ajax({
                 url: 'php/operacionesResguardo.php',
                 method: 'POST',
                 data: {
                     idBien: id,
-                    accionRes: "Eliminar"
+                    rpeRes: rpe,
+                    archivo: archivo,
+                    accion: "Eliminar"
                 },
                 success: function(data) {
                     // console.log(data);
@@ -727,8 +802,9 @@
                                 }
                             )
                             .then(function() {
+                                $('#fileToUpload').removeAttr('disabled');
                                 $('#tdPdf').attr('colspan', "2");
-                                $('#archivoPDF').html("No se encontrarón archivos del bien " + auxResguardos.id_bien + " del trabajador " + auxResguardos.rpe);
+                                $('#archivoPDF').html("No se encontraron archivos del bien " + auxResguardos.id_bien + " del trabajador " + auxResguardos.rpe);
                                 $("#eliminarPdf").html("");
                                 $('#tablaResguardo').bootstrapTable('refresh');
                             });
@@ -743,84 +819,145 @@
             });
         }
 
+        function traspasar() {
+            f_datos("php/empleados.php", {
+                action: "ShowAll"
+            }, function(data) {
+                $("#rpeNuevo").empty();
+                // console.log(auxResguardos);
+                $.each(data, function(key, value) {
+                    // console.log(value.rpe);
+                    $("#rpeNuevo").append('<option value="' + value.rpe + '" >' + value.rpe + ' ' + value.nombre + '</option>');
+                });
+                $("#modalTraspasarResguardo #exampleModalLabel").html("Traspasar Resguardo Id." + auxResguardos.id_bien);
+                $("#idBienTras").val(auxResguardos.id_bien);
+                $('#rpeAct').val(auxResguardos.rpe);
+                $('#rpeAct2').val(auxResguardos.rpe);
+                $('#rpeRes2Tras').val(auxResguardos.rpe);
+                $("#fechaCap").val(auxResguardos.fecha_captura);
+                $("#desResTras").val(auxResguardos.descripcion);
+                $("#marcaResTras").val(auxResguardos.marca);
+                $("#modeloResTras").val(auxResguardos.modelo);
+                $("#cantidadResTras").val(auxResguardos.cantidad);
+                $("#importeResTras").val(auxResguardos.importe);
+                // console.log(auxResguardos.archivo);
+                $("#nomArchivo").val(auxResguardos.archivo);
+                $("#archivoTras").val(auxResguardos.archivo);
+                $('#modalTraspasarResguardo').modal('show');
+            });
+        }
+
+        function traspasarResguardo() {
+            $('#formTraspaso').off("submit").on("submit", function(event) {
+                event.preventDefault();
+                parametros = formToObject($("#formTraspaso"));
+                console.log(parametros);
+                $.ajax({
+                    url: 'php/operacionesResguardo.php',
+                    method: 'POST',
+                    data: parametros,
+                    success: function(data) {
+                        if (data.success) {
+                            swal(
+                                    "El resguardo fue traspasado con exito.", {
+                                        icon: "success",
+                                    })
+                                .then(function() {
+                                    $('#modalTraspasarResguardo').modal('hide');
+                                    $('#tablaResguardo').bootstrapTable('refresh');
+                                });
+                        } else {
+                            swal(
+                                    'Error de Operacion',
+                                    'Hubo un error en la base de datos. ' + data.message,
+                                    'error'
+                                )
+                                .then(function() {
+                                    $('#modalTraspasarResguardo').modal('hide');
+                                });
+                        }
+                    }
+                });
+            });
+        }
+
+        function bajar() {
+            $("#modalDarBajaResguardo #exampleModalLabel").html("Dar de Baja Resguardo Id." + auxResguardos.id_bien);
+            $("#motBaja").val("");
+            $("#idBienBaja").val(auxResguardos.id_bien);
+            $("#accionResBaja").val("Bajar");
+            $('#rpeActBaja').val(auxResguardos.rpe);
+            $('#rpeRes3').val(auxResguardos.rpe);
+            $("#fechaCapBaja").val(auxResguardos.fecha_captura);
+            $("#desResBaja").val(auxResguardos.descripcion);
+            $("#marcaResBaja").val(auxResguardos.marca);
+            $("#modeloResBaja").val(auxResguardos.modelo);
+            $("#cantidadResBaja").val(auxResguardos.cantidad);
+            $("#importeResBaja").val(auxResguardos.importe);
+
+            $('#modalDarBajaResguardo').modal('show');
+        }
+
+        function bajarResguardo() {
+            $('#formDarBaja').off("submit").on("submit", function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: 'php/operacionesResguardo.php',
+                    method: 'POST',
+                    data: new FormData(this),
+                    dataType: 'json',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(data) {
+                        console.log(data);
+                        if (data.success) {
+                            swal(
+                                    "El resguardo fue dado de baja con exito.", {
+                                        icon: "success",
+                                    })
+                                .then(function() {
+                                    $('#modalDarBajaResguardo').modal('hide');
+                                    $('#tablaResguardo').bootstrapTable('refresh');
+                                });
+                        } else {
+                            swal(
+                                    'Error de Operacion',
+                                    'Hubo un error en la base de datos. ' + data.message,
+                                    'error'
+                                )
+                                .then(function() {
+                                    $('#modalDarBajaResguardo').modal('hide');
+                                });
+                        }
+                    }
+                });
+            });
+        }
+
+        function detallesShow() {
+            $("#modalDetalles #exampleModalLabel").html("Detalles de resguardo Id." + auxResguardos.id_bien);
+            $('#rpeResDetalle').val(auxResguardos.rpe);
+            $("#fechaCapDetalle").val(auxResguardos.fecha_captura);
+            $("#desResDetalles").val(auxResguardos.descripcion);
+            $("#importeResBaja").val(auxResguardos.importe);
+            $('#modalDetalles').modal('show');
+            f_datos("php/selectBienesByHistorico.php", {
+                id_bien: auxResguardos.id_bien
+            }, function(datHist) {
+                console.log(datHist);
+                $("#historico tbody").empty();
+                $.each(datHist, function(key, value) {
+                    tr = $("<tr />").appendTo($("#historico tbody"));
+                    $("<td>").html(value.fecha).appendTo(tr);
+                    $("<td>").html(value.accion).appendTo(tr);
+                    $("<td>").html(value.rpe + " " + value.nombrerpe).appendTo(tr);
+                    $("<td>").html(value.usuario + " " + value.nombreusuario).appendTo(tr);
+                });
+            });
+        }
     });
 
-    function traspasar() {
-        f_datos("php/empleados.php", {
-            action: "ShowAll"
-        }, function(data) {
-            $("#rpeNuevo").empty();
-            // console.log(auxResguardos);
-            $.each(data, function(key, value) {
-                // console.log(value.rpe);
-                $("#rpeNuevo").append('<option value="' + value.rpe + '" >' + value.rpe + ' ' + value.nombre + '</option>');
-            });
-
-            $("#modalTraspasarResguardo #exampleModalLabel").html("Traspasar Resguardo Id." + auxResguardos.id_bien);
-            $("#idBienTras").val(auxResguardos.id_bien);
-            $('#rpeAct').val(auxResguardos.rpe);
-            $('#rpeRes2Tras').val(auxResguardos.rpe);
-            $("#fechaCap").val(auxResguardos.fecha_captura);
-            $("#desResTras").val(auxResguardos.descripcion);
-            $("#marcaResTras").val(auxResguardos.marca);
-            $("#modeloResTras").val(auxResguardos.modelo);
-            $("#cantidadResTras").val(auxResguardos.cantidad);
-            $("#importeResTras").val(auxResguardos.importe);
-            // console.log(auxResguardos.archivo);
-            $("#nomArchivo").val(auxResguardos.archivo);
-            $('#modalTraspasarResguardo').modal('show');
-        });
-    }
-
-    function traspasarResguardo() {
-        $('#formTraspaso').off("submit").on("submit", function(event) {
-            event.preventDefault();
-            parametros = formToObject($("#formTraspaso"));
-            console.log(parametros);
-            $.ajax({
-                url: 'php/operacionesResguardo.php',
-                method: 'POST',
-                data: parametros,
-                success: function(data) {
-                    if (data.success) {
-                        swal(
-                                "El resguardo fue traspasado con exito.", {
-                                    icon: "success",
-                                })
-                            .then(function() {
-                                $('#modalTraspasarResguardo').modal('hide');
-                                $('#tablaResguardo').bootstrapTable('refresh');
-                            });
-                    } else {
-                        swal(
-                                'Error de Operacion',
-                                'Hubo un error en la base de datos. ' + data.message,
-                                'error'
-                            )
-                            .then(function() {
-                                $('#modalTraspasarResguardo').modal('hide');
-                            });
-                    }
-                }
-            });
-        });
-    }
-
-    function bajar() {
-        $("#modalDarBajaResguardo #exampleModalLabel").html("Dar de Baja Resguardo Id." + auxResguardos.id_bien);
-        $("#motBaja").val("");
-        $("#idBienBaja").val(auxResguardos.id_bien);
-        $('#rpeActBaja').val(auxResguardos.rpe);
-        $('#rpeRes3').val(auxResguardos.rpe);
-        $("#fechaCapBaja").val(auxResguardos.fecha_captura);
-        $("#desResBaja").val(auxResguardos.descripcion);
-        $("#marcaResBaja").val(auxResguardos.marca);
-        $("#modeloResBaja").val(auxResguardos.modelo);
-        $("#cantidadResBaja").val(auxResguardos.cantidad);
-        $("#importeResBaja").val(auxResguardos.importe);
-        // Falta, rescartar el nombre del pdf, donde este tenga el boton de eliminar, caso contrario, un mensaje de que no hay pdf.
-        $('#modalDarBajaResguardo').modal('show');
-    }
 
 
     function ajaxRequestRes(params) {

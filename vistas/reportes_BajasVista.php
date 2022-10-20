@@ -121,7 +121,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success" id="guardarCambiosRepoBajas">Guardar Resguardo</button>
+                            <button type="submit" class="btn btn-success" id="btnguardarCambiosRepoBajas">Guardar Resguardo</button>
                             <input type="hidden" id="rpeResBaja2" name="rpeRes2" value="" />
                             <input type="hidden" id="idBienBaja" name="idBien" value="" />
                             <input type="hidden" id="accionResBaja" name="accionRes" value="Modificar" />
@@ -135,6 +135,74 @@
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- Fin del modal para operar Resguardos -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- Inicio del modal para DETALLES reguardos -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+
+    <div class="modal fade" id="modalDetalles" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalles</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td><label class="control-label"><strong>RPE: </strong></span></td>
+                                <td><input type="text" id="rpeResDetalle" class="inputMod form-control" value="" disabled></input></td>
+                                <td><label class="control-label"><strong>Fecha de Captura: </strong></label></td>
+                                <td><input type="date" name="fechaCapDetalle" id="fechaCapDetalle" step="1" class="inputMod form-control" disabled></td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label"><strong>Descripcion: </strong></span></td>
+                                <td colspan="3">
+                                    <textarea cols="40" id="desResDetalles" class="form-control" disabled></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="4">
+                                    <label class="control-label"><strong>HISTORIAL DEL BIEN</strong></span>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <small>
+                                        <table id="historico" class="table table-condensed table-bordered table-stripped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fecha</th>
+                                                    <th>Acción</th>
+                                                    <th>Resguardante</th>
+                                                    <th>Usuario</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </small>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- Fin del modal para DETALLES Resguardos -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
 
@@ -167,10 +235,10 @@
     <div class="container">
         <div id="toolbar">
 
-            <button type="button" disabled class="btn btn-primary" id="botonEditarRepoBajas"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+            <button type="button" disabled class="btn btn-primary" id="btnEditarRepoBajas"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
                 </svg> Editar</button>
-            <button type="button" disabled class="btn btn-info" id="botonDetallesRepoBaja"><i class="bi bi-info-circle"></i> Detalles</button>
+            <button type="button" disabled class="btn btn-info" id="btnDetallesRepoBaja"><i class="bi bi-info-circle"></i> Detalles</button>
         </div>
         <table id="tablaReporteBajas" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequestRepoBaja">
             <thead>
@@ -197,9 +265,10 @@
     // -----------------------------------------------------------------------------------------------------------------------------------
     $(document).ready(function() {
         var $table = $('#tablaReporteBajas');
-        var select = $('#botonEditarRepoBajas');
-        var select1 = $('#botonDetallesRepoBaja');
+        var select = $('#btnEditarRepoBajas');
+        var select1 = $('#btnDetallesRepoBaja');
         var dataResBaja = [];
+
         $(function() {
             cargarTablaBT($table);
 
@@ -219,7 +288,7 @@
 
             var fecha_inicio = $("#fecha_inicioRep").val();
             var fecha_termino = $("#fecha_terminoRep").val();
-            console.log(fecha_inicio);
+            // console.log(fecha_inicio);
             if ($table) $table.bootstrapTable('removeAll');
 
             f_datos("php/selectAllRepoBaja.php", {
@@ -241,28 +310,42 @@
 
             select.click(function() {
                 var ids = $.map($table.bootstrapTable('getSelections'), function(row) {
-                    // console.log(row);
                     auxResguardosBajas = row;
+                    console.log(auxResguardosBajas);
                     return row.id
                 });
                 $table.bootstrapTable('remove', {
                     field: 'id',
                     values: ids
                 });
-                select.prop('disabled', true);
-                select1.prop('disabled', true);
             });
+            select1.mouseenter(function() {
+                var ids = $.map($table.bootstrapTable('getSelections'), function(row) {
+                    auxResguardosBajas = row;
+                    console.log(auxResguardosBajas);
+                    return row.id
+                });
+                $table.bootstrapTable('remove', {
+                    field: 'id',
+                    values: ids
+                });
+            });
+            select.prop('disabled', true);
+            select1.prop('disabled', true);
         });
 
         // -------------------------------------------------------------------------------------------
         // -------------------------------------CRUD Resguardos-------------------------------------
         // -------------------------------------------------------------------------------------------
-        $("#guardarCambiosRepoBajas").click(function() {
+        $("#btnguardarCambiosRepoBajas").click(function() {
             operarResguardoBaja();
         });
-        $('#botonEditarRepoBajas').click(function() {
+        $('#btnEditarRepoBajas').click(function() {
 
             modificar();
+        });
+        $("#btnDetallesRepoBaja").click(function() {
+            detallesShow();
         });
 
         // -------------------------------------------------------------------------------------------
@@ -314,14 +397,17 @@
                 });
                 if (auxResguardosBajas.archivo != "") {
                     // $('#archivoPDF').html("");   
+                    $('#fileToUpload').attr('disabled', 'disabled');
                     $('#tdPdf').removeAttr('colspan');
-                    $('#archivoPDF').html('<a href="pdf/' + auxResguardosBajas.archivo + '" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardosBajas.archivo + '">' + auxResguardosBajas.archivo + '</a>');
+                    $('#archivoPDF').html('<a href="pdf/' + auxResguardosBajas.rpe + '/' + auxResguardosBajas.archivo + '" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardosBajas.archivo + '">' + auxResguardosBajas.archivo + '</a>');
                     $("#eliminarPdf").html('<button id="botonEliminarPDF" type="button" class="btn btn-outline-danger"><svg xmlns = "http://www.w3.org/2000/svg"width = "16"height = "16"fill = "currentColor"class = "bi bi-trash3-fill"viewBox = "0 0 16 16" ><path d = "M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" / ></svg>Eliminar PDF </button>')
                 } else {
+                    $('#fileToUpload').removeAttr('disabled');
                     $('#tdPdf').attr('colspan', "2");
                     $('#archivoPDF').html("No se encontrarón archivos del bien " + auxResguardosBajas.id_bien + " del trabajador " + auxResguardosBajas.rpe);
                     $("#eliminarPdf").html("");
                 }
+                $("#fileToUpload").val("");
                 // console.log(auxResguardosBajas);
                 $('#rpeResBaja').val(auxResguardosBajas.rpe);
                 $('#rpeResBaja2').val(auxResguardosBajas.rpe);
@@ -350,7 +436,7 @@
                         dangerMode: true,
                     }).then((willDelete) => {
                         if (willDelete) {
-                            eliminarPDF(auxResguardosBajas.id_bien, auxResguardosBajas.archivo);
+                            eliminarPDF(auxResguardosBajas.id_bien, auxResguardosBajas.rpe, auxResguardosBajas.archivo);
                             $($table).bootstrapTable('refresh');
                         } else {
                             swal(
@@ -361,9 +447,8 @@
                         }
                     });
                 });
+
             });
-
-
             $("select#claseSelRes").change(function(event, valor) {
                 // console.log(valor);
                 f_datos("php/subclases.php", {
@@ -378,57 +463,83 @@
                         $("#subClaseSelRes").val(valor);
                 });
             });
+
+
         }
 
+        function eliminarPDF(id, rpe, nombreArchivo) {
+            $.ajax({
+                url: 'php/operacionesResguardo.php',
+                method: 'POST',
+                data: {
+                    idBien: id,
+                    rpeRes: rpe,
+                    archivo: nombreArchivo,
+                    accion: "eliminarPDF"
+                },
+                success: function(data) {
+                    // console.log(data);
+                    if (data.success) {
+                        swal(
+                                "El reguardo fue eliminado con exito.", {
+                                    icon: "success",
+                                }
+                            )
+                            .then(function() {
+                                $('#fileToUpload').removeAttr('disabled');
+                                $('#tdPdf').attr('colspan', "2");
+                                $('#archivoPDF').html("No se encontraron archivos del bien " + auxResguardosBajas.id_bien + " del trabajador " + auxResguardosBajas.rpe);
+                                $("#eliminarPdf").html("");
+                                $('#tablaResguardo').bootstrapTable('refresh');
+                            });
+                    } else {
+                        swal(
+                            'Error de Operacion',
+                            'Hubo un error en la base de datos. ' + data.message,
+                            'error'
+                        )
+                    }
+                }
+            });
+
+        }
+
+        function detallesShow() {
+            console.log(auxResguardosBajas);
+            $("#modalDetalles #exampleModalLabel").html("Detalles de resguardo Id." + auxResguardosBajas.id_bien);
+            $('#rpeResDetalle').val(auxResguardosBajas.rpe);
+            $("#fechaCapDetalle").val(auxResguardosBajas.fecha_captura);
+            $("#desResDetalles").val(auxResguardosBajas.descripcion);
+            $("#importeResBaja").val(auxResguardosBajas.importe);
+            $('#modalDetalles').modal('show');
+            f_datos("php/selectBienesByHistorico.php", {
+                id_bien: auxResguardosBajas.id_bien
+            }, function(datHist) {
+                console.log(datHist);
+                $("#historico tbody").empty();
+                $.each(datHist, function(key, value) {
+                    tr = $("<tr />").appendTo($("#historico tbody"));
+                    $("<td>").html(value.fecha).appendTo(tr);
+                    $("<td>").html(value.accion).appendTo(tr);
+                    $("<td>").html(value.rpe + " " + value.nombrerpe).appendTo(tr);
+                    $("<td>").html(value.usuario + " " + value.nombreusuario).appendTo(tr);
+                });
+            });
+        }
     });
 
     function operateFormatter(value, row, index) {
-        console.log(row.url_dictamen);
+        console.log(row);
         if (row.url_dictamen != "La carpeta no existe") {
             return [
-                '<a href="' + row.url_dictamen + '" target="_blank"><img src="imagenes/pdf.ico"></a>'
+                '<a href="' + row.url_dictamen + '" target="_blank"><img src="imagenes/pdf.ico"></a><span>Ver archivo</span>'
             ].join('')
         } else {
             return [
-                ''
+                '<a href="#"><img src="imagenes/pdfNoFile.ico"></a><span>Sin archivo</span>'
             ].join('')
         }
 
-    }
-
-
-    function eliminarPDF(id, nombreArchivo) {
-        $.ajax({
-            url: 'php/operacionesResguardo.php',
-            method: 'POST',
-            data: {
-                idBien: id,
-                archivo: nombreArchivo,
-                accionRes: "eliminarPDF"
-            },
-            success: function(data) {
-                // console.log(data);
-                if (data.success) {
-                    swal(
-                            "El reguardo fue eliminado con exito.", {
-                                icon: "success",
-                            }
-                        )
-                        .then(function() {
-                            $('#tdPdf').attr('colspan', "2");
-                            $('#archivoPDF').html("No se encontrarón archivos del bien " + auxResguardosBajas.id_bien + " del trabajador " + auxResguardosBajas.rpe);
-                            $("#eliminarPdf").html("");
-                            $('#tablaResguardo').bootstrapTable('refresh');
-                        });
-                } else {
-                    swal(
-                        'Error de Operacion',
-                        'Hubo un error en la base de datos. ' + data.message,
-                        'error'
-                    )
-                }
-            }
-        });
     }
 
     function ajaxRequestRepoBaja(params) {

@@ -205,19 +205,23 @@
 
         });
         f_datos("php/areas.php", {}, function(data) {
-            let fecha = new Date();
+            $("#fecha_inicioRep").val(hoy_input_date());
+            $("#fecha_terminoRep").val(hoy_input_date());
             $("#area").empty();
             $.each(data, function(key, value) {
                 $("#area").append('<option value="' + value.clave + '" >' + value.nombre_corto + '</option>');
             });
             $("#area").val(dataUser.area);
-            $("#area").trigger("change");   
+            $("#area").trigger("change");
         });
-        
-        $("#fecha_terminoRep").off("change").on("change", function(e) {
+
+        $("#fecha_inicioRep , #fecha_terminoRep").off("change").on("change", function(e) {
+
             var fecha_inicio = $("#fecha_inicioRep").val();
             var fecha_termino = $("#fecha_terminoRep").val();
+            console.log(fecha_inicio);
             if ($table) $table.bootstrapTable('removeAll');
+
             f_datos("php/selectAllRepoBaja.php", {
                 fecha_inicio: fecha_inicio,
                 fecha_termino: fecha_termino

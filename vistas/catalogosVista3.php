@@ -125,7 +125,7 @@
                             <button type="submit" class="btn btn-success" id="guardarCambiosResguardos">Registrar Resguardo</button>
                             <input type="hidden" id="rpeRes2" name="rpeRes2" value="" />
                             <input type="hidden" id="idBien" name="idBien" value="" />
-                            <input type="hidden" id="accionRes" name="accionRes" value="Agregar" />
+                            <input type="hidden" id="accionRes" name="accion" value="Agregar" />
                         </div>
                     </div>
                 </form>
@@ -139,6 +139,148 @@
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
 
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- Inicio del modal para traspasar reguardos -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <div class="modal fade" id="modalTraspasarResguardo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Traspasar Resguardo Id. N</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="form-horizontal" role="form" accept-charset="UTF-8" name="formTraspaso" id="formTraspaso" method="POST">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <table class="table table-condensed">
+                                <tr>
+                                    <td><label class="control-label"><strong>RPE Actual: </strong></span></td>
+                                    <td><input type="text" name="rpeAct" id="rpeAct" class="inputMod form-control" value="" disabled></input></td>
+                                    <td><label class="control-label"><strong>Fecha de Captura: </strong></label></td>
+                                    <td><input type="date" name="fechaCap" id="fechaCap" step="1" class="inputMod form-control" disabled></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label"><strong>Nuevo RPE: </strong></span></td>
+                                    <td>
+                                        <select class="inputMod form-control" id="rpeNuevo" name="rpeNuevo" placeholder="Elige un RPE" data-search="true" data-silent-initial-value-set="true" require></select>
+                                    </td>
+                                    <td><label class="control-label"><strong>Fecha de Traspaso: </strong></label></td>
+                                    <td><input type="date" name="fechaTras" id="fechaTras" step="1" class="inputMod form-control" required></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label"><strong>Descripcion: </strong></span></td>
+                                    <td><textarea rows="3" cols="40" name="desRes" id="desResTras" class="inputMod form-control" disabled></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label"><strong>Marca: </strong></span></td>
+                                    <td><input type="text" name="marcaRes1" id="marcaResTras" class="inputMod form-control" disabled></input></td>
+                                    <td><label class="control-label"><strong>Modelo: </strong></label></td>
+                                    <td><input type="text" name="modeloRes1" id="modeloResTras" class="inputMod form-control" disabled></input></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label"><strong>Cantidad: </strong></span></td>
+                                    <td><input type="number" min="1" name="cantidadRes" id="cantidadResTras" class="inputMod form-control" step="any" disabled></input></td>
+                                    <td><label class="control-label"><strong>Importe $: </strong></label></td>
+                                    <td><input type="number" min="1" name="importeRes" id="importeResTras" class="inputMod form-control" step="any" disabled></input></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label"><strong>Nombre del Archivo: </strong></span></td>
+                                    <td><input type="text" name="nomArchivo" id="nomArchivo" class="inputMod form-control" disabled></input></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-success" id="traspasarResguardo">Traspasar</button>
+                            <input type="hidden" id="rpeRes2Tras" name="rpeRes2Tras" value="" />
+                            <input type="hidden" id="idBienTras" name="idBienTras" value="" />
+                            <input type="hidden" id="accionResTras" name="accion" value="Traspasar" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- Fin del modal para traspasar Resguardos -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- Inicio del modal para dar de baja Resguardos -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <div class="modal fade" id="modalDarBajaResguardo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Dar de Baja Resguardo Id. N</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="form-horizontal" role="form" accept-charset="UTF-8" name="formDarBaja" id="formDarBaja" method="POST">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <table class="table table-condensed">
+                                <tr>
+                                    <td><label class="control-label"><strong>Motivo Baja: </strong></span></td>
+                                    <td><input type="text" name="motBaja" id="motBaja" class="inputMod form-control" value="" required></input></td>
+                                    <td><label class="control-label"><strong>Fecha de Baja: </strong></label></td>
+                                    <td><input type="date" name="fechaBaja" id="fechaBaja" step="1" class="inputMod form-control" required></input></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label"><strong>Archivo Dictamen: </strong></span></td>
+                                    <td><input class="form-control" type="file" id="fileToUploadDictamen" name="fileToUploadDictamen"></input></td>
+                                    <!-- <td id="tdPdf" colspan="2">
+                                        <div id="archivoPDF"></div>
+                                    </td>
+                                    <td>
+                                        <div id="eliminarPdf"></div>
+                                    </td> -->
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label"><strong>RPE Actual: </strong></span></td>
+                                    <td><input type="text" name="rpeActBaja" id="rpeActBaja" class="inputMod form-control" value="" disabled></input></td>
+                                    <td><label class="control-label"><strong>Fecha de Captura: </strong></label></td>
+                                    <td><input type="date" name="fechaCapBaja" id="fechaCapBaja" step="1" class="inputMod form-control" disabled></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label"><strong>Descripcion: </strong></span></td>
+                                    <td><textarea rows="3" cols="40" name="desResBaja" id="desResBaja" class="inputMod form-control" disabled></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label"><strong>Marca: </strong></span></td>
+                                    <td><input type="text" name="marcaResBaja" id="marcaResBaja" class="inputMod form-control" disabled></input></td>
+                                    <td><label class="control-label"><strong>Modelo: </strong></label></td>
+                                    <td><input type="text" name="modeloResBaja" id="modeloResBaja" class="inputMod form-control" disabled></input></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label"><strong>Cantidad: </strong></span></td>
+                                    <td><input type="number" min="1" name="cantidadResBaja" id="cantidadResBaja" class="inputMod form-control" step="any" disabled></input></td>
+                                    <td><label class="control-label"><strong>Importe $: </strong></label></td>
+                                    <td><input type="number" min="1" name="importeResBaja" id="importeResBaja" class="inputMod form-control" step="any" disabled></input></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-success" id="darDeBajaResguardo">Dar de Baja</button>
+                            <input type="hidden" id="rpeRes3" name="rpeRes3" value="" />
+                            <input type="hidden" id="idBienBaja" name="idBienBaja" value="" />
+                            <input type="hidden" id="accionResBaja" name="accion" value="Bajar" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- Fin del modal para dar de baja Resguardos -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <div class="container">
         <div class="row-fluid">
             <div class="panel panel-info" id="opciones">
@@ -329,6 +471,21 @@
                 }
             });
         });
+        $('#botonTraspasar').click(function() {
+            traspasar();
+        });
+
+        $("#traspasarResguardo").click(function() {
+            traspasarResguardo();
+        });
+        $('#botonDarBaja').click(function() {
+            bajar();
+        });
+
+        $("#darDeBajaResguardo").click(function() {
+            bajarResguardo();
+        });
+
         // -------------------------------------------------------------------------------------------
         // -------------------------------funciones CRUD Modal Resguardo----------------------------------------
         // -------------------------------------------------------------------------------------------
@@ -442,12 +599,12 @@
                 $.each(data, function(key, value) {
                     $("#claseSelRes").append('<option value="' + value.id_clase + '" >' + value.id_clase + ' ' + value.descripcion + '</option>');
                 });
-                console.log(auxResguardos);
+                // console.log(auxResguardos);
                 //
                 if (auxResguardos.archivo != "") {
                     // $('#archivoPDF').html("");   
                     $('#tdPdf').removeAttr('colspan');
-                    $('#archivoPDF').html('<a href="pdf/' + auxResguardos.archivo + '" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardos.archivo + '">' + auxResguardos.archivo + '</a>');
+                    $('#archivoPDF').html('<a href="pdf/' + auxResguardos.rpe + '/'+ auxResguardos.archivo+'" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardos.archivo + '">' + auxResguardos.archivo + '</a>');
                     $("#eliminarPdf").html('<button id="botonEliminarPDF" type="button" class="btn btn-outline-danger"><svg xmlns = "http://www.w3.org/2000/svg"width = "16"height = "16"fill = "currentColor"class = "bi bi-trash3-fill"viewBox = "0 0 16 16" ><path d = "M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" / ></svg>Eliminar PDF </button>')
                 } else {
                     $('#tdPdf').attr('colspan', "2");
@@ -485,7 +642,7 @@
                         dangerMode: true,
                     }).then((willDelete) => {
                         if (willDelete) {
-                            eliminarPDF(auxResguardos.id_bien, auxResguardos.archivo);
+                            eliminarPDF(auxResguardos.id_bien, auxResguardos.rpe, auxResguardos.archivo);
                             $($table).bootstrapTable('refresh');
                         } else {
                             swal(
@@ -551,17 +708,18 @@
             });
         }
 
-        function eliminarPDF(id, nombreArchivo) {
+        function eliminarPDF(id, rpe, nombreArchivo) {
             $.ajax({
                 url: 'php/operacionesResguardo.php',
                 method: 'POST',
                 data: {
                     idBien: id,
+                    rpeRes: rpe,
                     archivo: nombreArchivo,
-                    accionRes: "eliminarPDF"
+                    accion: "eliminarPDF"
                 },
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
                     if (data.success) {
                         swal(
                                 "El reguardo fue eliminado con exito.", {
@@ -587,9 +745,87 @@
 
     });
 
+    function traspasar() {
+        f_datos("php/empleados.php", {
+            action: "ShowAll"
+        }, function(data) {
+            $("#rpeNuevo").empty();
+            // console.log(auxResguardos);
+            $.each(data, function(key, value) {
+                // console.log(value.rpe);
+                $("#rpeNuevo").append('<option value="' + value.rpe + '" >' + value.rpe + ' ' + value.nombre + '</option>');
+            });
+
+            $("#modalTraspasarResguardo #exampleModalLabel").html("Traspasar Resguardo Id." + auxResguardos.id_bien);
+            $("#idBienTras").val(auxResguardos.id_bien);
+            $('#rpeAct').val(auxResguardos.rpe);
+            $('#rpeRes2Tras').val(auxResguardos.rpe);
+            $("#fechaCap").val(auxResguardos.fecha_captura);
+            $("#desResTras").val(auxResguardos.descripcion);
+            $("#marcaResTras").val(auxResguardos.marca);
+            $("#modeloResTras").val(auxResguardos.modelo);
+            $("#cantidadResTras").val(auxResguardos.cantidad);
+            $("#importeResTras").val(auxResguardos.importe);
+            // console.log(auxResguardos.archivo);
+            $("#nomArchivo").val(auxResguardos.archivo);
+            $('#modalTraspasarResguardo').modal('show');
+        });
+    }
+
+    function traspasarResguardo() {
+        $('#formTraspaso').off("submit").on("submit", function(event) {
+            event.preventDefault();
+            parametros = formToObject($("#formTraspaso"));
+            console.log(parametros);
+            $.ajax({
+                url: 'php/operacionesResguardo.php',
+                method: 'POST',
+                data: parametros,
+                success: function(data) {
+                    if (data.success) {
+                        swal(
+                                "El resguardo fue traspasado con exito.", {
+                                    icon: "success",
+                                })
+                            .then(function() {
+                                $('#modalTraspasarResguardo').modal('hide');
+                                $('#tablaResguardo').bootstrapTable('refresh');
+                            });
+                    } else {
+                        swal(
+                                'Error de Operacion',
+                                'Hubo un error en la base de datos. ' + data.message,
+                                'error'
+                            )
+                            .then(function() {
+                                $('#modalTraspasarResguardo').modal('hide');
+                            });
+                    }
+                }
+            });
+        });
+    }
+
+    function bajar() {
+        $("#modalDarBajaResguardo #exampleModalLabel").html("Dar de Baja Resguardo Id." + auxResguardos.id_bien);
+        $("#motBaja").val("");
+        $("#idBienBaja").val(auxResguardos.id_bien);
+        $('#rpeActBaja').val(auxResguardos.rpe);
+        $('#rpeRes3').val(auxResguardos.rpe);
+        $("#fechaCapBaja").val(auxResguardos.fecha_captura);
+        $("#desResBaja").val(auxResguardos.descripcion);
+        $("#marcaResBaja").val(auxResguardos.marca);
+        $("#modeloResBaja").val(auxResguardos.modelo);
+        $("#cantidadResBaja").val(auxResguardos.cantidad);
+        $("#importeResBaja").val(auxResguardos.importe);
+        // Falta, rescartar el nombre del pdf, donde este tenga el boton de eliminar, caso contrario, un mensaje de que no hay pdf.
+        $('#modalDarBajaResguardo').modal('show');
+    }
+
+
     function ajaxRequestRes(params) {
         var url = 'php/selectAllResguardos.php';
-        $.get(url, jQuery.parseJSON(params.data)).then(function(res) {
+        $.post(url, jQuery.parseJSON(params.data)).then(function(res) {
             params.success(res.data);
         });
     }

@@ -74,9 +74,9 @@ if ($resultado["success"]) {
     }
     if ($act == "Bajar") {
         $fichero = "../pdf/" . $rpe . "/" . $archivo;
-        $nuevo_fichero = "../pdf/" . $rpeNuevo . "/D" . $archivo;
-        if (!file_exists("../pdf/" . $rpeNuevo . "/"))
-            mkdir("../pdf/" . $rpeNuevo . "/", 0777, true);
+        $nuevo_fichero = "../pdf/" . $rpe . "/D" . $archivo;
+        if (!file_exists("../pdf/" . $rpe . "/"))
+            mkdir("../pdf/" . $rpe . "/", 0777, true);
         if (copy($fichero, $nuevo_fichero)) {
             unlink($fichero);
         }

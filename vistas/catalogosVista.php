@@ -288,7 +288,7 @@
     function ajaxRequestCl(params) {
         var url = 'php/Select_all_clases.php';
         //consola(jQuery.parseJSON(params.data));
-        $.get(url, jQuery.parseJSON(params.data)).then(function(res) {
+        $.get(url, $.param(params.data)).then(function(res) {
             // console.log(res);
             params.success(res);
         });

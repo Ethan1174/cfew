@@ -124,7 +124,7 @@
                             <button type="submit" class="btn btn-success" id="btnguardarCambiosRepoBajas">Guardar Resguardo</button>
                             <input type="hidden" id="rpeResBaja2" name="rpeRes2" value="" />
                             <input type="hidden" id="idBienBaja" name="idBien" value="" />
-                            <input type="hidden" id="accionResBaja" name="accionRes" value="Modificar" />
+                            <input type="hidden" id="accionResBaja" name="accion" value="Modificar" />
                         </div>
                     </div>
                 </form>
@@ -267,7 +267,6 @@
         var $table = $('#tablaReporteBajas');
         var select = $('#btnEditarRepoBajas');
         var select1 = $('#btnDetallesRepoBaja');
-        var dataResBaja = [];
 
         $(function() {
             cargarTablaBT($table);
@@ -311,7 +310,7 @@
             select.click(function() {
                 var ids = $.map($table.bootstrapTable('getSelections'), function(row) {
                     auxResguardosBajas = row;
-                    console.log(auxResguardosBajas);
+                    // console.log(auxResguardosBajas);
                     return row.id
                 });
                 $table.bootstrapTable('remove', {
@@ -364,7 +363,7 @@
                     cache: false,
                     processData: false,
                     success: function(data) {
-                        // console.log(data);
+                        console.log(data);
                         if (data.success) {
                             swal(
                                     "El resguardo fue operado con exito.", {
@@ -505,7 +504,7 @@
         }
 
         function detallesShow() {
-            console.log(auxResguardosBajas);
+            // console.log(auxResguardosBajas);
             $("#modalDetalles #exampleModalLabel").html("Detalles de resguardo Id." + auxResguardosBajas.id_bien);
             $('#rpeResDetalle').val(auxResguardosBajas.rpe);
             $("#fechaCapDetalle").val(auxResguardosBajas.fecha_captura);
@@ -515,7 +514,7 @@
             f_datos("php/selectBienesByHistorico.php", {
                 id_bien: auxResguardosBajas.id_bien
             }, function(datHist) {
-                console.log(datHist);
+                // console.log(datHist);
                 $("#historico tbody").empty();
                 $.each(datHist, function(key, value) {
                     tr = $("<tr />").appendTo($("#historico tbody"));
@@ -529,8 +528,8 @@
     });
 
     function operateFormatter(value, row, index) {
-        console.log(row);
-        if (row.url_dictamen != "La carpeta no existe") {
+        // console.log(row);
+        if (row.url_dictamen != "La carpeta no existe" && row.url_dictamen != null) {
             return [
                 '<a href="' + row.url_dictamen + '" target="_blank"><img src="imagenes/pdf.ico"></a><span>Ver archivo</span>'
             ].join('')
@@ -544,9 +543,9 @@
 
     function ajaxRequestRepoBaja(params) {
         var url = 'php/selectAllRepoBaja.php';
-        $.get(url, jQuery.parseJSON(params.data)).then(function(res) {
+        $.get(url, $.param(params.data)).then(function(res) {
             // console.log(res.data);
-            dataResBaja = res.data;
+            // dataResBaja = res.data;
             params.success(res["data"]);
         });
     }

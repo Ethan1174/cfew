@@ -408,7 +408,7 @@
                         </svg> Eliminar</button></li>
             </ul>
         </div>
-        <table data-locale="es-MX" id="tablaResguardo" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequestRes">
+        <table data-locale="es-MX" id="tablaResguardo" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-toolbar="#toolbar" data-pagination="true" data-search="true">
             <thead>
                 <tr>
                     <th data-field="state" data-checkbox="true">.</th>
@@ -438,6 +438,9 @@
         // -----------------------------------------------------------------------------------------------------------------------------------
         // -----------------------------------------------------------Funciones del Panel Resguardo---------------------------------------------------------
         // -----------------------------------------------------------------------------------------------------------------------------------
+        $(function() {
+            cargarTablaBT($table);
+        });
 
         f_datos("php/areas.php", {}, function(data) {
             $("#areaR").empty();
@@ -480,18 +483,13 @@
             rpeR = $('#Panelrpe').val();
             if ($table) $table.bootstrapTable('removeAll');
 
-            f_datos("php/selectAllResguardos.php", {
-                rpe: rpeR
-            }, function(stm) {
+            f_datos("php/selectAllResguardos.php?rpe=" + rpeR, {}, function(stm) {
                 // console.log(stm);
                 $table.bootstrapTable('load', stm);
             });
             // console.log(rpeR);
         });
 
-        $(function() {
-            cargarTablaBT('#tablaResguardo');
-        });
 
         $(function() {
 
@@ -536,6 +534,11 @@
             }).then((willDelete) => {
                 if (willDelete) {
                     eliminarResguardo(auxResguardos.id_bien, auxResguardos.rpe, auxResguardos.archivo);
+                    $('#modalOperarResguardo').modal('hide');
+                    $table.bootstrapTable("removeAll");
+                    f_datos("php/selectAllResguardos.php?rpe=" + auxResguardos.rpe, {}, function(stm) {
+                        $table.bootstrapTable('load', stm);
+                    });
                 } else {
                     swal(
                         'Sin cambios',
@@ -580,6 +583,7 @@
                     processData: false,
                     success: function(data) {
                         // console.log(data);
+
                         if (data.success) {
                             swal(
                                     "El resguardo fue operado con exito.", {
@@ -587,7 +591,9 @@
                                     })
                                 .then(function() {
                                     $('#modalOperarResguardo').modal('hide');
-                                    $('#tablaResguardo').bootstrapTable('refresh');
+                                    f_datos("php/selectAllResguardos.php?rpe=" + rpeR, {}, function(stm) {
+                                        $table.bootstrapTable('load', stm);
+                                    });
                                 });
                         } else {
                             swal(
@@ -719,7 +725,13 @@
                     }).then((willDelete) => {
                         if (willDelete) {
                             eliminarPDF(auxResguardos.id_bien, auxResguardos.rpe, auxResguardos.archivo);
-                            $($table).bootstrapTable('refresh');
+                            $('#fileToUpload').removeAttr('disabled');
+                            $('#tdPdf').attr('colspan', "2");
+                            $('#archivoPDF').html("No se encontraron archivos del bien " + auxResguardos.id_bien + " del trabajador " + auxResguardos.rpe);
+                            $("#eliminarPdf").html("");
+                            f_datos("php/selectAllResguardos.php?rpe=" + auxResguardos.rpe, {}, function(stm) {
+                                $table.bootstrapTable('load', stm);
+                            });
                         } else {
                             swal(
                                 'Sin cambios',
@@ -761,14 +773,10 @@
                     // console.log(data);
                     if (data.success) {
                         swal(
-                                "El reguardo fue eliminado con exito.", {
-                                    icon: "success",
-                                }
-                            )
-                            .then(function() {
-                                $('#modalOperarResguardo').modal('hide');
-                                $('#tablaResguardo').bootstrapTable('refresh');
-                            });
+                            "El reguardo fue eliminado con exito.", {
+                                icon: "success",
+                            }
+                        );
                     } else {
                         swal(
                                 'Error de Operacion',
@@ -797,17 +805,11 @@
                     // console.log(data);
                     if (data.success) {
                         swal(
-                                "El reguardo fue eliminado con exito.", {
-                                    icon: "success",
-                                }
-                            )
-                            .then(function() {
-                                $('#fileToUpload').removeAttr('disabled');
-                                $('#tdPdf').attr('colspan', "2");
-                                $('#archivoPDF').html("No se encontraron archivos del bien " + auxResguardos.id_bien + " del trabajador " + auxResguardos.rpe);
-                                $("#eliminarPdf").html("");
-                                $('#tablaResguardo').bootstrapTable('refresh');
-                            });
+                            "El reguardo fue eliminado con exito.", {
+                                icon: "success",
+                            }
+                        )
+
                     } else {
                         swal(
                             'Error de Operacion',
@@ -864,7 +866,10 @@
                                     })
                                 .then(function() {
                                     $('#modalTraspasarResguardo').modal('hide');
-                                    $('#tablaResguardo').bootstrapTable('refresh');
+                                    if ($table) $table.bootstrapTable("removeAll");
+                                    f_datos("php/selectAllResguardos.php?rpe=" + auxResguardos.rpe, {}, function(stm) {
+                                        $table.bootstrapTable('load', stm);
+                                    });
                                 });
                         } else {
                             swal(
@@ -918,7 +923,10 @@
                                     })
                                 .then(function() {
                                     $('#modalDarBajaResguardo').modal('hide');
-                                    $('#tablaResguardo').bootstrapTable('refresh');
+                                    $table.bootstrapTable("removeAll");
+                                    f_datos("php/selectAllResguardos.php?rpe=" + auxResguardos.rpe, {}, function(stm) {
+                                        $table.bootstrapTable('load', stm);
+                                    });
                                 });
                         } else {
                             swal(
@@ -960,10 +968,12 @@
 
 
 
-    function ajaxRequestRes(params) {
-        var url = 'php/selectAllResguardos.php';
-        $.post(url, jQuery.parseJSON(params.data)).then(function(res) {
-            params.success(res.data);
-        });
-    }
+    // function ajaxRequestRes(params) {
+    //     var url = 'php/selectAllResguardos.php';
+    //     $.get(url, $.param(params.data)).then(function(res) {
+    //         // console.log(res);
+    //         // dataResBaja = res.data;
+    //         params.success(res["data"]);
+    //     });
+    // }
 </script>

@@ -290,7 +290,7 @@
         //consola(jQuery.parseJSON(params.data));
         $.get(url, $.param(params.data)).then(function(res) {
             // console.log(res);
-            params.success(res);
+            params.success(res.data);
         });
     }
 </script>

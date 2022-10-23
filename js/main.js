@@ -15,7 +15,7 @@ var auxResguardos = [];
 var auxResguardosBajas = [];
 
 
- $.get("php/refrescarSesion.php", function (data, status) {
+ $.post("php/refrescarSesion.php", function (data, status) {
         dataUser = data;
         // console.log(dataUser);
     });
@@ -27,10 +27,7 @@ function messageNoData(titleMessage, text, icon,action) {
                 title: titleMessage,
                 text: text,
                 icon: icon,
-                buttons: true,
                 dangerMode: true,
-            }).then(() => {
-                action
             });
         }
 function f_datos(url, param, fn_cb, fn_err) {

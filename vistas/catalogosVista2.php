@@ -234,8 +234,8 @@
 
     function ajaxRequestSub(params) {
         var url = 'php/Select_all_subclases.php';
-        $.get(url, $.param(params.data)).then(function(res) {
-            params.success(res);
+        $.post(url, $.param(params.data)).then(function(res) {
+            params.success(res.data);
         });
     }
 </script>

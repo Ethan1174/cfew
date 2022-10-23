@@ -6,7 +6,7 @@ session_start();
 if (isset($_POST['area'])) $Sarea = $_POST['area'];
 if (isset($_POST['depto'])) $Sdepto = $_POST['depto'];
 if (isset($_POST['tipo'])) $Stipo = $_POST['tipo'];
-
+// Este post viene del modal de traspaso
 $act = ((isset($_POST["action"])) ? $_POST["action"] : "");
 // if (isset($_GET['rpe'])) 
 // 	$sql=sprintf("SELECT * FROM usuario_scate WHERE rpe = '%s'", $_GET['rpe']);

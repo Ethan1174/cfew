@@ -13,11 +13,11 @@
                 </div>
                 <form class="form-horizontal" role="form" accept-charset="UTF-8" name="formResguardo" id="formResguardo" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <div class="container-fluid">
+                        <div class="container">
                             <table class="table table-condensed">
                                 <tr>
                                     <td><label class="control-label"><strong>RPE: </strong></span></td>
-                                    <td><input type="text" name="rpeRes" id="rpeRes" class="inputMod form-control" value="" disabled></input></td>
+                                    <td><input type="text" name="rpeRes" id="rpeRes" class="form-control" value="" disabled></input></td>
                                     <td><label class="control-label"><strong>Fecha de Captura: </strong></label></td>
                                     <td><input type="date" name="fechaCapRes" id="fechaCapRes" step="1" class="inputMod form-control " required></td>
                                 </tr>
@@ -26,34 +26,31 @@
 
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="pesBien-tab" data-bs-toggle="tab" data-bs-target="#pesBien" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Datos del Bien</button>
-                                <button class="nav-link" id="pesFactura-tab" data-bs-toggle="tab" data-bs-target="#pesFactura" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Datos de Factura</button>
+                                <a class="nav-link active" id="pesBien-tab" data-bs-toggle="tab" data-bs-target="#pesBien" role="tab" aria-controls="nav-home" aria-selected="true">Datos del Bien</a>
+                                <a class="nav-link" id="pesFactura-tab" data-bs-toggle="tab" data-bs-target="#pesFactura" role="tab" aria-controls="nav-profile" aria-selected="false">Datos de Factura</a>
                             </div>
                         </nav>
                         <div class="tab-content" id="pesOpeRes">
                             <div class="tab-pane fade show active" id="pesBien" role="tabpanel" aria-labelledby="pesBien-tab" tabindex="0">
 
                                 <div class="container-fluid">
-                                    <table class="table table-condensed">
+                                    <table class="table table-striped">
                                         <tr>
                                             <td><label class="control-label"><strong>Clase: </strong></span></td>
-                                            <td>
-                                                <select class="inputMod form-control" id="claseSelRes" name="listaClases" placeholder="Clase"></select>
+                                            <td colspan="3">
+                                                <select class="form-control" id="claseSelRes" name="listaClases" placeholder="Clase"></select>
                                             </td>
-                                            <td></td>
-                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td><label class="control-label"><strong>Subclase: </strong></span></td>
-                                            <td>
-                                                <select class="inputMod form-control" id="subClaseSelRes" name="listaSubClases" placeholder="SubClase" data-search="true" data-silent-initial-value-set="true"></select>
+                                            <td colspan="3">
+                                                <select class="form-control" id="subClaseSelRes" name="listaSubClases" placeholder="SubClase" data-search="true" data-silent-initial-value-set="true"></select>
                                             </td>
-                                            <td></td>
-                                            <td></td>
+
                                         </tr>
                                         <tr>
                                             <td><label class="control-label"><strong>Descripcion: </strong></span></td>
-                                            <td><textarea rows="2" cols="40" name="desRes" id="desRes" class="inputMod form-control" required></textarea></td>
+                                            <td colspan="3"><textarea rows="2" cols="40" name="desRes" id="desRes" class="form-control" required></textarea></td>
                                         </tr>
                                         <tr>
                                             <td><label class="control-label"><strong>Marca: </strong></span></td>
@@ -89,7 +86,7 @@
                             <div class="tab-pane fade" id="pesFactura" role="tabpanel" aria-labelledby="pesFactura-tab" tabindex="0">
                                 <div class="container">
 
-                                    <table class="table table-condensed">
+                                    <table class="table table-striped">
                                         <tr>
                                             <td><label class="control-label"><strong>Número: </strong></span></td>
                                             <td><input type="text" name="numResFac" id="numResFac" class="inputMod form-control "></input></td>
@@ -106,12 +103,13 @@
                                             <td><label class="control-label"><strong>Archivo: </strong></span></td>
                                             <td><input class="form-control" type="file" id="fileToUpload" name="fileToUpload">
                                             </td>
-                                            <td id="tdPdf" colspan="2">
+                                        </tr>
+                                        <tr>
+                                            <td id="tdPdf" colspan="3">
                                                 <div id="archivoPDF"></div>
-
                                             </td>
                                             <td>
-                                                <div id="eliminarPdf"></div>
+                                                <span id="eliminarPdf"></span>
                                             </td>
                                         </tr>
 
@@ -153,41 +151,41 @@
                 </div>
                 <form class="form-horizontal" role="form" accept-charset="UTF-8" name="formTraspaso" id="formTraspaso" method="POST">
                     <div class="modal-body">
-                        <div class="container-fluid">
+                        <div class="container">
                             <table class="table table-condensed">
                                 <tr>
                                     <td><label class="control-label"><strong>RPE Actual: </strong></span></td>
-                                    <td><input type="text" name="rpeRes" id="rpeAct" class="inputMod form-control" value="" disabled></input></td>
+                                    <td><input type="text" name="rpeRes" id="rpeAct" class="form-control" value="" disabled></input></td>
                                     <td><label class="control-label"><strong>Fecha de Captura: </strong></label></td>
-                                    <td><input type="date" name="fechaCap" id="fechaCap" step="1" class="inputMod form-control" disabled></td>
+                                    <td><input type="date" name="fechaCap" id="fechaCap" step="1" class="form-control" disabled></td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label"><strong>Nuevo RPE: </strong></span></td>
                                     <td>
-                                        <select class="inputMod form-control" id="rpeNuevo" name="rpeNuevo" placeholder="Elige un RPE" data-search="true" data-silent-initial-value-set="true" require></select>
+                                        <select class="form-control" id="rpeNuevo" name="rpeNuevo" placeholder="Elige un RPE" data-search="true" data-silent-initial-value-set="true" require></select>
                                     </td>
                                     <td><label class="control-label"><strong>Fecha de Traspaso: </strong></label></td>
-                                    <td><input type="date" name="fechaTras" id="fechaTras" step="1" class="inputMod form-control" required></td>
+                                    <td><input type="date" name="fechaTras" id="fechaTras" step="1" class="form-control" required></td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label"><strong>Descripcion: </strong></span></td>
-                                    <td><textarea rows="3" cols="40" name="desRes" id="desResTras" class="inputMod form-control" disabled></textarea></td>
+                                    <td colspan="3"><textarea rows="2" cols="40" name="desRes" id="desResTras" class="form-control" disabled></textarea></td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label"><strong>Marca: </strong></span></td>
-                                    <td><input type="text" name="marcaRes1" id="marcaResTras" class="inputMod form-control" disabled></input></td>
+                                    <td><input type="text" name="marcaRes1" id="marcaResTras" class="form-control" disabled></input></td>
                                     <td><label class="control-label"><strong>Modelo: </strong></label></td>
-                                    <td><input type="text" name="modeloRes1" id="modeloResTras" class="inputMod form-control" disabled></input></td>
+                                    <td><input type="text" name="modeloRes1" id="modeloResTras" class="form-control" disabled></input></td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label"><strong>Cantidad: </strong></span></td>
-                                    <td><input type="number" min="1" name="cantidadRes" id="cantidadResTras" class="inputMod form-control" step="any" disabled></input></td>
+                                    <td><input type="number" min="1" name="cantidadRes" id="cantidadResTras" class="form-control" step="any" disabled></input></td>
                                     <td><label class="control-label"><strong>Importe $: </strong></label></td>
-                                    <td><input type="number" min="1" name="importeRes" id="importeResTras" class="inputMod form-control" step="any" disabled></input></td>
+                                    <td><input type="number" min="1" name="importeRes" id="importeResTras" class="form-control" step="any" disabled></input></td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label"><strong>Nombre del Archivo: </strong></span></td>
-                                    <td><input type="text" name="nomArchivo" id="nomArchivo" class="inputMod form-control" disabled></input></td>
+                                    <td><input type="text" name="nomArchivo" id="nomArchivo" class="form-control" disabled></input></td>
                                 </tr>
                             </table>
                         </div>
@@ -252,7 +250,7 @@
                                 </tr>
                                 <tr>
                                     <td><label class="control-label"><strong>Descripcion: </strong></span></td>
-                                    <td><textarea rows="3" cols="40" name="desResBaja" id="desResBaja" class="inputMod form-control" disabled></textarea></td>
+                                    <td colspan="3"><textarea rows="2" cols="40" name="desResBaja" id="desResBaja" class="form-control" disabled></textarea></td>
                                 </tr>
                                 <tr>
                                     <td><label class="control-label"><strong>Marca: </strong></span></td>
@@ -408,7 +406,7 @@
                         </svg> Eliminar</button></li>
             </ul>
         </div>
-        <table data-locale="es-MX" id="tablaResguardo" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-toolbar="#toolbar" data-pagination="true" data-search="true">
+        <table id="tablaResguardo" data-multiple-select-row="true" data-click-to-select="true" data-show-refresh="true" data-show-copy-rows="true" data-show-print="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequest" data-query-params="queryParams">
             <thead>
                 <tr>
                     <th data-field="state" data-checkbox="true">.</th>
@@ -419,6 +417,7 @@
                     <th data-field="unidad" data-sortable="true">Uni.</th>
                     <th data-field="importe" data-sortable="true">Importe</th>
                     <th data-field="fecha_captura" data-sortable="true">Fecha Captura</th>
+                    <th data-field="rpe" data-sortable="true" data-visible="false">rpe</th>
                 </tr>
             </thead>
             <tbody>
@@ -431,16 +430,18 @@
     // -----------------------------------------------------------------------------------------------------------------------------------
     // -----------------------------------------------------------Tabla Resguardo---------------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------------------------
+
     $(document).ready(function() {
         var $table = $('#tablaResguardo');
         var select = $('#btnOpcionesResguardos');
         var rpeR = "";
+        $(function() {
+            // cargarTablaBT($table);
+            $table.bootstrapTable();
+        });
         // -----------------------------------------------------------------------------------------------------------------------------------
         // -----------------------------------------------------------Funciones del Panel Resguardo---------------------------------------------------------
         // -----------------------------------------------------------------------------------------------------------------------------------
-        $(function() {
-            cargarTablaBT($table);
-        });
 
         f_datos("php/areas.php", {}, function(data) {
             $("#areaR").empty();
@@ -482,14 +483,14 @@
         $("#Panelrpe").off('change').on('change', function(e) {
             rpeR = $('#Panelrpe').val();
             if ($table) $table.bootstrapTable('removeAll');
-
-            f_datos("php/selectAllResguardos.php?rpe=" + rpeR, {}, function(stm) {
+            f_datos("php/selectAllResguardos.php", {
+                rpe: rpeR
+            }, function(stm) {
                 // console.log(stm);
                 $table.bootstrapTable('load', stm);
             });
             // console.log(rpeR);
         });
-
 
         $(function() {
 
@@ -525,6 +526,7 @@
             modificar();
         });
         $('#btnEliminarResguardo').click(function() {
+
             swal({
                 title: "¿Estás seguro de eliminar la clase " + auxResguardos.id_bien + " ?",
                 text: "El resguardo no se podrá recuperar una vez hecha esta operación.",
@@ -535,10 +537,7 @@
                 if (willDelete) {
                     eliminarResguardo(auxResguardos.id_bien, auxResguardos.rpe, auxResguardos.archivo);
                     $('#modalOperarResguardo').modal('hide');
-                    $table.bootstrapTable("removeAll");
-                    f_datos("php/selectAllResguardos.php?rpe=" + auxResguardos.rpe, {}, function(stm) {
-                        $table.bootstrapTable('load', stm);
-                    });
+                    $table.bootstrapTable('refresh');
                 } else {
                     swal(
                         'Sin cambios',
@@ -591,9 +590,8 @@
                                     })
                                 .then(function() {
                                     $('#modalOperarResguardo').modal('hide');
-                                    f_datos("php/selectAllResguardos.php?rpe=" + rpeR, {}, function(stm) {
-                                        $table.bootstrapTable('load', stm);
-                                    });
+                                    $table.bootstrapTable('refresh');
+
                                 });
                         } else {
                             swal(
@@ -644,6 +642,7 @@
                 $.each(data, function(key, value) {
                     $("#claseSelRes").append('<option value="' + value.id_clase + '" >' + value.id_clase + ' ' + value.descripcion + '</option>');
                 });
+                $("#claseSelRes").trigger("change");
             });
             $('#tdPdf').attr('colspan', "2");
             $('#archivoPDF').html("");
@@ -657,7 +656,7 @@
             $("#fechaCapRes").val(hoy_input_date());
             $("select#claseSelRes").trigger("change");
 
-            $("select#claseSelRes").change(function(event, valor) {
+            $("#claseSelRes").change(function(event, valor) {
                 // console.log(valor);
                 f_datos("php/subclases.php", {
                     id_clase: $("#claseSelRes option:selected").val()
@@ -682,14 +681,11 @@
                 // console.log(auxResguardos);
                 //
                 if (auxResguardos.archivo != "") {
-                    // $('#archivoPDF').html("");   
                     $('#fileToUpload').attr('disabled', 'disabled');
-                    $('#tdPdf').removeAttr('colspan');
                     $('#archivoPDF').html('<a href="pdf/' + auxResguardos.rpe + '/' + auxResguardos.archivo + '" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardos.archivo + '">' + auxResguardos.archivo + '</a>');
                     $("#eliminarPdf").html('<button id="botonEliminarPDF" type="button" class="btn btn-outline-danger"><svg xmlns = "http://www.w3.org/2000/svg"width = "16"height = "16"fill = "currentColor"class = "bi bi-trash3-fill"viewBox = "0 0 16 16" ><path d = "M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" / ></svg>Eliminar PDF </button>')
                 } else {
                     $('#fileToUpload').removeAttr('disabled');
-                    $('#tdPdf').attr('colspan', "2");
                     $('#archivoPDF').html("No se encontrarón archivos del bien " + auxResguardos.id_bien + " del trabajador " + auxResguardos.rpe);
                     $("#eliminarPdf").html("");
                 }
@@ -726,12 +722,9 @@
                         if (willDelete) {
                             eliminarPDF(auxResguardos.id_bien, auxResguardos.rpe, auxResguardos.archivo);
                             $('#fileToUpload').removeAttr('disabled');
-                            $('#tdPdf').attr('colspan', "2");
                             $('#archivoPDF').html("No se encontraron archivos del bien " + auxResguardos.id_bien + " del trabajador " + auxResguardos.rpe);
                             $("#eliminarPdf").html("");
-                            f_datos("php/selectAllResguardos.php?rpe=" + auxResguardos.rpe, {}, function(stm) {
-                                $table.bootstrapTable('load', stm);
-                            });
+                            $table.bootstrapTable('refresh');
                         } else {
                             swal(
                                 'Sin cambios',
@@ -837,6 +830,7 @@
                 $('#rpeAct2').val(auxResguardos.rpe);
                 $('#rpeRes2Tras').val(auxResguardos.rpe);
                 $("#fechaCap").val(auxResguardos.fecha_captura);
+                $("#fechaTras").val(hoy_input_date());
                 $("#desResTras").val(auxResguardos.descripcion);
                 $("#marcaResTras").val(auxResguardos.marca);
                 $("#modeloResTras").val(auxResguardos.modelo);
@@ -866,10 +860,7 @@
                                     })
                                 .then(function() {
                                     $('#modalTraspasarResguardo').modal('hide');
-                                    if ($table) $table.bootstrapTable("removeAll");
-                                    f_datos("php/selectAllResguardos.php?rpe=" + auxResguardos.rpe, {}, function(stm) {
-                                        $table.bootstrapTable('load', stm);
-                                    });
+                                    $table.bootstrapTable('refresh');
                                 });
                         } else {
                             swal(
@@ -894,6 +885,7 @@
             $('#rpeActBaja').val(auxResguardos.rpe);
             $('#rpeRes3').val(auxResguardos.rpe);
             $("#fechaCapBaja").val(auxResguardos.fecha_captura);
+            $("#fechaBaja").val(hoy_input_date());
             $("#desResBaja").val(auxResguardos.descripcion);
             $("#marcaResBaja").val(auxResguardos.marca);
             $("#modeloResBaja").val(auxResguardos.modelo);
@@ -923,10 +915,8 @@
                                     })
                                 .then(function() {
                                     $('#modalDarBajaResguardo').modal('hide');
-                                    $table.bootstrapTable("removeAll");
-                                    f_datos("php/selectAllResguardos.php?rpe=" + auxResguardos.rpe, {}, function(stm) {
-                                        $table.bootstrapTable('load', stm);
-                                    });
+                                    $table.bootstrapTable('refresh');
+
                                 });
                         } else {
                             swal(
@@ -966,14 +956,18 @@
         }
     });
 
+    function queryParams(params) {
+        // params.rpe = $("#PanelRpe").val();
+        console.log(params);
+        return params;
+    }
 
-
-    // function ajaxRequestRes(params) {
-    //     var url = 'php/selectAllResguardos.php';
-    //     $.get(url, $.param(params.data)).then(function(res) {
-    //         // console.log(res);
-    //         // dataResBaja = res.data;
-    //         params.success(res["data"]);
-    //     });
-    // }
+    function ajaxRequest(params) {
+        console.log(params.data);
+        var url = 'php/selectAllResguardos.php';
+        $.post(url, $.param(params.data)).then(function(res) {
+            // console.log(res.data);
+            params.success(res.data);
+        });
+    }
 </script>

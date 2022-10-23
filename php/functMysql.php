@@ -12,8 +12,8 @@ function echo_json($data, $salir = false){
 
 function connectDB($basedatos){
 	global $server;
-	$user = "root";
-	$pass = "";
+	$user = "respc";
+	$pass = "WEBServerRespc2022";
 	$bd = $basedatos;
     $conexion = mysqli_connect($server, $user, $pass, $bd);
 	if(!$conexion){

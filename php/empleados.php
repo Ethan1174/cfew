@@ -21,6 +21,6 @@ if ($act == "ShowAll") {
 	$sql = "SELECT `rpe`, `nombre` FROM `usuario_scate` ORDER BY rpe  ASC";
 }
 
-$resArray = getArraySQL($sql, "usuarios", true);
+$resArray = getArraySQL($sql, "usuarios_mps", true);
 header('Content-type: application/json; charset=utf-8');
 echo json_encode($resArray);

@@ -18,7 +18,7 @@ echo json_encode($resArray);
 
 function Nombre($rpe){
 	$sql=sprintf("SELECT * FROM usuario_scate WHERE rpe = '%s'", $rpe);
-	$res = getArraySQL($sql, "usuarios", true);
+	$res = getArraySQL($sql, "usuarios_mps", true);
 	
 	if ($res["success"]) {
 		$nombre = $res["data"][0]["nombre"];

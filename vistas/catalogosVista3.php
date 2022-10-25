@@ -235,12 +235,6 @@
                                 <tr>
                                     <td><label class="control-label"><strong>Archivo Dictamen: </strong></span></td>
                                     <td><input class="form-control" type="file" id="fileToUploadDictamen" name="fileToUploadDictamen" required></input></td>
-                                    <!-- <td id="tdPdf" colspan="2">
-                                        <div id="archivoPDF"></div>
-                                    </td>
-                                    <td>
-                                        <div id="eliminarPdf"></div>
-                                    </td> -->
                                 </tr>
                                 <tr>
                                     <td><label class="control-label"><strong>RPE Actual: </strong></span></td>
@@ -526,7 +520,7 @@
             modificar();
         });
         $('#btnEliminarResguardo').click(function() {
-
+            console.log(auxResguardos.archivo);
             swal({
                 title: "¿Estás seguro de eliminar la clase " + auxResguardos.id_bien + " ?",
                 text: "El resguardo no se podrá recuperar una vez hecha esta operación.",
@@ -534,6 +528,7 @@
                 buttons: true,
                 dangerMode: true,
             }).then((willDelete) => {
+
                 if (willDelete) {
                     eliminarResguardo(auxResguardos.id_bien, auxResguardos.rpe, auxResguardos.archivo);
                     $('#modalOperarResguardo').modal('hide');
@@ -581,9 +576,9 @@
                     cache: false,
                     processData: false,
                     success: function(data) {
-                        // console.log(data);
+                        console.log(data["archivoResguardo"]);
 
-                        if (data.success) {
+                        if (data.success || data["archivoResguardo"]) {
                             swal(
                                     "El resguardo fue operado con exito.", {
                                         icon: "success",
@@ -612,9 +607,10 @@
         $("#fileToUpload").change(function() {
             let file = this.files[0];
             let fileType = file.type;
+            // Sacamos el valor en megaBytes
             let fileSize = file.size / 1024;
             let extenOnlyPDF = ['application/pdf'];
-            // console.log(fileSize);
+            console.log(fileSize);
             if (!(fileType == extenOnlyPDF[0])) {
                 swal(
                     'Verifica tu archivo',
@@ -624,7 +620,7 @@
                 $("#fileToUpload").val('');
                 return false;
             }
-            if (fileSize > 2048) { //No mayor a 2mb
+            if (fileSize > 5120) { //No mayor a 5mb
                 swal(
                     'Límite de tamaño del archivo',
                     'El archivo es muy grande y no se pudo cargar',
@@ -644,7 +640,7 @@
                 });
                 $("#claseSelRes").trigger("change");
             });
-            $('#tdPdf').attr('colspan', "2");
+            $('#fileToUpload').removeAttr('disabled');
             $('#archivoPDF').html("");
             $("#eliminarPdf").html("");
             $('#rpeRes').attr("value", rpeR);
@@ -720,7 +716,12 @@
                         dangerMode: true,
                     }).then((willDelete) => {
                         if (willDelete) {
-                            eliminarPDF(auxResguardos.id_bien, auxResguardos.rpe, auxResguardos.archivo);
+                            eliminarPDF(auxResguardos.id_bien, auxResguardos.rpe, auxResguardos.archivo, "eliminarPDF");
+                            swal(
+                                "El archivo fue eliminado con exito.", {
+                                    icon: "success",
+                                }
+                            );
                             $('#fileToUpload').removeAttr('disabled');
                             $('#archivoPDF').html("No se encontraron archivos del bien " + auxResguardos.id_bien + " del trabajador " + auxResguardos.rpe);
                             $("#eliminarPdf").html("");
@@ -784,7 +785,7 @@
             });
         }
 
-        function eliminarPDF(id, rpe, nombreArchivo) {
+        function eliminarPDF(id, rpe, nombreArchivo, accion) {
             $.ajax({
                 url: 'php/operacionesResguardo.php',
                 method: 'POST',
@@ -792,24 +793,10 @@
                     idBien: id,
                     rpeRes: rpe,
                     archivo: nombreArchivo,
-                    accion: "eliminarPDF"
+                    accion: accion
                 },
                 success: function(data) {
-                    // console.log(data);
-                    if (data.success) {
-                        swal(
-                            "El reguardo fue eliminado con exito.", {
-                                icon: "success",
-                            }
-                        )
-
-                    } else {
-                        swal(
-                            'Error de Operacion',
-                            'Hubo un error en la base de datos. ' + data.message,
-                            'error'
-                        )
-                    }
+                    console.log(data);
                 }
             });
         }
@@ -847,12 +834,13 @@
             $('#formTraspaso').off("submit").on("submit", function(event) {
                 event.preventDefault();
                 parametros = formToObject($("#formTraspaso"));
-                console.log(parametros);
+                // console.log(parametros);
                 $.ajax({
                     url: 'php/operacionesResguardo.php',
                     method: 'POST',
                     data: parametros,
                     success: function(data) {
+                        // console.log(data);
                         if (data.success) {
                             swal(
                                     "El resguardo fue traspasado con exito.", {
@@ -957,13 +945,13 @@
     });
 
     function queryParams(params) {
-        // params.rpe = $("#PanelRpe").val();
-        console.log(params);
+        // params.rpe = rpeR;
+        // console.log(params);
         return params;
     }
 
     function ajaxRequest(params) {
-        console.log(params.data);
+        // console.log(params.data);
         var url = 'php/selectAllResguardos.php';
         $.post(url, $.param(params.data)).then(function(res) {
             // console.log(res.data);

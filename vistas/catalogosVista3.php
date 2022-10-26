@@ -434,7 +434,6 @@ if (!isset($_SESSION)) {
     // -----------------------------------------------------------------------------------------------------------------------------------
 
     $(document).ready(function() {
-        permisosDeUso();
         var $table = $('#tablaResguardo');
         var select = $('#btnOpcionesResguardos');
         var rpeR = "";

@@ -70,6 +70,7 @@ function getUser() {
 
 	});
 	$.post("php/obtenerPermisos.php", function(data, status) {
+		// Se usó esta consulta para posteriores validaciones
             console.log(data[0]);
 
             if (data[0].tipo == 22 || data[0].tipo == 31 ) {

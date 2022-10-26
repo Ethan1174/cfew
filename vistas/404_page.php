@@ -28,7 +28,7 @@
            </div>
        </div>
        <h1 class="second-four">4</h1>
-       <p class="wrong-para">Uh Oh! Page not found!</p>
+       <a class="wrong-para" href="php/accederHome.php">Uh Oh! Pagina no encontrada!</a>
    </div>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/gsap.min.js"></script>
-   <script type="text/javascript" src="js/js404.js"></script>
+   <script src=" https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/gsap.min.js"></script>
+           <script type="text/javascript" src="js/js404.js"></script>

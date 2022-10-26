@@ -1,3 +1,12 @@
+<?php
+// session_start();
+
+if (!isset($_SESSION)) {
+    echo '<script>alert("No tienes permitido navegar por URL"); window.location ="../."</script>';
+    die();
+}
+?>
+
 <div class="container-respons">
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
@@ -8,6 +17,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+
                     <h5 class="modal-title" id="exampleModalLabel">Agregar Clase</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -136,13 +146,13 @@
         // -------------------------------CRUD Modal Clases----------------------------------------
         // -------------------------------------------------------------------------------------------
         $('#botonAgregarClase').click(function() {
-
             $('.modal-title').text('Agregar Clase');
             $('#idClase').removeAttr('disabled');
             $('#formClaseA')[0].reset();
             $('#accion').val('Agregar');
             $('#guardarCambiosClaseA').text('Registrar Clase');
         });
+
         $('#botonActualizarClase').click(function() {
             $('#modalAgregarClase').modal('show');
             $('.modal-title').text('Editar Clase');
@@ -156,6 +166,7 @@
             document.querySelector('#multipleSelect').setValue(sub);
             // multiselectClases(auxClases.subclase);
         });
+
         $('#botonEliminarClase').click(function() {
             swal({
                 title: "¿Estás seguro de eliminar la clase " + auxClases.id_clase + " ?",

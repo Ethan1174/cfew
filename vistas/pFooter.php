@@ -1,3 +1,11 @@
+<?php
+// session_start();
+
+if (!isset($_SESSION)) {
+  echo '<script>alert("No tienes permitido navegar por URL"); window.location ="../."</script>';
+  die();
+}
+?>
 <footer class="footer mt-auto py-3 bg-dark">
   <div class="container">
     <span class="text-muted">

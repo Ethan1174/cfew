@@ -1,3 +1,11 @@
+<?php
+// session_start();
+
+if (!isset($_SESSION)) {
+    echo '<script>alert("No tienes permitido navegar por URL"); window.location ="../."</script>';
+    die();
+}
+?>
 <div class="container-respons">
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
@@ -426,6 +434,7 @@
     // -----------------------------------------------------------------------------------------------------------------------------------
 
     $(document).ready(function() {
+        permisosDeUso();
         var $table = $('#tablaResguardo');
         var select = $('#btnOpcionesResguardos');
         var rpeR = "";
@@ -450,7 +459,7 @@
         $("#areaR").off("change").on("change", function(e) {
             if ($table) $table.bootstrapTable('removeAll');
             f_datos("php/deptos.php", {}, function(datDep) {
-                // console.log(datDep);
+                // console.log(datDep);    
                 $("#deptoR").empty();
                 $.each(datDep, function(key, value) {
                     $("#deptoR").append('<option value="' + value.cl_cenco + '" >' + value.Descripcion + '</option>');
@@ -509,18 +518,19 @@
         // -------------------------------------CRUD Resguardos-------------------------------------
         // -------------------------------------------------------------------------------------------
         $('#btnAgregarResguardo').click(function() {
-
             agregar();
         });
+
         $("#btnguardarCambiosResguardos").click(function() {
             operarResguardo();
         });
-        $('#btnEditarResguardo').click(function() {
 
+        $('#btnEditarResguardo').click(function() {
             modificar();
         });
+
         $('#btnEliminarResguardo').click(function() {
-            console.log(auxResguardos.archivo);
+            console.log("Archivo a eliminar " + auxResguardos.archivo);
             swal({
                 title: "¿Estás seguro de eliminar la clase " + auxResguardos.id_bien + " ?",
                 text: "El resguardo no se podrá recuperar una vez hecha esta operación.",

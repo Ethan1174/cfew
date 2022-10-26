@@ -1,6 +1,11 @@
-<!-- <?php
-      // require "php/refrescarSesion.php";
-      ?> -->
+<?php
+// session_start();
+
+if (!isset($_SESSION)) {
+      echo '<script>alert("No tienes permitido navegar por URL"); window.location ="../."</script>';
+      die();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">

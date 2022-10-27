@@ -87,16 +87,11 @@ if (!isset($_SESSION)) {
     // -----------------------------------------------------------Tabla Subclases---------------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------------------------
     $(document).ready(function() {
-
-
         var $table = $('#tablaSubClases');
         var select = $('#botonOpcionesSub');
         $(function() {
             cargarTablaBT($table);
         });
-
-
-
         $(function() {
             $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function() {
                 select.prop('disabled', !$table.bootstrapTable('getSelections').length);

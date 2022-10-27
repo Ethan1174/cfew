@@ -9,11 +9,11 @@ $pass = (isset($_POST['pass1'])) ? $_POST['pass1']: '';
 
     // $resultado = array();
     // $resultado["param"] = $_POST;
-    $sql = "SELECT nombre, password FROM usuario_scate WHERE rpe='".$rpe."'";
+    $sql = "SELECT nombre, password FROM usuario_scate WHERE rpe='$rpe'";
     $resultado1 = getArraySQL($sql, "usuarios", false);
     if ($resultado1["success"]) 
     {
-        $sql = "UPDATE `usuario_scate` SET `nombre`='".$nombre."',`password`=SHA1('".$pass."') WHERE `rpe`='".$rpe."'";
+        $sql = "UPDATE usuario_scate SET nombre ='$nombre', password =SHA1('$pass') WHERE rpe='$rpe'";
         $update = getArraySQL($sql, "usuarios", false);
         
         // if($update["success"]) {

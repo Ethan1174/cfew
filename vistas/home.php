@@ -1,6 +1,5 @@
 <?php
 // session_start();
-
 if (!isset($_SESSION)) {
     echo '<script>alert("No tienes permitido navegar por URL"); window.location ="../."</script>';
     die();

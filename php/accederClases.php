@@ -11,7 +11,6 @@ if($Stipo == 10 || $Stipo == 11){
     header("Location: ../.");
     die();
 }else{
-    $_SESSION['Num'] = $_SESSION['Num'];
     session_write_close();
     header("Location: ../.");
     die();

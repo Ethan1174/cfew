@@ -4,6 +4,7 @@ session_start();
 
 $fecha_inicio = (isset($_POST['fecha_inicio'])) ? $_POST['fecha_inicio'] : "";
 $fecha_termino = (isset($_POST['fecha_termino'])) ? $_POST['fecha_termino'] : "";
+
 $sql = sprintf("SELECT * FROM bien WHERE status = 3 AND fecha_baja BETWEEN '%s' AND '%s' ", $fecha_inicio, $fecha_termino);
 $resultado = getArraySQL($sql, "bmpc", true);
 

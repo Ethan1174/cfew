@@ -128,7 +128,7 @@ if (!isset($_SESSION)) {
                 select.prop('disabled', !$table.bootstrapTable('getSelections').length);
                 // console.log(JSON.stringify($table.bootstrapTable('getSelections')));
             })
-            select.click(function() {
+            select.mouseenter(function() {
                 var ids = $.map($table.bootstrapTable('getSelections'), function(row) {
 
                     auxClases = row;
@@ -139,8 +139,8 @@ if (!isset($_SESSION)) {
                     field: 'id',
                     values: ids
                 })
-                select.prop('disabled', true)
             });
+            select.prop('disabled', true)
         });
         // -------------------------------------------------------------------------------------------
         // -------------------------------CRUD Modal Clases----------------------------------------

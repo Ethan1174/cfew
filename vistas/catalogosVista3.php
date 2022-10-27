@@ -354,13 +354,13 @@ if (!isset($_SESSION)) {
     <!-- Fin del modal para DETALLES Resguardos -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
-
+    <div class="container" id="clusterModClase1">
+        <h2 class="text-center" id="tituloDepto">Catálogo de Resguardos</h2>
+    </div>
     <div class="container">
         <div class="row-fluid">
             <div class="panel panel-info" id="opciones">
-                <div class="panel-heading" id="clusterModClase1">
-                    <h2 class="text-center" id="tituloDepto">Catálogo de Resguardos</h2>
-                </div>
+
                 <div class="panelTopCatalogoResguardo">
 
                     <form role="formTopRes" id="formFiltro">
@@ -438,8 +438,8 @@ if (!isset($_SESSION)) {
         var select = $('#btnOpcionesResguardos');
         var rpeR = "";
         $(function() {
-            // cargarTablaBT($table);
-            $table.bootstrapTable();
+            cargarTablaBT($table);
+            // $table.bootstrapTable();
         });
         // -----------------------------------------------------------------------------------------------------------------------------------
         // -----------------------------------------------------------Funciones del Panel Resguardo---------------------------------------------------------
@@ -458,7 +458,7 @@ if (!isset($_SESSION)) {
         $("#areaR").off("change").on("change", function(e) {
             if ($table) $table.bootstrapTable('removeAll');
             f_datos("php/deptos.php", {}, function(datDep) {
-                // console.log(datDep);    
+                // console.log(datDep);
                 $("#deptoR").empty();
                 $.each(datDep, function(key, value) {
                     $("#deptoR").append('<option value="' + value.cl_cenco + '" >' + value.Descripcion + '</option>');
@@ -467,6 +467,7 @@ if (!isset($_SESSION)) {
             });
         });
         $("#deptoR").off("change").on("change", function(e) {
+
             f_datos("php/empleados.php", {
                 area: $("#areaR").val(),
                 depto: $("#deptoR").val()
@@ -476,22 +477,15 @@ if (!isset($_SESSION)) {
                 $.each(datEmp, function(key, value) {
                     $("#Panelrpe").append('<option value="' + value.rpe + '" ><pre>' + value.rpe + " " + value.nombre + '</pre></option>');
                 });
-                // if($table)
                 $("#Panelrpe").trigger("change");
-                // else
-                // 	cargaBien($("#Panelrpe").val());
+
             });
         });
         $("#Panelrpe").off('change').on('change', function(e) {
-            rpeR = $('#Panelrpe').val();
-            if ($table) $table.bootstrapTable('removeAll');
-            f_datos("php/selectAllResguardos.php", {
-                rpe: rpeR
-            }, function(stm) {
-                // console.log(stm);
-                $table.bootstrapTable('load', stm);
-            });
-            // console.log(rpeR);
+            // console.log($(this).val());
+            // Este rpe es capturado para enviarlo por post para agregar Resguardos
+            rpeR = $("#Panelrpe").val();
+            $table.bootstrapTable('refresh');
         });
 
         $(function() {
@@ -954,17 +948,23 @@ if (!isset($_SESSION)) {
     });
 
     function queryParams(params) {
-        // params.rpe = rpeR;
-        // console.log(params);
+        // console.log($("#Panelrpe option:selected").val());
+        params.rpe = $("#Panelrpe option:selected").val();
+        console.log(params);
         return params;
     }
 
     function ajaxRequest(params) {
         // console.log(params.data);
         var url = 'php/selectAllResguardos.php';
-        $.post(url, $.param(params.data)).then(function(res) {
-            // console.log(res.data);
-            params.success(res.data);
+        var data = jQuery.parseJSON(params.data);
+        $.post(url, data).then(function(res) {
+            // console.log(res);
+            if (res.success) {
+                params.success(res.data);
+            } else {
+                params.error(res.message);
+            }
         });
     }
 </script>

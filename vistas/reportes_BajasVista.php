@@ -114,12 +114,13 @@ if (!isset($_SESSION)) {
                                             <td><label class="control-label"><strong>Archivo: </strong></span></td>
                                             <td><input class="form-control" type="file" id="fileToUpload" name="fileToUpload">
                                             </td>
-                                            <td id="tdPdf" colspan="2">
+                                        </tr>
+                                        <tr>
+                                            <td id="tdPdf" colspan="3">
                                                 <div id="archivoPDF"></div>
-
                                             </td>
                                             <td>
-                                                <div id="eliminarPdf"></div>
+                                                <span id="eliminarPdf"></span>
                                             </td>
                                         </tr>
                                     </table>
@@ -248,7 +249,7 @@ if (!isset($_SESSION)) {
                 </svg> Editar</button>
             <button type="button" disabled class="btn btn-info" id="btnDetallesRepoBaja"><i class="bi bi-info-circle"></i> Detalles</button>
         </div>
-        <table id="tablaReporteBajas" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequestRepoBaja">
+        <table id="tablaReporteBajas" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequestRepoBaja" data-query-params="queryParams">
             <thead>
                 <tr>
                     <th data-field="state" data-checkbox="true">.</th>
@@ -291,20 +292,10 @@ if (!isset($_SESSION)) {
             $("#area").trigger("change");
         });
 
-        $("#fecha_inicioRep , #fecha_terminoRep").off("change").on("change", function(e) {
-
-            var fecha_inicio = $("#fecha_inicioRep").val();
-            var fecha_termino = $("#fecha_terminoRep").val();
-            // console.log(fecha_inicio);
-            if ($table) $table.bootstrapTable('removeAll');
-
-            f_datos("php/selectAllRepoBaja.php", {
-                fecha_inicio: fecha_inicio,
-                fecha_termino: fecha_termino
-            }, function(bajas) {
-                // console.log(bajas);
-                $table.bootstrapTable('load', bajas);
-            });
+        $("#fecha_inicioRep ,#fecha_terminoRep").off("change").on("change", function(e) {
+            // console.log($("#fecha_inicioRep").val());
+            // console.log($("#fecha_terminoRep").val());
+            $table.bootstrapTable('refresh');
         });
 
 
@@ -405,12 +396,10 @@ if (!isset($_SESSION)) {
                 if (auxResguardosBajas.archivo != "") {
                     // $('#archivoPDF').html("");   
                     $('#fileToUpload').attr('disabled', 'disabled');
-                    $('#tdPdf').removeAttr('colspan');
                     $('#archivoPDF').html('<a href="pdf/' + auxResguardosBajas.rpe + '/' + auxResguardosBajas.archivo + '" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardosBajas.archivo + '">' + auxResguardosBajas.archivo + '</a>');
                     $("#eliminarPdf").html('<button id="botonEliminarPDF" type="button" class="btn btn-outline-danger"><svg xmlns = "http://www.w3.org/2000/svg"width = "16"height = "16"fill = "currentColor"class = "bi bi-trash3-fill"viewBox = "0 0 16 16" ><path d = "M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" / ></svg>Eliminar PDF </button>')
                 } else {
                     $('#fileToUpload').removeAttr('disabled');
-                    $('#tdPdf').attr('colspan', "2");
                     $('#archivoPDF').html("No se encontrarón archivos del bien " + auxResguardosBajas.id_bien + " del trabajador " + auxResguardosBajas.rpe);
                     $("#eliminarPdf").html("");
                 }
@@ -443,7 +432,15 @@ if (!isset($_SESSION)) {
                         dangerMode: true,
                     }).then((willDelete) => {
                         if (willDelete) {
-                            eliminarPDF(auxResguardosBajas.id_bien, auxResguardosBajas.rpe, auxResguardosBajas.archivo);
+                            swal(
+                                "El archivo fue eliminado con exito.", {
+                                    icon: "success",
+                                }
+                            );
+                            eliminarPDF(auxResguardosBajas.id_bien, auxResguardosBajas.rpe, auxResguardosBajas.archivo, "eliminarPDF");
+                            $('#fileToUpload').removeAttr('disabled');
+                            $('#archivoPDF').html("No se encontraron archivos del bien " + auxResguardosBajas.id_bien + " del trabajador " + auxResguardosBajas.rpe);
+                            $("#eliminarPdf").html("");
                             $($table).bootstrapTable('refresh');
                         } else {
                             swal(
@@ -474,7 +471,7 @@ if (!isset($_SESSION)) {
 
         }
 
-        function eliminarPDF(id, rpe, nombreArchivo) {
+        function eliminarPDF(id, rpe, nombreArchivo, accion) {
             $.ajax({
                 url: 'php/operacionesResguardo.php',
                 method: 'POST',
@@ -482,33 +479,12 @@ if (!isset($_SESSION)) {
                     idBien: id,
                     rpeRes: rpe,
                     archivo: nombreArchivo,
-                    accion: "eliminarPDF"
+                    accion: accion
                 },
                 success: function(data) {
-                    // console.log(data);
-                    if (data.success) {
-                        swal(
-                                "El reguardo fue eliminado con exito.", {
-                                    icon: "success",
-                                }
-                            )
-                            .then(function() {
-                                $('#fileToUpload').removeAttr('disabled');
-                                $('#tdPdf').attr('colspan', "2");
-                                $('#archivoPDF').html("No se encontraron archivos del bien " + auxResguardosBajas.id_bien + " del trabajador " + auxResguardosBajas.rpe);
-                                $("#eliminarPdf").html("");
-                                $('#tablaResguardo').bootstrapTable('refresh');
-                            });
-                    } else {
-                        swal(
-                            'Error de Operacion',
-                            'Hubo un error en la base de datos. ' + data.message,
-                            'error'
-                        )
-                    }
+                    console.log(data);
                 }
             });
-
         }
 
         function detallesShow() {
@@ -549,12 +525,26 @@ if (!isset($_SESSION)) {
 
     }
 
+    function queryParams(params) {
+        // console.log(String($("#fecha_inicioRep").val()));
+        // console.log(String($("#fecha_terminoRep").val()));
+        params.fecha_inicio = $("#fecha_inicioRep").val();
+        params.fecha_termino = $("#fecha_terminoRep").val();
+        // console.log(params);
+        return params;
+    }
+
     function ajaxRequestRepoBaja(params) {
+        // console.log(params);
         var url = 'php/selectAllRepoBaja.php';
-        $.get(url, $.param(params.data)).then(function(res) {
-            // console.log(res.data);
-            // dataResBaja = res.data;
-            params.success(res["data"]);
+        var data = jQuery.parseJSON(params.data);
+        $.post(url, data).then(function(res) {
+            // console.log(res);
+            if (res.success) {
+                params.success(res.data);
+            } else {
+                params.error(res.message);
+            }
         });
     }
 </script>

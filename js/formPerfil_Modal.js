@@ -48,20 +48,19 @@ function formPerfil() {
 			}
 		});
 
-
 	});
 
 }
 
 function getUser() {
 	$.post("php/refrescarSesion.php", function (data, status) {
-		// console.log(data.tipo);
+		// console.log(data);
 		if (data.id_tipo == 22 || data.id_tipo == 31 || data.id_tipo == 40) {
 			$('#catalogoClaseDrop').hide();
 			$('#catalogoSubclaseDrop').hide();
 			// $('#moduloReportes').hide();
 		}
-		console.log(data);
+		// console.log(data);
 		$('.name').text(data.firstName);
 		$('#disLink').text(data.tipo);
 		$("#exampleModalLabel").html("Actualizar Perfil de Usuario " + data.rpe);
@@ -71,7 +70,7 @@ function getUser() {
 	});
 	$.post("php/obtenerPermisos.php", function(data, status) {
 		// Se usó esta consulta para posteriores validaciones
-            console.log(data[0]);
+            // console.log(data[0]);
 
             if (data[0].tipo == 22 || data[0].tipo == 31 ) {
                 // Este es opcional ya que el cliente hace la consulta y el servidor retorna solo la Zona y departamento del usuario logueado

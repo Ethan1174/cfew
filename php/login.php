@@ -1,23 +1,24 @@
 <?php
 error_reporting(0);
-require('usuarios.php');
+// require('usuarios.php');
+require('functMysql.php');
 
 if (isset($_POST['rpe']) && isset($_POST['pass'])) {
 	$rpe=$_POST['rpe'];
 	$pass=$_POST['pass'];  
-	$sql = "SELECT rpe, nombre, usuario_scate.id_tipo, activo, area_clave as area, id_depto, depto_nombre, descripcion as tipo FROM usuario_scate INNER JOIN tipo_scate ON (usuario_scate.id_tipo = tipo_scate.id_tipo) WHERE rpe='".$rpe."' AND password=SHA1('".$pass."')";
+	$sql = "SELECT rpe, nombre, usuario_scate.id_tipo, activo, area_clave as area, id_depto, depto_nombre, descripcion as tipo FROM usuario_scate INNER JOIN tipo_scate ON (usuario_scate.id_tipo = tipo_scate.id_tipo) WHERE rpe='$rpe' AND password=SHA1('$pass')";
 	$resultado = getArraySQL($sql, "usuarios", false);
 
 	if ($resultado["success"]) {
-		$resultado["activo"] = $resultado["data"]["activo"];
-		if($resultado["data"]["activo"]) {
+		$resultado["activo"] = $resultado["data"][0]["activo"];
+		if($resultado["activo"]) {
 			$query_permiso = sprintf("SELECT * FROM permiso WHERE rpe_usuario='%s'", $rpe);
 			$permiso = getArraySQL($query_permiso, "bmpc", false);			
 			if ($permiso["success"]) {
 				$resultado["data"]["permiso"] = $permiso["success"];
-				$resultado["data"]["id_tipo"] = $permiso["data"]["tipo"];
-				$resultado["data"]["cenco"] = $permiso["data"]["cenco"];
-				iniciarSesion($resultado["data"]);
+				$resultado["data"]["id_tipo"] = $permiso["data"][0]["tipo"];
+				$resultado["data"]["cenco"] = $permiso["data"][0]["cenco"];
+				iniciarSesion($resultado["data"][0]);
 			}
             else {
 				$resultado["success"] = false;

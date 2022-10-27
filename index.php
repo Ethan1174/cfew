@@ -9,46 +9,24 @@ if (!isset($_SESSION['Num'])) {
     $_SESSION['Num'] = 0;
     session_write_close();
 }
-
-if ($_SESSION['Num'] == 0) {
-    ilustrarLogin();
+switch($_SESSION["Num"]){
+    case 0: ilustrarLogin(); break;
+    case 1: ilustrarHome(); break;
+    case 2: ilustrarClases(); break;
+    case 3: ilustrarSubClases(); break;
+    case 4: ilustrarResguardos(); break;
+    case 5: ilustrarReportesBaja(); break;
+    case 6: ilustrarReportesClase(); break;
+    case 7: ilustrarReportesFactura(); break;
+    case 8: ilustrarReportesNoSerie(); break;
+    case 9: ilustrarReportesCeCo(); break;
 }
 
-if ($_SESSION['Num'] == 1) {
-    ilustrarHome();
-}
-
-if ($_SESSION['Num'] == 2) {
-    ilustrarClases();
-}
-
-if ($_SESSION['Num'] == 3) {
-    ilustrarSubClases();
-}
-
-if ($_SESSION['Num'] == 4) {
-    ilustrarResguardos();
-}
-if ($_SESSION['Num'] == 5) {
-    ilustrarReportesBaja();
-}
-if ($_SESSION['Num'] == 6) {
-    ilustrarReportesClase();
-}
-if ($_SESSION['Num'] == 7) {
-    ilustrarReportesFactura();
-}
-if ($_SESSION['Num'] == 8) {
-    ilustrarReportesNoSerie();
-}
-if ($_SESSION['Num'] == 9) {
-    ilustrarReportesCeCo();
-}
 
 function ilustrarLogin()
 {
     $plantilla = new Plantilla;
-    $plantilla->ilustrar('login.html');
+    $plantilla->ilustrar('login.php');
 }
 
 function ilustrarHome()

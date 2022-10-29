@@ -58,7 +58,7 @@ function getUser() {
 		if (data.id_tipo == 22 || data.id_tipo == 31 || data.id_tipo == 40) {
 			$('#catalogoClaseDrop').hide();
 			$('#catalogoSubclaseDrop').hide();
-			// $('#moduloReportes').hide();
+			$('#moduloReportes').hide();
 		}
 		// console.log(data);
 		$('.name').text(data.firstName);
@@ -68,33 +68,33 @@ function getUser() {
 		$("#rpe").val(data.rpe);
 
 	});
-	$.post("php/obtenerPermisos.php", function(data, status) {
+	$.post("php/obtenerPermisos.php", function (data, status) {
 		// Se usó esta consulta para posteriores validaciones
-            // console.log(data[0]);
+		// console.log(data[0]);
 
-            if (data[0].tipo == 22 || data[0].tipo == 31 ) {
-                // Este es opcional ya que el cliente hace la consulta y el servidor retorna solo la Zona y departamento del usuario logueado
-                $('#areaR').attr('disabled', 'disabled');
-                $('#deptoR').attr('disabled', 'disabled');
-                // $("#btnOpcionesResguardos").hide();
-                $("#btnAgregarResguardo").hide();
-            }
-            if (data[0].tipo == 40) {
-                // Este es opcional ya que el cliente hace la consulta y el servidor retorna solo la Zona y departamento del usuario logueado
-                $('#areaR').attr('disabled', 'disabled');
-                $('#deptoR').attr('disabled', 'disabled');
-                $('#Panelrpe').attr('disabled', 'disabled');
-                $("#btnAgregarResguardo").hide();
-            }
-            if (data[0].modifica == 0) {
-                $('#btnEditarResguardo').hide();
-                $('#btnTraspasar').hide();
-                $('#btnDarBaja').hide();
-            }
-            if (data[0].elimina == 0) {
-                $('#btnEliminarResguardo').hide();
-            }
-        });
+		if (data[0].tipo == 22 || data[0].tipo == 31) {
+			// Este es opcional ya que el cliente hace la consulta y el servidor retorna solo la Zona y departamento del usuario logueado
+			$('#areaR').attr('disabled', 'disabled');
+			$('#deptoR').attr('disabled', 'disabled');
+			// $("#btnOpcionesResguardos").hide();
+
+		}
+		if (data[0].tipo == 40) {
+			// Este es opcional ya que el cliente hace la consulta y el servidor retorna solo la Zona y departamento del usuario logueado
+			$('#areaR').attr('disabled', 'disabled');
+			$('#deptoR').attr('disabled', 'disabled');
+			$('#Panelrpe').attr('disabled', 'disabled');
+
+		}
+		if (data[0].modifica == 0) {
+			$('#btnEditarResguardo').hide();
+			$('#btnTraspasar').hide();
+			$('#btnDarBaja').hide();
+		}
+		if (data[0].elimina == 0) {
+			$('#btnEliminarResguardo').hide();
+		}
+	});
 }
 
 function actualizar() {

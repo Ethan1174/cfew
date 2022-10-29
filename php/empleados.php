@@ -18,7 +18,7 @@ $act = ((isset($_POST["action"])) ? $_POST["action"] : "");
 // 	$sql = sprintf("SELECT * FROM usuario_scate WHERE area_clave LIKE ('%s') AND cenco = '' ORDER BY RPE", $Sarea, $Sdepto);
 // else
 
-if ($Stipo == 10 || $Stipo == 11 || $Stipo == 12 || $Stipo == 20 || $Stipo == 30 || $Stipo ==31)
+if ($Stipo == 10 || $Stipo == 11 || $Stipo == 12 || $Stipo == 20 || $Stipo == 22 || $Stipo == 30 || $Stipo == 31)
 	$sql = sprintf("SELECT * FROM usuario_scate WHERE area_clave LIKE ('%s') AND cenco LIKE ('%s') ORDER BY RPE", $Sarea, $Sdepto);
 else
 	$sql = sprintf("SELECT * FROM usuario_scate WHERE area_clave LIKE ('%s') AND cenco LIKE ('%s') AND	 rpe = ('%s') ORDER BY RPE", $Sarea, $Sdepto, $rpe);	

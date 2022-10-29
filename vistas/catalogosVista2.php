@@ -71,7 +71,8 @@ if (!isset($_SESSION)) {
         <table data-locale="es-MX" id="tablaSubClases" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-show-columns="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequestSub">
             <thead>
                 <tr>
-                    <th data-field="state" data-checkbox="true">ID</th>
+                    <!-- Data formatter se encuentra en main.js lín.71 -->
+                    <th data-field="state" data-checkbox="true" data-formatter="stateFormatter">Num.Subclases</th>
                     <th data-field="id_subclase" data-sortable="true">ID Subclase</th>
                     <th data-field="descripcion" data-sortable="true">Descripcion</th>
                 </tr>
@@ -90,7 +91,7 @@ if (!isset($_SESSION)) {
         var $table = $('#tablaSubClases');
         var select = $('#botonOpcionesSub');
         $(function() {
-            cargarTablaBT($table);
+            cargarTablaBT($table, dataUser.nombre, "Catálogos Subclases");
         });
         $(function() {
             $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function() {
@@ -237,8 +238,14 @@ if (!isset($_SESSION)) {
 
     function ajaxRequestSub(params) {
         var url = 'php/Select_all_subclases.php';
-        $.post(url, $.param(params.data)).then(function(res) {
-            params.success(res.data);
+        var data = jQuery.parseJSON(params.data);
+        $.post(url, data).then(function(res) {
+            // console.log(res.data);
+            if (res.success) {
+                params.success(res.data);
+            } else {
+                params.error(res.message);
+            }
         });
     }
 </script>

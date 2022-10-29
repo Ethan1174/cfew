@@ -2,7 +2,7 @@
 var auxClases= [];
 // variables globales de subclases
 var auxIDSubC, auxDesSubC = "";
-
+var dataUser= []
 var fecha = new Date();
 var fechaHoy = fecha.toLocaleDateString() + " a la(s) " + fecha.toLocaleTimeString("es-MX", {
     hour: "2-digit",
@@ -67,8 +67,14 @@ function hoy_input_date() {
     var today = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
     return today;
 }
+// Se edita el formato de retorno de la primer columna de la tabla a imprimir, el resultado es una numeración de las filas
+    function stateFormatter(value, row, index) {
+        // Iniciamos desde el numero 1
+        index = index + 1;
+        return index
+}
 
-function cargarTablaBT(tablaDinamica,) {
+function cargarTablaBT(tablaDinamica, user, nombreTabla) {
     $(tablaDinamica).bootstrapTable({
         printPageBuilder: function (table) {
             return `
@@ -124,7 +130,17 @@ function cargarTablaBT(tablaDinamica,) {
                         .head {
                             padding: 3%; 
                             letter-spacing: 0.07em;
-                        }                         
+                        }   
+                        .firma{
+                            padding:150px;
+                        }                      
+                        .line{
+                            border-top: 1px solid black;
+                            height: 2px;
+                            width: 300px;
+                            padding: 0;
+                            margin: 50px auto 0 auto;
+                        }                      
                     </style>
                 </head>
                 <title>Reporte BMPC</title>
@@ -138,9 +154,18 @@ function cargarTablaBT(tablaDinamica,) {
                                 Zona de Transmisión Malpaso
                             </small>
                             <p>Sistema de Control de Resguardo Poca Cuantia</p>
+                            <h4>${nombreTabla}</h4>
                         </div>
                     </div>
                     <div class="bs-table-print">${table}</div>
+                    <center>
+                    <div class="firma">
+                        <div class="line"></div>
+                        <h5>
+                            Reporte generado por ${user}       
+                        </h5>
+                    </div>
+                    </center>
                 </body>
             </html>
             `

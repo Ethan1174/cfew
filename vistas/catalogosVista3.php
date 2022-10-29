@@ -374,6 +374,7 @@ if (!isset($_SESSION)) {
                             <div class="col-xs-12 col-md-4 col-lg-4">
                                 <select name="rpe" id="Panelrpe" class="form-control" title="Seleccione el RPE"></select>
                             </div>
+                            <input type="hidden" id="userPrint" value="" />
                         </div>
                     </form>
 
@@ -411,7 +412,8 @@ if (!isset($_SESSION)) {
         <table id="tablaResguardo" data-multiple-select-row="true" data-click-to-select="true" data-show-refresh="true" data-show-copy-rows="true" data-show-print="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequest" data-query-params="queryParams">
             <thead>
                 <tr>
-                    <th data-field="state" data-checkbox="true">.</th>
+                    <!-- Data formatter se encuentra en main.js lín.71 -->
+                    <th data-field="state" data-checkbox="true" data-formatter="stateFormatter">Num.Bienes</th>
                     <th data-field="id_bien" data-sortable="true">ID</th>
                     <th data-field="descripcion" data-sortable="true">Descripcion</th>
                     <th data-field="serie" data-sortable="true">Serie</th>
@@ -432,15 +434,19 @@ if (!isset($_SESSION)) {
     // -----------------------------------------------------------------------------------------------------------------------------------
     // -----------------------------------------------------------Tabla Resguardo---------------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------------------------
-
     $(document).ready(function() {
         var $table = $('#tablaResguardo');
         var select = $('#btnOpcionesResguardos');
         var rpeR = "";
+
         $(function() {
-            cargarTablaBT($table);
-            // $table.bootstrapTable();
-        });
+            cargarTablaBT($table, "", "Catálogos de resguardos");
+            var print = document.getElementsByName("print");
+            $(print).mouseenter(function(){
+                console.log("Estoy en el print");
+            })  
+        })
+
         // -----------------------------------------------------------------------------------------------------------------------------------
         // -----------------------------------------------------------Funciones del Panel Resguardo---------------------------------------------------------
         // -----------------------------------------------------------------------------------------------------------------------------------
@@ -483,11 +489,13 @@ if (!isset($_SESSION)) {
         });
         $("#Panelrpe").off('change').on('change', function(e) {
             // console.log($(this).val());
-            // Este rpe es capturado para enviarlo por post para agregar Resguardos
+            $("#userPrint").val($("#Panelrpe option:selected")[0].textContent);
+
+            // Este rpe es capturado para enviarlo por post para agregar Resguardoss
             rpeR = $("#Panelrpe").val();
+
             $table.bootstrapTable('refresh');
         });
-
         $(function() {
 
             $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function() {
@@ -948,9 +956,9 @@ if (!isset($_SESSION)) {
     });
 
     function queryParams(params) {
-        // console.log($("#Panelrpe option:selected").val());
+
         params.rpe = $("#Panelrpe option:selected").val();
-        console.log(params);
+        // console.log(params);
         return params;
     }
 
@@ -959,7 +967,7 @@ if (!isset($_SESSION)) {
         var url = 'php/selectAllResguardos.php';
         var data = jQuery.parseJSON(params.data);
         $.post(url, data).then(function(res) {
-            // console.log(res);
+            // console.log(res.data);
             if (res.success) {
                 params.success(res.data);
             } else {

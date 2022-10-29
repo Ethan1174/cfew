@@ -88,7 +88,8 @@ if (!isset($_SESSION)) {
         <table data-locale="es-MX" id="tablaClases" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-show-columns="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-query-params="queryParams" data-ajax="ajaxRequestCl">
             <thead>
                 <tr>
-                    <th data-field="state" data-checkbox="true">ID</th>
+                    <!-- Data formatter se encuentra en main.js lín.71 -->
+                    <th data-field="state" data-checkbox="true" data-formatter="stateFormatter">Num.Clases</th>
                     <th data-field="id_clase" data-sortable="true">ID Clase</th>
                     <th data-field="descripcion" data-sortable="true">Descripcion</th>
                     <th data-field="subclase" data-sortable="true">Subclase</th>
@@ -112,7 +113,7 @@ if (!isset($_SESSION)) {
         // -----------------------------------------------------------Diseño Print------------------------------------------------------------
         // -----------------------------------------------------------------------------------------------------------------------------------
         $(function() {
-            cargarTablaBT($table);
+            cargarTablaBT($table, dataUser.nombre, "Catálogos Clases");
 
         });
         getAllSubclasesById();
@@ -299,9 +300,14 @@ if (!isset($_SESSION)) {
     function ajaxRequestCl(params) {
         var url = 'php/Select_all_clases.php';
         //consola(jQuery.parseJSON(params.data));
-        $.get(url, $.param(params.data)).then(function(res) {
-            // console.log(res);
-            params.success(res.data);
+        var data = jQuery.parseJSON(params.data);
+        $.post(url, data).then(function(res) {
+            // console.log(res.data);
+            if (res.success) {
+                params.success(res.data);
+            } else {
+                params.error(res.message);
+            }
         });
     }
 </script>

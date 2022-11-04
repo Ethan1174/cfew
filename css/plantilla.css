@@ -198,14 +198,21 @@ footer {
         width: 40%;
         height: 40%;
     }
-
-
 }
 
 @media (max-width:576px) {
-
     /* xXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxX Input Format Styles xXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxX */
     .inputMod {
         width: 5em;
     }
+}
+
+.img401 {
+    width: 18em;
+    height: 18em;
+}
+
+#navBarCustom403 {
+    background-color: #008E5A;
+    height: 100%;
 }

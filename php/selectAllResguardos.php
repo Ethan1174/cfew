@@ -1,5 +1,6 @@
 <?php
 require('functMysql.php');
+require_once('seguridad.php');
 session_start();
 
 if (isset($_POST['rpe']))

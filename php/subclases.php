@@ -1,7 +1,7 @@
 <?php
 
 require('functMysql.php');
-
+require_once('seguridad.php');
 
 if (isset($_POST['id_clase'])) $clase = $_POST['id_clase']; else $clase = "";
 

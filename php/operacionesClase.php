@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 require('functMysql.php');
-
+require_once('seguridad.php');
 
 $idClase =(isset($_POST['idClase'])) ? $_POST['idClase'] : $_POST['idClase2'];
 $subclaseRef =(isset($_POST['subclases'])) ? $_POST['subclases'] : "";

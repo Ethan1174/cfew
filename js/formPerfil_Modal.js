@@ -66,7 +66,7 @@ function getUser() {
 		$("#exampleModalLabel").html("Actualizar Perfil de Usuario " + data.rpe);
 		$("#nombre").val(data.nombre);
 		$("#rpe").val(data.rpe);
-
+		// console.log($('#Panelrpe').val());
 	});
 	$.post("php/obtenerPermisos.php", function (data, status) {
 		// Se usó esta consulta para posteriores validaciones
@@ -83,7 +83,7 @@ function getUser() {
 			// Este es opcional ya que el cliente hace la consulta y el servidor retorna solo la Zona y departamento del usuario logueado
 			$('#areaR').attr('disabled', 'disabled');
 			$('#deptoR').attr('disabled', 'disabled');
-			$('#Panelrpe').attr('disabled', 'disabled');
+			// $('#Panelrpe').attr('disabled', 'disabled');
 
 		}
 		if (data[0].modifica == 0) {
@@ -105,7 +105,7 @@ function actualizar() {
 		url: 'php/editarPerfil.php',
 		data: parametros,
 		success: function (data) {
-			// console.log(data);
+			console.log(data);
 			if (data.success) {
 				swal(
 					"Tus datos fueron actualizados.", {

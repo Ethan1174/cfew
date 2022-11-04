@@ -1,6 +1,7 @@
 <?php
 error_reporting(0);
 require('functMysql.php');
+require_once('seguridad.php');
 
 $idSubClase =(isset($_POST['idSubClase'])) ? $_POST['idSubClase'] : $_POST['idSubClase2'];
 $desSubClase =(isset($_POST['desSubClase'])) ? $_POST['desSubClase'] : "";

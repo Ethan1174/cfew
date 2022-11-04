@@ -1,7 +1,7 @@
 <?php
 
 require('functMysql.php');
-
+require_once('seguridad.php');
 
 $sql = "SELECT * FROM clase";
 $resultado = getArraySQL($sql, "bmpc", true);

@@ -1,7 +1,7 @@
 <?php
 require('functMysql.php');
+require_once('seguridad.php');
 
-session_start();
 $Stipo = $_SESSION["id_tipo"];
 
 if (isset($_POST['cenco']))

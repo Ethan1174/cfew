@@ -2,7 +2,6 @@
 error_reporting(0);
 // require('usuarios.php');
 require('functMysql.php');
-
 if (isset($_POST['rpe']) && isset($_POST['pass'])) {
 	$rpe=$_POST['rpe'];
 	$pass=$_POST['pass'];  

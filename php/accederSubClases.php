@@ -8,8 +8,9 @@ if ($Stipo == 10 || $Stipo == 11|| $Stipo == 12) {
     session_write_close();
     header("Location: ../.");
     die();
-} else {
-    $_SESSION['Num'] = $_SESSION['Num'];
+}
+else {
+    $_SESSION['Num'] = 401;
     session_write_close();
     header("Location: ../.");
     die();

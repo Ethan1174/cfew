@@ -3,6 +3,7 @@ date_default_timezone_set('America/Mexico_City');
 error_reporting(0);
 session_start();
 require('functMysql.php'); // Puedes cambuarlo a functMysql.php, solo marca mas errores pero hace las mismas consultas.
+require_once('seguridad.php');
 // Todas estas validaciones toman valor de acuerdo a las acciones AGREGAR - MODIFICAR -ELIMINAR - TRASPASAR - BAJAR
 $idBien = (isset($_POST['idBien'])) ? $_POST['idBien'] : "";
 $rpe = (isset($_POST['rpeRes'])) ? $_POST['rpeRes'] : $_POST['rpeRes2'];

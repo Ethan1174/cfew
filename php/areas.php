@@ -1,8 +1,9 @@
 <?php
-session_start();
+require('functMysql.php');
+require_once('seguridad.php');
 $Stipo = $_SESSION["id_tipo"];
 $Sarea = $_SESSION["area"];
-require('functMysql.php');
+
 
 
 if ($Stipo == 10 || $Stipo == 11 ){

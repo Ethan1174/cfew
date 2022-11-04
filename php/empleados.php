@@ -1,7 +1,7 @@
 <?php
 require('functMysql.php');
+require_once('seguridad.php');
 
-session_start();
 
 $rpe = $_SESSION["rpe"];
 $Stipo = $_SESSION["id_tipo"];

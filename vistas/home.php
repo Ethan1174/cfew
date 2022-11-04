@@ -1,7 +1,12 @@
 <?php
 // session_start();
 if (!isset($_SESSION)) {
-    echo '<script>alert("No tienes permitido navegar por URL"); window.location ="../."</script>';
+    // echo '<script>alert("No tienes permitido navegar por URL"); window.location ="../."</script>';
+    // die();
+    session_start();
+    $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
     die();
 }
 ?>

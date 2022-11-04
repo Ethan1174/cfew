@@ -1,5 +1,6 @@
 <?php
 require('functMysql.php');
+require_once('seguridad.php');
 session_start();
 
 $fecha_inicio = (isset($_POST['fecha_inicio'])) ? $_POST['fecha_inicio'] : "";

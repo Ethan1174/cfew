@@ -1,7 +1,7 @@
 <?php
 
 require_once('functMysql.php');
-
+require_once('seguridad.php');
 $sql ="";
 if (isset($_POST['id_bien']))
 	$sql = sprintf("SELECT * FROM historico WHERE id_bien = %d", $_POST['id_bien']);

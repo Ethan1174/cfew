@@ -1,8 +1,12 @@
 <?php
 // session_start();
-
 if (!isset($_SESSION)) {
-    echo '<script>alert("No tienes permitido navegar por URL"); window.location ="../."</script>';
+    // echo '<script>alert("No tienes permitido navegar por URL"); window.location ="../."</script>';
+    // die();
+    session_start();
+    $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
     die();
 }
 ?>
@@ -437,15 +441,15 @@ if (!isset($_SESSION)) {
     $(document).ready(function() {
         var $table = $('#tablaResguardo');
         var select = $('#btnOpcionesResguardos');
-        var rpeR = "";
+        var $rpeR = "";
 
-        $(function() {
-            cargarTablaBT($table, "", "Catálogos de resguardos");
-            var print = document.getElementsByName("print");
-            $(print).mouseenter(function(){
-                console.log("Estoy en el print");
-            })  
-        })
+        // $(function() {
+        //     cargarTablaBT($table, "", "Catálogos de resguardos");
+        //     var print = document.getElementsByName("print");
+        //     $(print).mouseenter(function(){
+        //         console.log("Estoy en el print");
+        //     })  
+        // })
 
         // -----------------------------------------------------------------------------------------------------------------------------------
         // -----------------------------------------------------------Funciones del Panel Resguardo---------------------------------------------------------
@@ -454,13 +458,13 @@ if (!isset($_SESSION)) {
         f_datos("php/areas.php", {}, function(data) {
             $("#areaR").empty();
             // console.log(data);
-
             $.each(data, function(key, value) {
                 $("#areaR").append('<option value="' + value.clave + '" >' + value.nombre_corto + '</option>');
             });
             $("#areaR").val(dataUser.area);
             $("#areaR").trigger("change");
         });
+
         $("#areaR").off("change").on("change", function(e) {
             if ($table) $table.bootstrapTable('removeAll');
             f_datos("php/deptos.php", {}, function(datDep) {
@@ -472,8 +476,8 @@ if (!isset($_SESSION)) {
                 $("#deptoR").trigger("change");
             });
         });
-        $("#deptoR").off("change").on("change", function(e) {
 
+        $("#deptoR").off("change").on("change", function(e) {
             f_datos("php/empleados.php", {
                 area: $("#areaR").val(),
                 depto: $("#deptoR").val()
@@ -487,17 +491,27 @@ if (!isset($_SESSION)) {
 
             });
         });
+
         $("#Panelrpe").off('change').on('change', function(e) {
             // console.log($(this).val());
             $("#userPrint").val($("#Panelrpe option:selected")[0].textContent);
+            $usuarioElegido = $("#Panelrpe option:selected")[0].textContent;
 
-            // Este rpe es capturado para enviarlo por post para agregar Resguardoss
+            // Este rpe es capturado para enviarlo por post para agregar Resguardos
             rpeR = $("#Panelrpe").val();
-
             $table.bootstrapTable('refresh');
+
+            // Prueba....
+            $(function() {
+                cargarTablaBT($table, $usuarioElegido, "Catálogos de resguardos");
+                var print = document.getElementsByName("print");
+                $(print).mouseenter(function() {
+                    console.log("Estoy en el print");
+                })
+            })
+
         });
         $(function() {
-
             $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function() {
                 select.prop('disabled', !$table.bootstrapTable('getSelections').length);
             });

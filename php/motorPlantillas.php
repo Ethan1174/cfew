@@ -22,7 +22,7 @@ Class Plantilla {
             eval(' ?>' . $contenido . '<?php ');
         }
         else {
-            exit( require_once("vistas/404_page.php"));
+            require_once("vistas/404_page.php");
         }
     }
 }

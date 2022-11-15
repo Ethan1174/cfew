@@ -26,11 +26,6 @@ if (!isset($_SESSION)) {
         <a class="navbar-brand syst" id="customNB" href="php/accederHome.php">
           Sistema de Resguardo BMPC v2.0
         </a>
-<?php
-
-if(isset($_SESSION['nombre'])){
-
-?>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
           <li class="nav-item dropdown">
@@ -166,11 +161,6 @@ if(isset($_SESSION['nombre'])){
           </li>
 
         </ul>
-        <?php
-        
-}
-        
-        ?>
       </div>
     </div>
   </nav>

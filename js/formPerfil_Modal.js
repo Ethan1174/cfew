@@ -51,15 +51,14 @@ function formPerfil() {
 	});
 
 }
-
 function getUser() {
-	$.post("php/refrescarSesion.php", function (data, status) {
-		// console.log(data);
+	$.post("php/refrescarSesion.php", { key: keySeguridad }, function (data, status) {
 		if (data.id_tipo == 22 || data.id_tipo == 31 || data.id_tipo == 40) {
 			$('#catalogoClaseDrop').hide();
 			$('#catalogoSubclaseDrop').hide();
 			$('#moduloReportes').hide();
 		}
+	
 		// console.log(data);
 		$('.name').text(data.firstName);
 		$('#disLink').text(data.tipo);
@@ -68,7 +67,8 @@ function getUser() {
 		$("#rpe").val(data.rpe);
 		// console.log($('#Panelrpe').val());
 	});
-	$.post("php/obtenerPermisos.php", function (data, status) {
+
+	$.post("php/obtenerPermisos.php", { key: keySeguridad }, function (data, status) {
 		// Se usó esta consulta para posteriores validaciones
 		// console.log(data[0]);
 
@@ -99,6 +99,7 @@ function getUser() {
 
 function actualizar() {
 	parametros = formToObject($("form#formPerfil"));
+	parametros.key = keySeguridad
 	// console.log(parametros);
 	$.ajax({
 		type: 'POST',

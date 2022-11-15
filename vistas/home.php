@@ -10,15 +10,15 @@ if (!isset($_SESSION)) {
     die();
 }
 ?>
-<div class="container" id="cluster1">
+<div class="container-respons" id="cluster1">
     <h1>Bienvenidos al Sistema de Control de Resguardo</h1>
     <h4>de Bienes Muebles de Poca Cuantía</h4>
     <hr>
     <img src="imagenes/cfe.jpg" class="imgCFEHome" alt="Imagen de ejemplo." />
-    <hr>
 </div>
-<center>
-    <div class="container-respons container cardA">
+
+<!-- <center> -->
+    <!-- <div class="container-respons container cardA">
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6">
 
@@ -159,5 +159,5 @@ if (!isset($_SESSION)) {
 
             </div>
         </div>
-    </div>
-</center>
+    </div> -->
+<!-- </center> -->

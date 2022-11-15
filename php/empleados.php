@@ -10,13 +10,14 @@ if (isset($_POST['depto'])) $Sdepto = $_POST['depto'];
 // Este post viene del modal de traspaso
 $act = ((isset($_POST["action"])) ? $_POST["action"] : "");
 
-// if (isset($_GET['rpe'])) 
-// 	$sql=sprintf("SELECT * FROM usuario_scate WHERE rpe = '%s'", $_GET['rpe']);
-// else
+$stmValidar = (isset($_POST["key"]))? $_POST["key"]: "";
 
-// if ($Sdepto == '99999')
-// 	$sql = sprintf("SELECT * FROM usuario_scate WHERE area_clave LIKE ('%s') AND cenco = '' ORDER BY RPE", $Sarea, $Sdepto);
-// else
+if($stmValidar == ""){
+ $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
+    die();
+}
 
 if ($Stipo == 10 || $Stipo == 11 || $Stipo == 12 || $Stipo == 20 || $Stipo == 22 || $Stipo == 30 || $Stipo == 31)
 	$sql = sprintf("SELECT * FROM usuario_scate WHERE area_clave LIKE ('%s') AND cenco LIKE ('%s') ORDER BY RPE", $Sarea, $Sdepto);

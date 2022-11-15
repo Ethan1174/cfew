@@ -3,6 +3,14 @@ require('functMysql.php');
 require_once('seguridad.php');
 
 $Stipo = $_SESSION["id_tipo"];
+$stmValidar = (isset($_POST["key"]))? $_POST["key"]: "";
+
+if($stmValidar == ""){
+ $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
+    die();
+}
 
 if (isset($_POST['cenco']))
     $sql = sprintf("SELECT * FROM especialidad WHERE cl_cenco IN (%s)", $_POST['cenco']);

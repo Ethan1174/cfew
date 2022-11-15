@@ -89,11 +89,11 @@ if (!isset($_SESSION)) {
                         </svg> Eliminar</button></li>
             </ul>
         </div>
-        <table data-locale="es-MX" id="tablaClases" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-show-columns="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-query-params="queryParams" data-ajax="ajaxRequestCl">
+        <table data-locale="es-MX" id="tablaClases" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-show-columns="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-query-params="queryParams" data-ajax="ajaxRequestCl" data-query-params="queryParams">
             <thead>
                 <tr>
-                    <!-- Data formatter se encuentra en main.js lín.71 -->
-                    <th data-field="state" data-checkbox="true" data-formatter="stateFormatter">Num.Clases</th>
+                    <!-- Data formatter se encuentra en main.js lín.83 -->
+                    <th class="d-none" data-field="state" data-checkbox="true" data-print-ignore="true"></th>                    
                     <th data-field="id_clase" data-sortable="true">ID Clase</th>
                     <th data-field="descripcion" data-sortable="true">Descripcion</th>
                     <th data-field="subclase" data-sortable="true">Subclase</th>
@@ -117,7 +117,8 @@ if (!isset($_SESSION)) {
         // -----------------------------------------------------------Diseño Print------------------------------------------------------------
         // -----------------------------------------------------------------------------------------------------------------------------------
         $(function() {
-            cargarTablaBT($table, dataUser.nombre, "Catálogos Clases");
+            console.log(dataUser);
+            cargarTablaBT($table, "Lista de Clases");
 
         });
         getAllSubclasesById();
@@ -287,7 +288,7 @@ if (!isset($_SESSION)) {
                 searchPlaceholderText: "Buscar",
             })
             let arrSub = [];
-            $.get("php/multiselectClases.php", function(data, status) {
+            $.post("php/multiselectClases.php",{key: keySeguridad}, function(data, status) {
                 data.forEach((value, key) => {
                     arrSub[key] = {
                         value: value.id_subclase,
@@ -301,12 +302,20 @@ if (!isset($_SESSION)) {
 
     });
 
+    function queryParams(params) {
+
+        params.key = keySeguridad;
+        // console.log(params);
+        return params;
+    }
+
     function ajaxRequestCl(params) {
+        // console.log(params);
         var url = 'php/Select_all_clases.php';
         //consola(jQuery.parseJSON(params.data));
         var data = jQuery.parseJSON(params.data);
         $.post(url, data).then(function(res) {
-            // console.log(res.data);
+            // console.log(res);
             if (res.success) {
                 params.success(res.data);
             } else {

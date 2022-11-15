@@ -2,6 +2,13 @@
 
 require('functMysql.php');
 require_once('seguridad.php');
+$stmValidar = (isset($_POST["key"]))? $_POST["key"]: "";
+if($stmValidar == ""){
+ $_SESSION['Num'] = 403;
+session_write_close();
+header("Location: ../.");
+die();
+}
 
 $sql = "SELECT * FROM clase";
 $resultado = getArraySQL($sql, "bmpc", true);
@@ -12,5 +19,4 @@ if($resultado["success"]){
 } else {
 	echo "[]";
 }
-
 ?>

@@ -72,12 +72,11 @@ if (!isset($_SESSION)) {
                         </svg> Eliminar</button></li>
             </ul>
         </div>
-        <table data-locale="es-MX" id="tablaSubClases" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-show-columns="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequestSub">
+        <table data-locale="es-MX" id="tablaSubClases" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-show-columns="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequestSub" data-query-params="queryParams">
             <thead>
                 <tr>
-                    <!-- Data formatter se encuentra en main.js lín.71 -->
-                    <th data-field="state" data-checkbox="true" data-formatter="stateFormatter">Num.Subclases</th>
-                    <th data-field="id_subclase" data-sortable="true">ID Subclase</th>
+                    <!-- Data formatter se encuentra en main.js lín.83 -->
+                    <th class="d-none" data-field="state" data-checkbox="true" data-print-ignore="true"></th>                    <th data-field="id_subclase" data-sortable="true">ID Subclase</th>
                     <th data-field="descripcion" data-sortable="true">Descripcion</th>
                 </tr>
             </thead>
@@ -95,7 +94,7 @@ if (!isset($_SESSION)) {
         var $table = $('#tablaSubClases');
         var select = $('#botonOpcionesSub');
         $(function() {
-            cargarTablaBT($table, dataUser.nombre, "Catálogos Subclases");
+            cargarTablaBT($table, "Lista de Subclases");
         });
         $(function() {
             $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function() {
@@ -239,12 +238,19 @@ if (!isset($_SESSION)) {
 
         }
     });
+   function queryParams(params) {
+
+        params.key = keySeguridad;
+        console.log(params);
+        return params;
+    }
 
     function ajaxRequestSub(params) {
+        // console.log(params);
         var url = 'php/Select_all_subclases.php';
         var data = jQuery.parseJSON(params.data);
         $.post(url, data).then(function(res) {
-            // console.log(res.data);
+            console.log(res.data);
             if (res.success) {
                 params.success(res.data);
             } else {

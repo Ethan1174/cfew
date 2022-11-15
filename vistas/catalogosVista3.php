@@ -413,11 +413,11 @@ if (!isset($_SESSION)) {
                         </svg> Eliminar</button></li>
             </ul>
         </div>
-        <table id="tablaResguardo" data-multiple-select-row="true" data-click-to-select="true" data-show-refresh="true" data-show-copy-rows="true" data-show-print="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequest" data-query-params="queryParams">
+        <table id="tablaResguardo" data-show-columns="true" data-multiple-select-row="true" data-click-to-select="true" data-show-refresh="true" data-show-copy-rows="true" data-show-print="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequest" data-query-params="queryParams">
             <thead>
                 <tr>
-                    <!-- Data formatter se encuentra en main.js lín.71 -->
-                    <th data-field="state" data-checkbox="true" data-formatter="stateFormatter">Num.Bienes</th>
+                    <!-- Data formatter se encuentra en main.js lín.83 -->
+                    <th class="d-none" data-field="state" data-checkbox="true" data-print-ignore="true"></th>
                     <th data-field="id_bien" data-sortable="true">ID</th>
                     <th data-field="descripcion" data-sortable="true">Descripcion</th>
                     <th data-field="serie" data-sortable="true">Serie</th>
@@ -443,19 +443,20 @@ if (!isset($_SESSION)) {
         var select = $('#btnOpcionesResguardos');
         var $rpeR = "";
 
-        // $(function() {
-        //     cargarTablaBT($table, "", "Catálogos de resguardos");
-        //     var print = document.getElementsByName("print");
-        //     $(print).mouseenter(function(){
-        //         console.log("Estoy en el print");
-        //     })  
-        // })
+        $(function() {
+            cargarTablaBT($table, "Lista de bienes");
+            // var print = document.getElementsByName("print");
+            // $(print).mouseenter(function(){
+            //     console.log("Estoy en el print");
+            // })
+
+        })
 
         // -----------------------------------------------------------------------------------------------------------------------------------
         // -----------------------------------------------------------Funciones del Panel Resguardo---------------------------------------------------------
         // -----------------------------------------------------------------------------------------------------------------------------------
 
-        f_datos("php/areas.php", {}, function(data) {
+        f_datos("php/areas.php", { key:keySeguridad}, function(data) {
             $("#areaR").empty();
             // console.log(data);
             $.each(data, function(key, value) {
@@ -467,7 +468,7 @@ if (!isset($_SESSION)) {
 
         $("#areaR").off("change").on("change", function(e) {
             if ($table) $table.bootstrapTable('removeAll');
-            f_datos("php/deptos.php", {}, function(datDep) {
+            f_datos("php/deptos.php", {key:keySeguridad}, function(datDep) {
                 // console.log(datDep);
                 $("#deptoR").empty();
                 $.each(datDep, function(key, value) {
@@ -480,12 +481,13 @@ if (!isset($_SESSION)) {
         $("#deptoR").off("change").on("change", function(e) {
             f_datos("php/empleados.php", {
                 area: $("#areaR").val(),
-                depto: $("#deptoR").val()
+                depto: $("#deptoR").val(),
+                key:keySeguridad,
             }, function(datEmp) {
                 // console.log(datEmp);
                 $("#Panelrpe").empty();
                 $.each(datEmp, function(key, value) {
-                    $("#Panelrpe").append('<option value="' + value.rpe + '" ><pre>' + value.rpe + " " + value.nombre + '</pre></option>');
+                    $("#Panelrpe").append('<option value="' + value.rpe + '" >' + value.rpe + " " + value.nombre + '</option>');
                 });
                 $("#Panelrpe").trigger("change");
 
@@ -494,22 +496,16 @@ if (!isset($_SESSION)) {
 
         $("#Panelrpe").off('change').on('change', function(e) {
             // console.log($(this).val());
-            $("#userPrint").val($("#Panelrpe option:selected")[0].textContent);
-            $usuarioElegido = $("#Panelrpe option:selected")[0].textContent;
+            // $("#userPrint").val($("#Panelrpe option:selected")[0].textContent);
+            // $usuarioElegido = $("#Panelrpe option:selected")[0].textContent;
 
             // Este rpe es capturado para enviarlo por post para agregar Resguardos
             rpeR = $("#Panelrpe").val();
+            // console.log($("#Panelrpe option:selected").html());
+
+
+
             $table.bootstrapTable('refresh');
-
-            // Prueba....
-            $(function() {
-                cargarTablaBT($table, $usuarioElegido, "Catálogos de resguardos");
-                var print = document.getElementsByName("print");
-                $(print).mouseenter(function() {
-                    console.log("Estoy en el print");
-                })
-            })
-
         });
         $(function() {
             $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function() {
@@ -658,7 +654,7 @@ if (!isset($_SESSION)) {
 
 
         function agregar() {
-            f_datos("php/clases.php", {}, function(data) {
+            f_datos("php/clases.php", { key:keySeguridad}, function(data) {
                 $(" #claseSelRes").empty();
                 $.each(data, function(key, value) {
                     $("#claseSelRes").append('<option value="' + value.id_clase + '" >' + value.id_clase + ' ' + value.descripcion + '</option>');
@@ -676,11 +672,10 @@ if (!isset($_SESSION)) {
             $('#btnguardarCambiosResguardos').text('Registrar Resguardo');
             $("#fechaCapRes").val(hoy_input_date());
             $("select#claseSelRes").trigger("change");
-
             $("#claseSelRes").change(function(event, valor) {
                 // console.log(valor);
                 f_datos("php/subclases.php", {
-                    id_clase: $("#claseSelRes option:selected").val()
+                    id_clase: $("#claseSelRes option:selected").val(), key:keySeguridad
                 }, function(data) {
                     $("#subClaseSelRes").empty();
                     $.each(data, function(key, value) {
@@ -694,7 +689,7 @@ if (!isset($_SESSION)) {
         }
 
         function modificar() {
-            f_datos("php/clases.php", {}, function(data) {
+            f_datos("php/clases.php", { key:keySeguridad}, function(data) {
                 $(" #claseSelRes").empty();
                 $.each(data, function(key, value) {
                     $("#claseSelRes").append('<option value="' + value.id_clase + '" >' + value.id_clase + ' ' + value.descripcion + '</option>');
@@ -761,10 +756,10 @@ if (!isset($_SESSION)) {
                     });
                 });
             });
+
             $("select#claseSelRes").change(function(event, valor) {
-                // console.log(valor);
                 f_datos("php/subclases.php", {
-                    id_clase: $("#claseSelRes option:selected").val()
+                    id_clase: $("#claseSelRes option:selected").val(), key:keySeguridad
                 }, function(data) {
                     $("#subClaseSelRes").empty();
 
@@ -828,7 +823,7 @@ if (!isset($_SESSION)) {
 
         function traspasar() {
             f_datos("php/empleados.php", {
-                action: "ShowAll"
+                action: "ShowAll", key:keySeguridad
             }, function(data) {
                 $("#rpeNuevo").empty();
                 // console.log(auxResguardos);
@@ -970,7 +965,7 @@ if (!isset($_SESSION)) {
     });
 
     function queryParams(params) {
-
+        params.key = keySeguridad;
         params.rpe = $("#Panelrpe option:selected").val();
         // console.log(params);
         return params;

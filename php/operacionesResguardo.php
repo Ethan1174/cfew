@@ -4,6 +4,7 @@ error_reporting(0);
 session_start();
 require('functMysql.php'); // Puedes cambuarlo a functMysql.php, solo marca mas errores pero hace las mismas consultas.
 require_once('seguridad.php');
+
 // Todas estas validaciones toman valor de acuerdo a las acciones AGREGAR - MODIFICAR -ELIMINAR - TRASPASAR - BAJAR
 $idBien = (isset($_POST['idBien'])) ? $_POST['idBien'] : "";
 $rpe = (isset($_POST['rpeRes'])) ? $_POST['rpeRes'] : $_POST['rpeRes2'];
@@ -30,6 +31,13 @@ $fechaTras = (isset($_POST['fechaTras'])) ? $_POST['fechaTras'] : "";
 $motBaja = (isset($_POST['motBaja'])) ? $_POST['motBaja'] : "";
 $fechaBaja = (isset($_POST['fechaBaja'])) ? $_POST['fechaBaja'] : "";
 
+
+if($act == ""){
+    $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
+    die();
+}
 if ($act == "Agregar") {
     $sql = "INSERT INTO `bien`(`rpe`, `fecha_captura`, `clase`, `subclase`, `descripcion`, `marca`, `modelo`, `serie`, `unidad`, `cantidad`, `importe`, `numero`, `fecha_factura`, `rfc`, `posicion`, `archivo`, `status`) VALUES ('" . $rpe . "', '" . $fecha_captura . "', '" . $clase . "', '" . $subclase . "', '" . $descripcion . "', '" . $marca . "', '" . $modelo . "', '" . $serie . "', '" . $unidad . "', '" . $cantidad . "', '" . $importe . "', '" . $numero . "', '" . $fecha_factura . "', '" . $rfc . "', '" . $posicion . "', '', 1)";
     $resultado = getArraySQL($sql, "bmpc", true);

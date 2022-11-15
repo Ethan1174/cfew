@@ -7,6 +7,14 @@ $rpe = (isset($_POST['rpe']) ? $_POST['rpe']: '');
 $nombre = (isset($_POST['nombre'])) ? $_POST['nombre']:'';
 $pass = (isset($_POST['pass1'])) ? $_POST['pass1']: '';
 
+$stmValidar = (isset($_POST["key"]))? $_POST["key"]: "";
+
+if($stmValidar == ""){
+ $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
+    die();
+}
     // $resultado = array();
     // $resultado["param"] = $_POST;
     $sql = "SELECT nombre, password FROM usuario_scate WHERE rpe='$rpe'";

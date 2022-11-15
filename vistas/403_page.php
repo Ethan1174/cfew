@@ -18,36 +18,26 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <a class="navbar-brand" href="#">
-                    <img src="imagenes/logo.png" alt="Logo CFE" class="imgLogo" />
-                </a>
                 <?php
                 if (isset($_SESSION["rpe"])) {
                 ?>
+                    <a class="navbar-brand" href="php/accederHome.php">
+                        <img src="imagenes/logo.png" alt="Logo CFE" class="imgLogo" />
+                    </a>
                     <a class="navbar-brand syst" id="customNB" href="php/accederHome.php">
                         Sistema de Resguardo BMPC v2.0
                     </a>
-                    <span>
-                        <a class="nav-link active" id="customNB" aria-current="page" href="php/accederHome.php">
-                            Regresar
-                        </a>
-                    </span>
                 <?php
                 } else {
                 ?>
-
-                    <a class="navbar-brand syst" id="customNB" href="#">
+                    <a class="navbar-brand" href="php/logout.php">
+                        <img src="imagenes/logo.png" alt="Logo CFE" class="imgLogo" />
+                    </a>
+                    <a class="navbar-brand syst" id="customNB" href="php/logout.php">
                         Sistema de Resguardo BMPC v2.0
                     </a>
-                    <span>
-                        <a class="nav-link active" id="customNB" aria-current="page" href="php/logout.php">
-                            Iniciar Sesión
-                        </a>
-                    </span>
                 <?php
-
                 }
-
                 ?>
             </div>
         </div>
@@ -57,7 +47,19 @@
         <div class="container" id="cluster1">
             <h2>Error 403</h2>
             <h4>No podemos redirigirte a esta página.</h4>
-            <img src="imagenes/llaveVerde.jpg" class="img401" alt="Imagen de un candado." />
+            <img src="imagenes/llaveVerde.jpg" class="img401" alt="Imagen de una llave." />
+            <br>
+            <?php
+            if (isset($_SESSION["rpe"])) {
+            ?>
+                <a href="php/accederHome.php" class="btn btn-success" role="button" data-bs-toggle="button">Regresar</a>
+            <?php
+            } else {
+            ?>
+                <a href="php/logout.php" class="btn btn-success" role="button" data-bs-toggle="button"><i class="bi bi-door-open-fill"></i> Iniciar Sesión</a>
+            <?php
+            }
+            ?>
         </div>
     </div>
     <footer class="footer mt-auto py-3 bg-dark">

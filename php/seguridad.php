@@ -6,4 +6,5 @@ if ($_SESSION["Num"] == 0) {
     header("Location: ../.");
     die();
 }
+
 ?>

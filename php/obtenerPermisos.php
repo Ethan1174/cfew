@@ -2,7 +2,14 @@
 error_reporting(0);
 require('functMysql.php');
 require_once('seguridad.php');
-session_start();
+$stmValidar = (isset($_POST["key"]))? $_POST["key"]: "";
+
+if($stmValidar == ""){
+ $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
+    die();
+}
 $rpe = $_SESSION['rpe'];
 $sql = ("SELECT tipo, agrega, modifica, elimina, consulta FROM permiso WHERE rpe_usuario = '$rpe'");
 // $sql = "SELECT agrega, modifica, elimina, consulta FROM permiso WHERE rpe_usuario ='".$rpe."'";

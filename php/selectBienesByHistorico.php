@@ -3,6 +3,13 @@
 require_once('functMysql.php');
 require_once('seguridad.php');
 $sql ="";
+$stmValidar = (isset($_POST["key"]))? $_POST["key"]: "";
+if($stmValidar == ""){
+ $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
+    die();
+}
 if (isset($_POST['id_bien']))
 	$sql = sprintf("SELECT * FROM historico WHERE id_bien = %d", $_POST['id_bien']);
 

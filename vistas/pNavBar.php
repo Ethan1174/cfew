@@ -21,12 +21,16 @@ if (!isset($_SESSION)) {
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <a class="navbar-brand" href="php/accederHome.php">
-          <img src="imagenes/logo.png" alt="Logo CFE" class="imgLogo" />
+          <img src="http://localhost/respc_v2/imagenes/logo.png" alt="Logo CFE" class="imgLogo" />
         </a>
         <a class="navbar-brand syst" id="customNB" href="php/accederHome.php">
           Sistema de Resguardo BMPC v2.0
         </a>
+<?php
 
+if(isset($_SESSION['nombre'])){
+
+?>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
           <li class="nav-item dropdown">
@@ -162,6 +166,11 @@ if (!isset($_SESSION)) {
           </li>
 
         </ul>
+        <?php
+        
+}
+        
+        ?>
       </div>
     </div>
   </nav>
@@ -221,4 +230,3 @@ if (!isset($_SESSION)) {
       </div>
     </div>
   </div>
-  <script src="js/formPerfil_Modal.js"></script>

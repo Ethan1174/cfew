@@ -256,14 +256,14 @@ if (!isset($_SESSION)) {
         <table id="tablaReporteBajas" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequestRepoBaja" data-query-params="queryParams">
             <thead>
                 <tr>
-                    <th data-field="state" data-checkbox="true">.</th>
+                    <th class="d-none" data-field="state" data-checkbox="true" data-print-ignore="true"></th>
                     <th data-field="id_bien" data-sortable="true">ID</th>
                     <th data-field="descripcion" data-sortable="true">Descripcion</th>
                     <th data-field="serie" data-sortable="true">Serie</th>
                     <th data-field="rpe" data-sortable="true">RPE</th>
                     <th data-field="motivo_baja" data-sortable="true">Motivo de Baja</th>
                     <th data-field="fecha_baja" data-sortable="true">Fecha de baja</th>
-                    <th data-field="archivo" data-sortable="true" data-formatter="operateFormatter">Dictamen</th>
+                    <th data-field="archivo" data-sortable="true" data-print-ignore="true" data-formatter="operateFormatter">Dictamen</th>
                 </tr>
             </thead>
             <tbody>
@@ -282,10 +282,10 @@ if (!isset($_SESSION)) {
         var select1 = $('#btnDetallesRepoBaja');
 
         $(function() {
-            cargarTablaBT($table);
+            cargarTablaBT($table, dataUser.rpe + " " + dataUser.nombre, "Catálogos Bajas");
 
         });
-        f_datos("php/areas.php", {}, function(data) {
+        f_datos("php/areas.php", {key: keySeguridad}, function(data) {
             $("#fecha_inicioRep").val(hoy_input_date());
             $("#fecha_terminoRep").val(hoy_input_date());
             $("#area").empty();
@@ -392,7 +392,7 @@ if (!isset($_SESSION)) {
         }
 
         function modificar() {
-            f_datos("php/clases.php", {}, function(data) {
+            f_datos("php/clases.php", {key: keySeguridad}, function(data) {
                 $(" #claseSelRes").empty();
                 $.each(data, function(key, value) {
                     $("#claseSelRes").append('<option value="' + value.id_clase + '" >' + value.id_clase + ' ' + value.descripcion + '</option>');
@@ -460,7 +460,7 @@ if (!isset($_SESSION)) {
             $("select#claseSelRes").change(function(event, valor) {
                 // console.log(valor);
                 f_datos("php/subclases.php", {
-                    id_clase: $("#claseSelRes option:selected").val()
+                    id_clase: $("#claseSelRes option:selected").val(), key: keySeguridad
                 }, function(data) {
                     $("#subClaseSelRes").empty();
                     $.each(data, function(key, value) {
@@ -500,7 +500,7 @@ if (!isset($_SESSION)) {
             $("#importeResBaja").val(auxResguardosBajas.importe);
             $('#modalDetalles').modal('show');
             f_datos("php/selectBienesByHistorico.php", {
-                id_bien: auxResguardosBajas.id_bien
+                id_bien: auxResguardosBajas.id_bien, key: keySeguridad
             }, function(datHist) {
                 // console.log(datHist);
                 $("#historico tbody").empty();
@@ -532,6 +532,7 @@ if (!isset($_SESSION)) {
     function queryParams(params) {
         // console.log(String($("#fecha_inicioRep").val()));
         // console.log(String($("#fecha_terminoRep").val()));
+        params.key = keySeguridad;
         params.fecha_inicio = $("#fecha_inicioRep").val();
         params.fecha_termino = $("#fecha_terminoRep").val();
         // console.log(params);

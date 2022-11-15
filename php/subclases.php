@@ -3,8 +3,16 @@
 require('functMysql.php');
 require_once('seguridad.php');
 
-if (isset($_POST['id_clase'])) $clase = $_POST['id_clase']; else $clase = "";
 
+$clase =(isset($_POST['id_clase'])) ? $_POST['id_clase'] : "";
+$stmValidar = (isset($_POST["key"]))? $_POST["key"]: "";
+
+if($stmValidar == ""){
+ $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
+    die();
+}
 if (isset($_POST['id_subclase']))
 	$sql = sprintf("SELECT * FROM subclase WHERE id_clase like ('%s')", $_POST['id_clase']);
 elseif (isset($_POST['id_clase']))

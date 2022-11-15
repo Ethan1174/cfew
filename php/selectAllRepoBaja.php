@@ -5,7 +5,20 @@ session_start();
 
 $fecha_inicio = (isset($_POST['fecha_inicio'])) ? $_POST['fecha_inicio'] : "";
 $fecha_termino = (isset($_POST['fecha_termino'])) ? $_POST['fecha_termino'] : "";
-
+$stmValidar = (isset($_POST["key"]))? $_POST["key"]: "";
+if($stmValidar == ""){
+ $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
+    die();
+}
+$stmValidar = (isset($_POST["key"]))? $_POST["key"]: "";
+if($stmValidar == ""){
+ $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
+    die();
+}
 $sql = sprintf("SELECT * FROM bien WHERE status = 3 AND fecha_baja BETWEEN '%s' AND '%s' ", $fecha_inicio, $fecha_termino);
 $resultado = getArraySQL($sql, "bmpc", true);
 

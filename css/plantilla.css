@@ -52,7 +52,8 @@ footer {
 }
 
 .imgCFEHome {
-    width: 30%;
+    padding-top: 50px;
+    width: 40%;
     height: 50%;
 }
 
@@ -195,8 +196,9 @@ footer {
     }
 
     .imgCFEHome {
-        width: 40%;
-        height: 40%;
+        padding-top: 70px;
+        width: 60%;
+        height: 60%;
     }
 }
 

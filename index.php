@@ -115,5 +115,8 @@ function ilustrar401() { // Error 401 cuando no tiene privilegios ante un modulo
 }
 function ilustrar403() { // Error 403 cuando intentas acceder a una vista directamente, solo "catalogosVista.php" tiene esto funcionando.
     $plantilla = new Plantilla;
+    $plantilla->ilustrar('pHeader.php');
+    $plantilla->ilustrar('pNavBar.php');
     $plantilla->ilustrar('403_page.php');
+    $plantilla->ilustrar('pFooter.php');
 }

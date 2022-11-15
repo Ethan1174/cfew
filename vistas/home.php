@@ -14,6 +14,7 @@ if (!isset($_SESSION)) {
     <h1>Bienvenidos al Sistema de Control de Resguardo</h1>
     <h4>de Bienes Muebles de Poca Cuantía</h4>
     <hr>
+    <!-- <br><br><br><br> -->
     <img src="imagenes/cfe.jpg" class="imgCFEHome" alt="Imagen de ejemplo." />
 </div>
 

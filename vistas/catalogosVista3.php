@@ -412,6 +412,7 @@ if (!isset($_SESSION)) {
                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                         </svg> Eliminar</button></li>
             </ul>
+            <button id="btnReportes" class="btn btn-secondary"><i class="bi bi-file-earmark-pdf-fill"></i> Generar Reporte</button>
         </div>
         <table id="tablaResguardo" data-show-columns="true" data-multiple-select-row="true" data-click-to-select="true" data-show-refresh="true" data-show-copy-rows="true" data-show-print="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequest" data-query-params="queryParams">
             <thead>
@@ -445,18 +446,28 @@ if (!isset($_SESSION)) {
 
         $(function() {
             cargarTablaBT($table, "Lista de bienes");
-            // var print = document.getElementsByName("print");
-            // $(print).mouseenter(function(){
-            //     console.log("Estoy en el print");
-            // })
+            $table.bootstrapTable('refresh');
+            var $btnReportes = $("#btnReportes");
 
-        })
+            $btnReportes.click(() => {
+                var reporte = {};
+                var url = 'vistas/reportes/reportes.php';
+                reporte.user = $("#Panelrpe option:selected").html();
+                reporte.name = "Lista de bienes";
+                reporte.data = $table.bootstrapTable('getData');
+                console.log(reporte);
+                open('POST', url, reporte, '_blank');
+                // console.log(obtenerDataReporte);
+            });
+        });
 
         // -----------------------------------------------------------------------------------------------------------------------------------
         // -----------------------------------------------------------Funciones del Panel Resguardo---------------------------------------------------------
         // -----------------------------------------------------------------------------------------------------------------------------------
 
-        f_datos("php/areas.php", { key:keySeguridad}, function(data) {
+        f_datos("php/areas.php", {
+            key: keySeguridad
+        }, function(data) {
             $("#areaR").empty();
             // console.log(data);
             $.each(data, function(key, value) {
@@ -468,7 +479,9 @@ if (!isset($_SESSION)) {
 
         $("#areaR").off("change").on("change", function(e) {
             if ($table) $table.bootstrapTable('removeAll');
-            f_datos("php/deptos.php", {key:keySeguridad}, function(datDep) {
+            f_datos("php/deptos.php", {
+                key: keySeguridad
+            }, function(datDep) {
                 // console.log(datDep);
                 $("#deptoR").empty();
                 $.each(datDep, function(key, value) {
@@ -482,7 +495,7 @@ if (!isset($_SESSION)) {
             f_datos("php/empleados.php", {
                 area: $("#areaR").val(),
                 depto: $("#deptoR").val(),
-                key:keySeguridad,
+                key: keySeguridad,
             }, function(datEmp) {
                 // console.log(datEmp);
                 $("#Panelrpe").empty();
@@ -654,7 +667,9 @@ if (!isset($_SESSION)) {
 
 
         function agregar() {
-            f_datos("php/clases.php", { key:keySeguridad}, function(data) {
+            f_datos("php/clases.php", {
+                key: keySeguridad
+            }, function(data) {
                 $(" #claseSelRes").empty();
                 $.each(data, function(key, value) {
                     $("#claseSelRes").append('<option value="' + value.id_clase + '" >' + value.id_clase + ' ' + value.descripcion + '</option>');
@@ -675,7 +690,8 @@ if (!isset($_SESSION)) {
             $("#claseSelRes").change(function(event, valor) {
                 // console.log(valor);
                 f_datos("php/subclases.php", {
-                    id_clase: $("#claseSelRes option:selected").val(), key:keySeguridad
+                    id_clase: $("#claseSelRes option:selected").val(),
+                    key: keySeguridad
                 }, function(data) {
                     $("#subClaseSelRes").empty();
                     $.each(data, function(key, value) {
@@ -689,7 +705,9 @@ if (!isset($_SESSION)) {
         }
 
         function modificar() {
-            f_datos("php/clases.php", { key:keySeguridad}, function(data) {
+            f_datos("php/clases.php", {
+                key: keySeguridad
+            }, function(data) {
                 $(" #claseSelRes").empty();
                 $.each(data, function(key, value) {
                     $("#claseSelRes").append('<option value="' + value.id_clase + '" >' + value.id_clase + ' ' + value.descripcion + '</option>');
@@ -759,7 +777,8 @@ if (!isset($_SESSION)) {
 
             $("select#claseSelRes").change(function(event, valor) {
                 f_datos("php/subclases.php", {
-                    id_clase: $("#claseSelRes option:selected").val(), key:keySeguridad
+                    id_clase: $("#claseSelRes option:selected").val(),
+                    key: keySeguridad
                 }, function(data) {
                     $("#subClaseSelRes").empty();
 
@@ -823,7 +842,8 @@ if (!isset($_SESSION)) {
 
         function traspasar() {
             f_datos("php/empleados.php", {
-                action: "ShowAll", key:keySeguridad
+                action: "ShowAll",
+                key: keySeguridad
             }, function(data) {
                 $("#rpeNuevo").empty();
                 // console.log(auxResguardos);
@@ -984,4 +1004,22 @@ if (!isset($_SESSION)) {
             }
         });
     }
+
+    var open = function(verb, url, data, target) {
+        var form = document.createElement("form");
+        form.action = url;
+        form.method = verb;
+        form.target = target || "_self";
+        if (data) {
+            for (var key in data) {
+                var input = document.createElement("input");
+                input.name = key;
+                input.value = typeof data[key] === "object" ? JSON.stringify(data[key]) : data[key];
+                form.appendChild(input);
+            }
+        }
+        form.style.display = 'none';
+        document.body.appendChild(form);
+        form.submit();
+    };
 </script>

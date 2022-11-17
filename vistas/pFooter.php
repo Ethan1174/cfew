@@ -25,9 +25,9 @@ if (!isset($_SESSION)) {
 <script src="js/popper.min.js"></script>
 <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="bootstrap/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
 <script src="js/formPerfil_Modal.js"></script>
 <script type="text/javascript" src="js/virtual-select.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 <!-- locale Idioma de BootstraoTable Español-->
 <script src="bootstrap/bootstrap-table-master/dist/locale/bootstrap-table-es-MX.min.js"></script>
 

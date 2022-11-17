@@ -1,7 +1,7 @@
 <?php
 require('functMysql.php');
 require_once('seguridad.php');
-session_start();
+// session_start();
 $stmValidar = (isset($_POST["key"]))? $_POST["key"]: "";
 if($stmValidar == ""){
  $_SESSION['Num'] = 403;

@@ -27,7 +27,7 @@ function key(string_length) {
 var keySeguridad = key(50);
 // console.log(keySeguridad);
 $.post("php/refrescarSesion.php", { key: keySeguridad }, function (data, status) {
-
+    
     dataUser = data;
     // console.log(dataUser);
 });

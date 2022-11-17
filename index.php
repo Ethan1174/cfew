@@ -22,6 +22,7 @@ switch($_SESSION["Num"]){
     case 9: ilustrarReportesCeCo(); break;
     case 401: ilustrar401(); break;
     case 403: ilustrar403(); break;
+    // case 10: ilustrarReportes(); break;
 }
 
 
@@ -120,3 +121,8 @@ function ilustrar403() { // Error 403 cuando intentas acceder a una vista direct
     $plantilla->ilustrar('403_page.php');
     $plantilla->ilustrar('pFooter.php');
 }
+// function ilustrarReportes() { 
+//     $plantilla = new Plantilla;
+//     $plantilla->ilustrar('pHeader.php');
+//     $plantilla->ilustrar('reportes/reportes.php');
+// }

@@ -53,6 +53,7 @@ function formPerfil() {
 }
 function getUser() {
 	$.post("php/refrescarSesion.php", { key: keySeguridad }, function (data, status) {
+		
 		if (data.id_tipo == 22 || data.id_tipo == 31 || data.id_tipo == 40) {
 			$('#catalogoClaseDrop').hide();
 			$('#catalogoSubclaseDrop').hide();

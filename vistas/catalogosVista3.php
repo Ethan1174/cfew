@@ -414,7 +414,7 @@ if (!isset($_SESSION)) {
             </ul>
             <button id="btnReportes" class="btn btn-secondary"><i class="bi bi-file-earmark-pdf-fill"></i> Generar Reporte</button>
         </div>
-        <table id="tablaResguardo" data-show-columns="true" data-multiple-select-row="true" data-click-to-select="true" data-show-refresh="true" data-show-copy-rows="true" data-show-print="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequest" data-query-params="queryParams">
+        <table id="tablaResguardo" data-show-columns="true" data-multiple-select-row="true" data-click-to-select="true" data-show-refresh="true" data-show-copy-rows="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequest" data-query-params="queryParams">
             <thead>
                 <tr>
                     <!-- Data formatter se encuentra en main.js lín.83 -->
@@ -454,6 +454,7 @@ if (!isset($_SESSION)) {
                 var url = 'vistas/reportes/reportes.php';
                 reporte.user = $("#Panelrpe option:selected").html();
                 reporte.name = "Lista de bienes";
+                reporte.fecha = fechaHoy;
                 reporte.data = $table.bootstrapTable('getData');
                 console.log(reporte);
                 open('POST', url, reporte, '_blank');

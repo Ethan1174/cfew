@@ -11,9 +11,6 @@ ob_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="../../js/jquery-3.6.1.min.js"></script>
-    <link rel="stylesheet" href="../../bootstrap/bootstrap-table-master/dist/bootstrap-table.min.css">
     <title>Sistema de Resguardo BMPC v2.0</title>
     <style>
         @page {
@@ -116,13 +113,12 @@ ob_start();
             padding-right: 1.5cm;
             padding-top: 2cm;
             text-align: center;
-        }
+            color: rgb(77, 76, 76);
 
-        .page-number:first {
-            content: "Página "counter(page);
         }
 
         .page-number:before {
+
             content: "Página "counter(page);
         }
     </style>
@@ -198,19 +194,6 @@ ob_start();
             <h4>Administrador</h4>
         </div>
     </footer>
-    <!-- <script>
-        $(document).ready(function() {
-            var $table = $('#tablaReportes');
-            $(function() {
-                $table.bootstrapTable({
-                    data: <?php echo $data; ?>
-                });
-            });
-        });
-    </script> -->
-
-    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../bootstrap/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
 </body>
 
 </html>
@@ -231,7 +214,7 @@ $dompdf = new Dompdf();
 $options = $dompdf->getOptions();
 $options->set(array('isRemoteEnabled' => true));
 // $options->set(array('isJavascriptEnabled' => true));
-// $options->set(array('isHtml5ParserEnabled' => true));
+$options->set(array('isHtml5ParserEnabled' => true));
 $dompdf->setOptions($options);
 
 //contenido
@@ -242,5 +225,5 @@ $dompdf->setPaper('letter');
 
 $dompdf->render();
 // Evitamos descargar directamente el PDF.
-$dompdf->stream($reporteName . ".pdf", array("Attachment" => false));
+$dompdf->stream($fecha." ".$reporteName." de ".$user. ".pdf", array("Attachment" => false));
 ?>

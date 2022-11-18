@@ -89,7 +89,7 @@ if (!isset($_SESSION)) {
                         </svg> Eliminar</button></li>
             </ul>
         </div>
-        <table data-locale="es-MX" id="tablaClases" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-show-columns="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-query-params="queryParams" data-ajax="ajaxRequestCl" data-query-params="queryParams">
+        <table data-locale="es-MX" id="tablaClases" data-multiple-select-row="true" data-click-to-select="true" data-show-refresh="true" data-show-columns="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-query-params="queryParams" data-ajax="ajaxRequestCl" data-query-params="queryParams">
             <thead>
                 <tr>
                     <!-- Data formatter se encuentra en main.js lín.83 -->

@@ -6,7 +6,7 @@ require_once('seguridad.php');
 session_start();
 $Stipo = $_SESSION["id_tipo"];
 if ($Stipo == 10 || $Stipo == 11 || $Stipo == 12) {
-    $_SESSION['Num'] = 9;
+    $_SESSION['Num'] = 6;
     session_write_close();
     header("Location: ../.");
     die();
@@ -16,4 +16,3 @@ if ($Stipo == 10 || $Stipo == 11 || $Stipo == 12) {
     header("Location: ../.");
     die();
 }
-

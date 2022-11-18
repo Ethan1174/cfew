@@ -9,20 +9,38 @@ if (!isset($_SESSION['Num'])) {
     $_SESSION['Num'] = 0;
     session_write_close();
 }
-switch($_SESSION["Num"]){
-    case 0: ilustrarLogin(); break;
-    case 1: ilustrarHome(); break;
-    case 2: ilustrarClases(); break;
-    case 3: ilustrarSubClases(); break;
-    case 4: ilustrarResguardos(); break;
-    case 5: ilustrarReportesBaja(); break;
-    case 6: ilustrarReportesClase(); break;
-    case 7: ilustrarReportesFactura(); break;
-    case 8: ilustrarReportesNoSerie(); break;
-    case 9: ilustrarReportesCeCo(); break;
-    case 401: ilustrar401(); break;
-    case 403: ilustrar403(); break;
-    // case 10: ilustrarReportes(); break;
+switch ($_SESSION["Num"]) {
+    case 0:
+        ilustrarLogin();
+        break;
+    case 1:
+        ilustrarHome();
+        break;
+    case 2:
+        ilustrarClases();
+        break;
+    case 3:
+        ilustrarSubClases();
+        break;
+    case 4:
+        ilustrarResguardos();
+        break;
+    case 5:
+        ilustrarReportesBaja();
+        break;
+    case 6:
+        ilustrarReportesAlta();
+        break;
+    case 7:
+        ilustrarReportesClase();
+        break;
+    case 401:
+        ilustrar401();
+        break;
+    case 403:
+        ilustrar403();
+        break;
+        // case 10: ilustrarReportes(); break;
 }
 
 
@@ -75,6 +93,14 @@ function ilustrarReportesBaja()
     $plantilla->ilustrar('reportes_BajasVista.php');
     $plantilla->ilustrar('pFooter.php');
 }
+function ilustrarReportesAlta()
+{
+    $plantilla = new Plantilla;
+    $plantilla->ilustrar('pHeader.php');
+    $plantilla->ilustrar('pNavBar.php');
+    $plantilla->ilustrar('.php');
+    $plantilla->ilustrar('pFooter.php');
+}
 function ilustrarReportesClase()
 {
     $plantilla = new Plantilla;
@@ -83,38 +109,16 @@ function ilustrarReportesClase()
     $plantilla->ilustrar('.php');
     $plantilla->ilustrar('pFooter.php');
 }
-function ilustrarReportesFactura()
-{
-    $plantilla = new Plantilla;
-    $plantilla->ilustrar('pHeader.php');
-    $plantilla->ilustrar('pNavBar.php');
-    $plantilla->ilustrar('.php');
-    $plantilla->ilustrar('pFooter.php');
-}
-function ilustrarReportesNoSerie()
-{
-    $plantilla = new Plantilla;
-    $plantilla->ilustrar('pHeader.php');
-    $plantilla->ilustrar('pNavBar.php');
-    $plantilla->ilustrar('.php');
-    $plantilla->ilustrar('pFooter.php');
-}
-function ilustrarReportesCeCo()
-{
-    $plantilla = new Plantilla;
-    $plantilla->ilustrar('pHeader.php');
-    $plantilla->ilustrar('pNavBar.php');
-    $plantilla->ilustrar('.php');
-    $plantilla->ilustrar('pFooter.php');
-}
-function ilustrar401() { // Error 401 cuando no tiene privilegios ante un modulo.
+function ilustrar401()
+{ // Error 401 cuando no tiene privilegios ante un modulo.
     $plantilla = new Plantilla;
     $plantilla->ilustrar('pHeader.php');
     $plantilla->ilustrar('pNavBar.php');
     $plantilla->ilustrar('401_page.php');
     $plantilla->ilustrar('pFooter.php');
 }
-function ilustrar403() { // Error 403 cuando intentas acceder a una vista directamente, solo "catalogosVista.php" tiene esto funcionando.
+function ilustrar403()
+{ // Error 403 cuando intentas acceder a una vista directamente, solo "catalogosVista.php" tiene esto funcionando.
     $plantilla = new Plantilla;
     $plantilla->ilustrar('pHeader.php');
     $plantilla->ilustrar('pNavBar.php');

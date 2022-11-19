@@ -98,7 +98,7 @@ function ilustrarReportesAlta()
     $plantilla = new Plantilla;
     $plantilla->ilustrar('pHeader.php');
     $plantilla->ilustrar('pNavBar.php');
-    $plantilla->ilustrar('.php');
+    $plantilla->ilustrar('reportes_AltasVista.php');
     $plantilla->ilustrar('pFooter.php');
 }
 function ilustrarReportesClase()

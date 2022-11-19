@@ -436,7 +436,6 @@ if (!isset($_SESSION)) {
                 reporte.user = $("#Panelrpe option:selected").html();
                 reporte.name = "Lista de bienes";
                 reporte.tipo = "resguardo"
-                reporte.fecha = fechaHoy;
                 reporte.data = $table.bootstrapTable('getData');
                 console.log(reporte);
                 open('POST', url, reporte, '_blank');

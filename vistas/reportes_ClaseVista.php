@@ -226,7 +226,6 @@ if (!isset($_SESSION)) {
                 reporte.user = dataUser.nombre;
                 reporte.name = "Lista de bienes por Clase";
                 reporte.tipo = "reporteClase"
-                reporte.fecha = fechaHoy;
                 reporte.data = $table.bootstrapTable('getData');
                 console.log(reporte);
                 open('POST', url, reporte, '_blank');
@@ -459,6 +458,7 @@ if (!isset($_SESSION)) {
                     });
                 });
             });
+
             $("select#claseSelRes").change(function(event, valor) {
                 f_datos("php/subclases.php", {
                     id_clase: $("#claseSelRes option:selected").val(),

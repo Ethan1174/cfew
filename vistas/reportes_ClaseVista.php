@@ -16,69 +16,66 @@ if (!isset($_SESSION)) {
     <!-- Modal para operar Resguardos -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
-    <div class="modal fade" id="modalOperarRepoBajas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalOperarResguardo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Reguardo</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Resguardo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form class="form-horizontal" role="form" accept-charset="UTF-8" name="formRepoBajas" id="formRepoBajas" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal" role="form" accept-charset="UTF-8" name="formResguardo" id="formResguardo" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <div class="container-fluid">
+                        <div class="container">
                             <table class="table table-condensed">
                                 <tr>
                                     <td><label class="control-label"><strong>RPE: </strong></span></td>
-                                    <td><input type="text" name="rpeRes" id="rpeResBaja" class="inputMod form-control" value="" disabled></input></td>
+                                    <td><input type="text" name="rpeRes" id="rpeRes" class="form-control" value="" disabled></input></td>
                                     <td><label class="control-label"><strong>Fecha de Captura: </strong></label></td>
-                                    <td><input type="date" name="fechaCapResBaja" id="fechaCapResBaja" step="1" class="inputMod form-control " required></td>
+                                    <td><input type="date" name="fechaCapRes" id="fechaCapRes" step="1" class="inputMod form-control " required></td>
                                 </tr>
                             </table>
                         </div>
 
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="pesBien-tab" data-bs-toggle="tab" data-bs-target="#pesBien" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Datos del Bien</button>
-                                <button class="nav-link" id="pesFactura-tab" data-bs-toggle="tab" data-bs-target="#pesFactura" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Datos de Factura</button>
+                                <a class="nav-link active" id="pesBien-tab" data-bs-toggle="tab" data-bs-target="#pesBien" role="tab" aria-controls="nav-home" aria-selected="true">Datos del Bien</a>
+                                <a class="nav-link" id="pesFactura-tab" data-bs-toggle="tab" data-bs-target="#pesFactura" role="tab" aria-controls="nav-profile" aria-selected="false">Datos de Factura</a>
                             </div>
                         </nav>
                         <div class="tab-content" id="pesOpeRes">
                             <div class="tab-pane fade show active" id="pesBien" role="tabpanel" aria-labelledby="pesBien-tab" tabindex="0">
 
                                 <div class="container-fluid">
-                                    <table class="table table-condensed">
+                                    <table class="table table-striped">
                                         <tr>
                                             <td><label class="control-label"><strong>Clase: </strong></span></td>
-                                            <td>
-                                                <select class="inputMod form-control" id="claseSelRes" name="listaClases" placeholder="Clase"></select>
+                                            <td colspan="3">
+                                                <select class="form-control" id="claseSelRes" name="listaClases" placeholder="Clase"></select>
                                             </td>
-                                            <td></td>
-                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td><label class="control-label"><strong>Subclase: </strong></span></td>
-                                            <td>
-                                                <select class="inputMod form-control" id="subClaseSelRes" name="listaSubClases" placeholder="SubClase" data-search="true" data-silent-initial-value-set="true"></select>
+                                            <td colspan="3">
+                                                <select class="form-control" id="subClaseSelRes" name="listaSubClases" placeholder="SubClase" data-search="true" data-silent-initial-value-set="true"></select>
                                             </td>
-                                            <td></td>
-                                            <td></td>
+
                                         </tr>
                                         <tr>
                                             <td><label class="control-label"><strong>Descripcion: </strong></span></td>
-                                            <td><textarea rows="2" cols="40" name="desRes" id="desResBaja" class="inputMod form-control" required></textarea></td>
+                                            <td colspan="3"><textarea rows="2" cols="40" name="desRes" id="desRes" class="form-control" required></textarea></td>
                                         </tr>
                                         <tr>
                                             <td><label class="control-label"><strong>Marca: </strong></span></td>
-                                            <td><input type="text" name="marcaRes" id="marcaResBaja" class="inputMod form-control" required></input></td>
+                                            <td><input type="text" name="marcaRes" id="marcaRes" class="inputMod form-control" required></input></td>
                                             <td><label class="control-label"><strong>Modelo: </strong></label></td>
-                                            <td><input type="text" name="modeloRes" id="modeloResBaja" class="inputMod form-control" required></input></td>
+                                            <td><input type="text" name="modeloRes" id="modeloRes" class="inputMod form-control" required></input></td>
                                         </tr>
                                         <tr>
                                             <td><label class="control-label"><strong>Serie: </strong></span></td>
-                                            <td><input type="text" name="serieRes" id="serieResBaja" class="inputMod form-control" required></input></td>
+                                            <td><input type="text" name="serieRes" id="serieRes" class="inputMod form-control" required></input></td>
                                             <td><label class="control-label"><strong>Unidad: </strong></label></td>
                                             <td>
-                                                <select class="inputMod form-control" id="unidadSelResBaja" name="unidadSelRes" placeholder="Unidad" data-search="true" data-silent-initial-value-set="true">
+                                                <select class="inputMod form-control" id="unidadSelRes" name="unidadSelRes" placeholder="Unidad" data-search="true" data-silent-initial-value-set="true">
                                                     <option value="PIEZA">PIEZA</option>
                                                     <option value="KG">KG</option>
                                                     <option value="METRO">METRO</option>
@@ -90,9 +87,9 @@ if (!isset($_SESSION)) {
                                         </tr>
                                         <tr>
                                             <td><label class="control-label"><strong>Cantidad: </strong></span></td>
-                                            <td><input type="number" min="1" name="cantidadRes" id="cantidadResBaja" class="inputMod form-control" value=1 step="any" required></input></td>
+                                            <td><input type="number" min="1" name="cantidadRes" id="cantidadRes" class="inputMod form-control" value=1 step="any" required></input></td>
                                             <td><label class="control-label"><strong>Importe $: </strong></label></td>
-                                            <td><input type="number" min="1" name="importeRes" id="importeResBaja" class="inputMod form-control" value=1 step="any" required></input></td>
+                                            <td><input type="number" min="1" name="importeRes" id="importeRes" class="inputMod form-control" value=1 step="any" required></input></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -101,18 +98,18 @@ if (!isset($_SESSION)) {
                             <div class="tab-pane fade" id="pesFactura" role="tabpanel" aria-labelledby="pesFactura-tab" tabindex="0">
                                 <div class="container">
 
-                                    <table class="table table-condensed">
+                                    <table class="table table-striped">
                                         <tr>
                                             <td><label class="control-label"><strong>Número: </strong></span></td>
-                                            <td><input type="text" name="numResFac" id="numResFacBaja" class="inputMod form-control "></input></td>
-                                            <td><label class="control-label"><strong>Fecha: </strong></label></td>
-                                            <td><input type="date" name="fechaResFac" id="fechaResFacBaja" step="1" class="inputMod form-control"></td>
+                                            <td><input type="text" name="numResFac" id="numResFac" class="inputMod form-control "></input></td>
+                                            <td><label class="control-label"><strong>Fecha de Factura: </strong></label></td>
+                                            <td><input type="date" name="fechaResFac" id="fechaResFac" step="1" class="inputMod form-control"></td>
                                         </tr>
                                         <tr>
                                             <td><label class="control-label"><strong>RFC: </strong></span></td>
-                                            <td><input type="text" name="rfcResFac" id="rfcResFacBaja" class="inputMod form-control"></input></td>
+                                            <td><input type="text" name="rfcResFac" id="rfcResFac" class="inputMod form-control"></input></td>
                                             <td><label class="control-label"><strong>Posición: </strong></label></td>
-                                            <td><input type="number" name="posicionResFac" id="posicionResFacBaja" class="inputMod form-control" min=0 value="0"></input></td>
+                                            <td><input type="number" name="posicionResFac" id="posicionResFac" class="inputMod form-control" min=0 value="0"></input></td>
                                         </tr>
                                         <tr>
                                             <td><label class="control-label"><strong>Archivo: </strong></span></td>
@@ -127,6 +124,7 @@ if (!isset($_SESSION)) {
                                                 <span id="eliminarPdf"></span>
                                             </td>
                                         </tr>
+
                                     </table>
                                 </div>
                             </div>
@@ -134,10 +132,10 @@ if (!isset($_SESSION)) {
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success" id="btnguardarCambiosRepoBajas">Guardar Resguardo</button>
-                            <input type="hidden" id="rpeResBaja2" name="rpeRes2" value="" />
-                            <input type="hidden" id="idBienBaja" name="idBien" value="" />
-                            <input type="hidden" id="accionResBaja" name="accion" value="Modificar" />
+                            <button type="submit" class="btn btn-success" id="btnguardarCambiosResguardos">Editar Resguardo</button>
+                            <input type="hidden" id="rpeRes2" name="rpeRes2" value="" />
+                            <input type="hidden" id="idBien" name="idBien" value="" />
+                            <input type="hidden" id="accionRes" name="accion" value="Agregar" />
                         </div>
                     </div>
                 </form>
@@ -150,93 +148,26 @@ if (!isset($_SESSION)) {
     <!-- Fin del modal para operar Resguardos -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------------------------------- -->
-    <!-- ---------------------------------------------------------------------------------------------------------------- -->
-    <!-- ---------------------------------------------------------------------------------------------------------------- -->
-    <!-- Inicio del modal para DETALLES reguardos -->
-    <!-- ---------------------------------------------------------------------------------------------------------------- -->
-    <!-- ---------------------------------------------------------------------------------------------------------------- -->
 
-    <div class="modal fade" id="modalDetalles" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detalles</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <table class="table table-condensed">
-                            <tr>
-                                <td><label class="control-label"><strong>RPE: </strong></span></td>
-                                <td><input type="text" id="rpeResDetalle" class="inputMod form-control" value="" disabled></input></td>
-                                <td><label class="control-label"><strong>Fecha de Captura: </strong></label></td>
-                                <td><input type="date" name="fechaCapDetalle" id="fechaCapDetalle" step="1" class="inputMod form-control" disabled></td>
-                            </tr>
-                            <tr>
-                                <td><label class="control-label"><strong>Descripcion: </strong></span></td>
-                                <td colspan="3">
-                                    <textarea cols="40" id="desResDetalles" class="form-control" disabled></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="center" colspan="4">
-                                    <label class="control-label"><strong>HISTORIAL DEL BIEN</strong></span>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <small>
-                                        <table id="historico" class="table table-condensed table-bordered table-stripped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Fecha</th>
-                                                    <th>Acción</th>
-                                                    <th>Resguardante</th>
-                                                    <th>Usuario</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                            </tbody>
-                                        </table>
-                                    </small>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="container" id="clusterModClase1">
+        <h2 class="text-center" id="tituloDepto">Reportes por Clase</h2>
     </div>
-    <!-- ---------------------------------------------------------------------------------------------------------------- -->
-    <!-- ---------------------------------------------------------------------------------------------------------------- -->
-    <!-- Fin del modal para DETALLES Resguardos -->
-    <!-- ---------------------------------------------------------------------------------------------------------------- -->
-    <!-- ---------------------------------------------------------------------------------------------------------------- -->
-
     <div class="container">
         <div class="row-fluid">
             <div class="panel panel-info" id="opciones">
-                <div class="panel-heading" id="clusterModClase1">
-                    <h2 class="text-center" id="tituloDepto">Reportes de bajas</h2>
-                </div>
+
                 <div class="panelTopCatalogoResguardo">
 
                     <form role="formTopRes" id="formFiltro">
                         <div class="row">
                             <div class="col-xs-12 col-md-4 col-lg-4">
-                                <select name="areaRep" id="area" class="form-control" title="Seleccione la Zona"></select>
+                                <select name="area" id="areaR" class="form-control" title="Seleccione la Zona"></select>
                             </div>
                             <div class="col-xs-12 col-md-4 col-lg-4">
-                                <input type="date" name="fecha_inicioRep" id="fecha_inicioRep" class="form-control"></input>
+                                <select name="clase" id="PanelClase" class="form-control" title="Seleccione la clase"></select>
                             </div>
                             <div class="col-xs-12 col-md-4 col-lg-4">
-                                <input type="date" name="fecha_terminoRep" id="fecha_terminoRep" class="form-control"></input>
+                                <select name="subclase" id="PanelSubclase" class="form-control" title="Seleccione la subclase"></select>
                             </div>
                         </div>
                     </form>
@@ -247,23 +178,23 @@ if (!isset($_SESSION)) {
     </div>
     <div class="container">
         <div id="toolbar">
-
-            <button type="button" disabled class="btn btn-primary" id="btnEditarRepoBajas"><i class="bi bi-pencil-fill"></i> Editar</button>
-            <button type="button" disabled class="btn btn-info" id="btnDetallesRepoBaja"><i class="bi bi-info-circle"></i> Detalles</button>
+            <!-- <button type="button" class="btn btn-success" id="btnAgregarResguardo" data-bs-toggle="modal" data-bs-target="#modalOperarResguardo"><i class="bi bi-plus-circle-fill"></i> Agregar</button> -->
+            <button type="button"  class="btn btn-primary" id="btnEditarResguardoClase" disabled><i class="bi bi-pencil-fill"></i> Editar</button>
             <button id="btnReportes" class="btn btn-secondary"><i class="bi bi-file-earmark-pdf-fill"></i> Generar Reporte</button>
-
         </div>
-        <table id="tablaReporteBajas" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequestRepoBaja" data-query-params="queryParams">
+        <table id="tablaReporteClases" data-show-columns="true" data-multiple-select-row="true" data-click-to-select="true" data-show-refresh="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequest" data-query-params="queryParams">
             <thead>
                 <tr>
                     <th class="d-none" data-field="state" data-checkbox="true" data-print-ignore="true"></th>
                     <th data-field="id_bien" data-sortable="true">ID</th>
                     <th data-field="descripcion" data-sortable="true">Descripcion</th>
                     <th data-field="serie" data-sortable="true">Serie</th>
-                    <th data-field="rpe" data-sortable="true">RPE</th>
-                    <th data-field="motivo_baja" data-sortable="true">Motivo de Baja</th>
-                    <th data-field="fecha_baja" data-sortable="true">Fecha de baja</th>
-                    <th data-field="archivo" data-sortable="true" data-print-ignore="true" data-formatter="operateFormatter">Dictamen</th>
+                    <th data-field="cantidad" data-sortable="true">Can.</th>
+                    <th data-field="unidad" data-sortable="true">Uni.</th>
+                    <th data-field="importe" data-sortable="true">Importe</th>
+                    <th data-field="fecha_captura" data-sortable="true">Fecha Captura</th>
+                    <th data-field="clase" data-sortable="true">Clase</th>
+                    <th data-field="subclase" data-sortable="true">Sublase</th>
                 </tr>
             </thead>
             <tbody>
@@ -274,70 +205,90 @@ if (!isset($_SESSION)) {
 </div>
 <script>
     // -----------------------------------------------------------------------------------------------------------------------------------
-    // -----------------------------------------------------------Tabla reportes_baja---------------------------------------------------------
+    // -----------------------------------------------------------Tabla Resguardo---------------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------------------------
     $(document).ready(function() {
-        var $table = $('#tablaReporteBajas');
-        var select = $('#btnEditarRepoBajas');
-        var select1 = $('#btnDetallesRepoBaja');
+
+        var $table = $('#tablaReporteClases');
+        var select = $('#btnEditarResguardoClase');
+        var subclase = "";
+        var clase = "";
 
         $(function() {
-              $table.bootstrapTable();
+            $table.bootstrapTable();
             var $btnReportes = $("#btnReportes");
+
             $btnReportes.click(() => {
                 var reporte = {};
                 var url = 'vistas/reportes/reportes.php';
                 reporte.user = dataUser.nombre;
-                reporte.name = "Lista de bienes Bajas";
-                reporte.tipo = "reporteBaja"
+                reporte.name = "Lista de bienes por Clase";
+                reporte.tipo = "reporteClase"
                 reporte.fecha = fechaHoy;
                 reporte.data = $table.bootstrapTable('getData');
                 console.log(reporte);
                 open('POST', url, reporte, '_blank');
                 // console.log(obtenerDataReporte);
             });
-
         });
-        f_datos("php/areas.php", {key: keySeguridad}, function(data) {
-            $("#fecha_inicioRep").val(hoy_input_date());
-            $("#fecha_terminoRep").val(hoy_input_date());
-            $("#area").empty();
+
+        // -----------------------------------------------------------------------------------------------------------------------------------
+        // -----------------------------------------------------------Funciones del Panel Resguardo---------------------------------------------------------
+        // -----------------------------------------------------------------------------------------------------------------------------------
+
+        f_datos("php/areas.php", {
+            key: keySeguridad
+        }, function(data) {
+            $("#areaR").empty();
+            // console.log(data);
             $.each(data, function(key, value) {
-                $("#area").append('<option value="' + value.clave + '" >' + value.nombre_corto + '</option>');
+                $("#areaR").append('<option value="' + value.clave + '" >' + value.nombre_corto + '</option>');
             });
-            $("#area").val(dataUser.area);
-            $("#area").trigger("change");
+            $("#areaR").val(dataUser.area);
+            $("#areaR").trigger("change");
         });
 
-        $("#fecha_inicioRep ,#fecha_terminoRep").off("change").on("change", function(e) {
-            // console.log($("#fecha_inicioRep").val());
-            // console.log($("#fecha_terminoRep").val());
+        $("#areaR").off("change").on("change", function(e) {
+            if ($table) $table.bootstrapTable('removeAll');
+            f_datos("php/clases.php", {
+                key: keySeguridad
+            }, function(data) {
+                $(" #PanelClase").empty();
+                $.each(data, function(key, value) {
+                    
+                    $("#PanelClase").append('<option value="' + value.id_clase + '" >' + value.descripcion + '</option>');
+                });
+                $("#PanelClase").trigger("change");
+            });
+        });
+
+        $("#PanelClase").off("change").on("change", function(e) {
+              f_datos("php/subclases.php", {
+                    id_clase: $("#PanelClase option:selected").val(),
+                    key: keySeguridad
+                }, function(data) {
+                    $("#PanelSubclase").empty();
+                    $("#PanelSubclase").append('<option value="%" ><pre>Todas las Subclases</pre></option>');	
+                    $.each(data, function(key, value) {
+                        // console.log(value);
+                        $("#PanelSubclase").append('<option value="' + value.id_subclase + '" >' + value.id_subclase + ' ' + value.descripcion + '</option>');
+                    });
+                    $("#PanelSubclase").trigger("change"); 
+                });
+        });
+        
+        $("#PanelSubclase").off('change').on('change', function(e) {
             $table.bootstrapTable('refresh');
         });
-
-
         $(function() {
-
             $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function() {
                 select.prop('disabled', !$table.bootstrapTable('getSelections').length);
-                select1.prop('disabled', !$table.bootstrapTable('getSelections').length);
             });
 
             select.click(function() {
                 var ids = $.map($table.bootstrapTable('getSelections'), function(row) {
-                    auxResguardosBajas = row;
-                    // console.log(auxResguardosBajas);
-                    return row.id
-                });
-                $table.bootstrapTable('remove', {
-                    field: 'id',
-                    values: ids
-                });
-            });
-            select1.mouseenter(function() {
-                var ids = $.map($table.bootstrapTable('getSelections'), function(row) {
-                    auxResguardosBajas = row;
-                    console.log(auxResguardosBajas);
+                    auxResguardos = row;
+                    // console.log(auxResguardos);
                     return row.id
                 });
                 $table.bootstrapTable('remove', {
@@ -346,29 +297,30 @@ if (!isset($_SESSION)) {
                 });
             });
             select.prop('disabled', true);
-            select1.prop('disabled', true);
         });
-
         // -------------------------------------------------------------------------------------------
         // -------------------------------------CRUD Resguardos-------------------------------------
         // -------------------------------------------------------------------------------------------
-        $("#btnguardarCambiosRepoBajas").click(function() {
-            operarResguardoBaja();
-        });
-        $('#btnEditarRepoBajas').click(function() {
 
+        $("#btnguardarCambiosResguardos").click(function() {
+            operarResguardo();
+        });
+
+        $('#btnEditarResguardoClase').click(function() {
             modificar();
         });
-        $("#btnDetallesRepoBaja").click(function() {
-            detallesShow();
-        });
+
+       
+        // $("#btnDetalles").click(function() {
+        //     detallesShow();
+        // });
 
         // -------------------------------------------------------------------------------------------
         // -------------------------------funciones CRUD Modal Resguardo----------------------------------------
         // -------------------------------------------------------------------------------------------
-        function operarResguardoBaja() {
+        function operarResguardo() {
             // Dentro de la funcion, se llega a iterar.
-            $('#formRepoBajas').off("submit").on("submit", function(event) {
+            $('#formResguardo').off("submit").on("submit", function(event) {
                 event.preventDefault();
                 $.ajax({
                     url: 'php/operacionesResguardo.php',
@@ -379,15 +331,17 @@ if (!isset($_SESSION)) {
                     cache: false,
                     processData: false,
                     success: function(data) {
-                        console.log(data);
-                        if (data.success) {
+                        console.log(data["archivoResguardo"]);
+
+                        if (data.success || data["archivoResguardo"]) {
                             swal(
                                     "El resguardo fue operado con exito.", {
                                         icon: "success",
                                     })
                                 .then(function() {
-                                    $('#modalOperarRepoBajas').modal('hide');
-                                    $('#tablaReporteBajas').bootstrapTable('refresh');
+                                    $('#modalOperarResguardo').modal('hide');
+                                    $table.bootstrapTable('refresh');
+
                                 });
                         } else {
                             swal(
@@ -396,7 +350,7 @@ if (!isset($_SESSION)) {
                                     'error'
                                 )
                                 .then(function() {
-                                    $('#modalOperarRepoBajas').modal('hide');
+                                    $('#modalOperarResguardo').modal('hide');
                                 });
                         }
                     }
@@ -404,61 +358,95 @@ if (!isset($_SESSION)) {
             });
         }
 
+        // Funcion de validación de PDF por su extensión - Tamaño
+        $("#fileToUpload").change(function() {
+            let file = this.files[0];
+            let fileType = file.type;
+            // Sacamos el valor en megaBytes
+            let fileSize = file.size / 1024;
+            let extenOnlyPDF = ['application/pdf'];
+            console.log(fileSize);
+            if (!(fileType == extenOnlyPDF[0])) {
+                swal(
+                    'Verifica tu archivo',
+                    'Hubo un error al cargar tu archivo, solo se aceptan PDF(s)',
+                    'warning'
+                );
+                $("#fileToUpload").val('');
+                return false;
+            }
+            if (fileSize > 5120) { //No mayor a 5mb
+                swal(
+                    'Límite de tamaño del archivo',
+                    'El archivo es muy grande y no se pudo cargar',
+                    'warning'
+                );
+                $("#fileToUpload").val('');
+                return false;
+            }
+        });
+
+
+    
+
         function modificar() {
-            f_datos("php/clases.php", {key: keySeguridad}, function(data) {
+            f_datos("php/clases.php", {
+                key: keySeguridad
+            }, function(data) {
                 $(" #claseSelRes").empty();
                 $.each(data, function(key, value) {
                     $("#claseSelRes").append('<option value="' + value.id_clase + '" >' + value.id_clase + ' ' + value.descripcion + '</option>');
                 });
-                if (auxResguardosBajas.archivo != "") {
-                    // $('#archivoPDF').html("");   
+                // console.log(auxResguardos);
+                //
+                if (auxResguardos.archivo != "") {
                     $('#fileToUpload').attr('disabled', 'disabled');
-                    $('#archivoPDF').html('<a href="pdf/' + auxResguardosBajas.rpe + '/' + auxResguardosBajas.archivo + '" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardosBajas.archivo + '">' + auxResguardosBajas.archivo + '</a>');
+                    $('#archivoPDF').html('<a href="pdf/' + auxResguardos.rpe + '/' + auxResguardos.archivo + '" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardos.archivo + '">' + auxResguardos.archivo + '</a>');
                     $("#eliminarPdf").html('<button id="botonEliminarPDF" type="button" class="btn btn-outline-danger"><svg xmlns = "http://www.w3.org/2000/svg"width = "16"height = "16"fill = "currentColor"class = "bi bi-trash3-fill"viewBox = "0 0 16 16" ><path d = "M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" / ></svg>Eliminar PDF </button>')
                 } else {
                     $('#fileToUpload').removeAttr('disabled');
-                    $('#archivoPDF').html("No se encontrarón archivos del bien " + auxResguardosBajas.id_bien + " del trabajador " + auxResguardosBajas.rpe);
+                    $('#archivoPDF').html("No se encontrarón archivos del bien " + auxResguardos.id_bien + " del trabajador " + auxResguardos.rpe);
                     $("#eliminarPdf").html("");
                 }
                 $("#fileToUpload").val("");
-                // console.log(auxResguardosBajas);
-                $('#rpeResBaja').val(auxResguardosBajas.rpe);
-                $('#rpeResBaja2').val(auxResguardosBajas.rpe);
-                $('#modalOperarRepoBajas').modal('show');
-                $('#accionResBaja').val('Modificar');
-                $("#idBienBaja").val(auxResguardosBajas.id_bien);
-                $("#desResBaja").val(auxResguardosBajas.descripcion);
-                $("#marcaResBaja").val(auxResguardosBajas.marca);
-                $("#modeloResBaja").val(auxResguardosBajas.modelo);
-                $("#serieResBaja").val(auxResguardosBajas.serie);
-                $("#unidadSelResBaja").val(auxResguardosBajas.unidad);
-                $("#cantidadResBaja").val(auxResguardosBajas.cantidad);
-                $("#numResFacBaja").val(auxResguardosBajas.numero);
-                $("#rfcResFacBaja").val(auxResguardosBajas.rfc);
-                $("#fechaResFacBaja").val(auxResguardosBajas.fecha_factura);
-                $("#fechaCapResBaja").val(auxResguardosBajas.fecha_captura);
-                $("#posicionResFacBaja").val(auxResguardosBajas.posicion);
-                $("#claseSelRes").val(auxResguardosBajas.clase);
-                $("select#claseSelRes").trigger("change", auxResguardosBajas.subclase);
+                $('#rpeRes').val(auxResguardos.rpe);
+                $('#rpeRes2').val(auxResguardos.rpe);
+                $('#modalOperarResguardo').modal('show');
+                $('#accionRes').val('Modificar');
+                $("#idBien").val(auxResguardos.id_bien);
+                $("#desRes").val(auxResguardos.descripcion);
+                $("#marcaRes").val(auxResguardos.marca);
+                $("#modeloRes").val(auxResguardos.modelo);
+                $("#serieRes").val(auxResguardos.serie);
+                $("#unidadSelRes").val(auxResguardos.unidad);
+                $("#cantidadRes").val(auxResguardos.cantidad);
+                $("#numResFac").val(auxResguardos.numero);
+                $("#rfcResFac").val(auxResguardos.rfc);
+                $("#fechaResFac").val(auxResguardos.fecha_factura);
+                $("#fechaCapRes").val(auxResguardos.fecha_captura);
+                $("#posicionResFac").val(auxResguardos.posicion);
+                $("#claseSelRes").val(auxResguardos.clase);
+                $("select#claseSelRes").trigger("change", auxResguardos.subclase);
+
                 $('#botonEliminarPDF').click(function() {
                     swal({
-                        title: "¿Estás seguro de eliminar el archivo " + auxResguardosBajas.archivo + " ?",
+                        title: "¿Estás seguro de eliminar el archivo " + auxResguardos.archivo + " ?",
                         text: "El archivo no se podrá recuperar una vez hecha esta operación.",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,
                     }).then((willDelete) => {
                         if (willDelete) {
+                            eliminarPDF(auxResguardos.id_bien, auxResguardos.rpe, auxResguardos.archivo, "eliminarPDF");
                             swal(
                                 "El archivo fue eliminado con exito.", {
                                     icon: "success",
                                 }
                             );
-                            eliminarPDF(auxResguardosBajas.id_bien, auxResguardosBajas.rpe, auxResguardosBajas.archivo, "eliminarPDF");
                             $('#fileToUpload').removeAttr('disabled');
-                            $('#archivoPDF').html("No se encontraron archivos del bien " + auxResguardosBajas.id_bien + " del trabajador " + auxResguardosBajas.rpe);
+                            $('#archivoPDF').html("No se encontraron archivos del bien " + auxResguardos.id_bien + " del trabajador " + auxResguardos.rpe);
                             $("#eliminarPdf").html("");
-                            $($table).bootstrapTable('refresh');
+                            $table.bootstrapTable('refresh');
                         } else {
                             swal(
                                 'Sin cambios',
@@ -468,14 +456,15 @@ if (!isset($_SESSION)) {
                         }
                     });
                 });
-
             });
+
             $("select#claseSelRes").change(function(event, valor) {
-                // console.log(valor);
                 f_datos("php/subclases.php", {
-                    id_clase: $("#claseSelRes option:selected").val(), key: keySeguridad
+                    id_clase: $("#claseSelRes option:selected").val(),
+                    key: keySeguridad
                 }, function(data) {
                     $("#subClaseSelRes").empty();
+
                     $.each(data, function(key, value) {
                         // console.log(value);
                         $("#subClaseSelRes").append('<option value="' + value.id_subclase + '" >' + value.id_subclase + ' ' + value.descripcion + '</option>');
@@ -484,9 +473,8 @@ if (!isset($_SESSION)) {
                         $("#subClaseSelRes").val(valor);
                 });
             });
-
-
         }
+
 
         function eliminarPDF(id, rpe, nombreArchivo, accion) {
             $.ajax({
@@ -504,18 +492,18 @@ if (!isset($_SESSION)) {
             });
         }
 
+       
         function detallesShow() {
-            // console.log(auxResguardosBajas);
-            $("#modalDetalles #exampleModalLabel").html("Detalles de resguardo Id." + auxResguardosBajas.id_bien);
-            $('#rpeResDetalle').val(auxResguardosBajas.rpe);
-            $("#fechaCapDetalle").val(auxResguardosBajas.fecha_captura);
-            $("#desResDetalles").val(auxResguardosBajas.descripcion);
-            $("#importeResBaja").val(auxResguardosBajas.importe);
+            $("#modalDetalles #exampleModalLabel").html("Detalles de resguardo Id." + auxResguardos.id_bien);
+            $('#rpeResDetalle').val(auxResguardos.rpe);
+            $("#fechaCapDetalle").val(auxResguardos.fecha_captura);
+            $("#desResDetalles").val(auxResguardos.descripcion);
+            $("#importeResBaja").val(auxResguardos.importe);
             $('#modalDetalles').modal('show');
             f_datos("php/selectBienesByHistorico.php", {
-                id_bien: auxResguardosBajas.id_bien, key: keySeguridad
+                id_bien: auxResguardos.id_bien
             }, function(datHist) {
-                // console.log(datHist);
+                console.log(datHist);
                 $("#historico tbody").empty();
                 $.each(datHist, function(key, value) {
                     tr = $("<tr />").appendTo($("#historico tbody"));
@@ -528,36 +516,20 @@ if (!isset($_SESSION)) {
         }
     });
 
-    function operateFormatter(value, row, index) {
-        // console.log(row);
-        if (row.url_dictamen != "La carpeta no existe" && row.url_dictamen != null) {
-            return [
-                '<a href="' + row.url_dictamen + '" target="_blank"><img src="imagenes/pdf.ico"></a><span>Ver archivo</span>'
-            ].join('')
-        } else {
-            return [
-                '<a href="#"><img src="imagenes/pdfNoFile.ico"></a><span>Sin archivo</span>'
-            ].join('')
-        }
-
-    }
-
     function queryParams(params) {
-        // console.log(String($("#fecha_inicioRep").val()));
-        // console.log(String($("#fecha_terminoRep").val()));
         params.key = keySeguridad;
-        params.fecha_inicio = $("#fecha_inicioRep").val();
-        params.fecha_termino = $("#fecha_terminoRep").val();
+        params.clase = $("#PanelClase option:selected").val();
+        params.subclase = $("#PanelSubclase option:selected").val()
         // console.log(params);
         return params;
     }
 
-    function ajaxRequestRepoBaja(params) {
-        // console.log(params);
-        var url = 'php/selectAllRepoBaja.php';
+    function ajaxRequest(params) {
+        // console.log(params.data);
+        var url = 'php/selectAllResguardoClase.php';
         var data = jQuery.parseJSON(params.data);
         $.post(url, data).then(function(res) {
-            // console.log(res);
+            // console.log(res.data);
             if (res.success) {
                 params.success(res.data);
             } else {
@@ -565,4 +537,6 @@ if (!isset($_SESSION)) {
             }
         });
     }
+
+   
 </script>

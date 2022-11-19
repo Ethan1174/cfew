@@ -1,8 +1,19 @@
 <?php
+
 $user = (isset($_POST['user'])) ? $_POST['user'] : "";
 $reporteName = (isset($_POST['name'])) ? $_POST['name'] : "";
 $data = (isset($_POST['data'])) ? $_POST['data'] : "";
 $fecha = (isset($_POST['fecha'])) ? $_POST['fecha'] : "";
+$tipo = (isset($_POST['tipo'])) ? $_POST['tipo'] : "";
+if ($user == "") {
+    // echo '<script>alert("No tienes permitido navegar por URL"); window.location ="../."</script>';
+    // die();
+    session_start();
+    $_SESSION['Num'] = 403;
+    session_write_close();
+    header("Location: ../.");
+    die();
+}
 ob_start();
 ?>
 <html>
@@ -34,11 +45,10 @@ ob_start();
 
         footer {
             position: absolute;
-            ;
             bottom: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 3cm;
+            height: 2.7cm;
         }
 
         #footer2 {
@@ -58,7 +68,7 @@ ob_start();
             position: absolute;
             left: 30%;
             text-align: center;
-            top: 75%;
+            top: 80%;
         }
 
         #grupo2 {
@@ -91,6 +101,7 @@ ob_start();
             border-collapse: collapse;
             font-size: 12px;
             width: 100%;
+            padding-bottom: 2%;
             /* margin-left: 3%;
             margin-right: 3%; */
         }
@@ -140,19 +151,58 @@ ob_start();
             <p>Reporte generado el dia <?= $fecha ?> </p>
         </div>
     </header>
+<?php
 
+if ($tipo == "resguardo"){
+?>
     <table id="tablaReportes">
+        <thead>
+            <tr>
+                <th >ID</th>
+                <th >Descripcion</th>
+                <th >Serie</th>
+                <th >Cantidad</th>
+                <th >Unidad</th>
+                <th >Importe</th>
+                <th >Fecha Captura</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $dat1 = json_decode($data, true);
+            foreach ($dat1 as $key => $value) {
+                echo "<tr>";
+                echo "<td>" . $value["id_bien"] . "</td>";
+                echo "<td>" . $value["descripcion"] . "</td>";
+                echo "<td>" . $value["serie"] . "</td>";
+                echo "<td>" . $value["cantidad"] . "</td>";
+                echo "<td>" . $value["unidad"] . "</td>";
+                echo "<td>" . $value["importe"] . "</td>";
+                echo "<td>" . $value["fecha_captura"] . "</td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+<?php
+        }
+        else if ($tipo == "reporteClase") 
+        {
+?>
+ <table id="tablaReportes">
         <thead>
             <tr>
 
                 <!-- Data formatter se encuentra en main.js lín.83 -->
-                <th data-field="id_bien" data-sortable="true">ID</th>
-                <th data-field="descripcion" data-sortable="true">Descripcion</th>
-                <th data-field="serie" data-sortable="true">Serie</th>
-                <th data-field="cantidad" data-sortable="true">Cantidad</th>
-                <th data-field="unidad" data-sortable="true">Unidad</th>
-                <th data-field="importe" data-sortable="true">Importe</th>
-                <th data-field="fecha_captura" data-sortable="true">Fecha Captura</th>
+                <th >ID</th>
+                <th >Descripcion</th>
+                <th >Serie</th>
+                <th >Cantidad</th>
+                <th >Unidad</th>
+                <th >Importe</th>
+                <th >Fecha Captura</th>
+                <th >Clase</th>
+                <th>Subclase</th>
             </tr>
         </thead>
         <tbody>
@@ -169,19 +219,50 @@ ob_start();
                 echo "<td>" . $value["unidad"] . "</td>";
                 echo "<td>" . $value["importe"] . "</td>";
                 echo "<td>" . $value["fecha_captura"] . "</td>";
+                echo "<td>" . $value["clase"] . "</td>";
+                echo "<td>" . $value["subclase"] . "</td>";
                 echo "</tr>";
             }
-
             ?>
         </tbody>
     </table>
+    <?php
+        }else if($tipo == "reporteBaja"){
+    ?>
+    <table id="tablaReportes">
+        <thead>
+            <tr>
 
+                <!-- Data formatter se encuentra en main.js lín.83 -->
+                <th >ID</th>
+                <th >Descripcion</th>
+                <th >Serie</th>
+                <th >RPE</th>
+                <th >Motivo de Baja</th>
+                <th >Fecha de baja</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
 
+            $dat1 = json_decode($data, true);
 
-    <!-- <main>
-        <p style="page-break-after: always;"></p>
-        <p style="page-break-after: never;"></p>
-    </main> -->
+            foreach ($dat1 as $key => $value) {
+                echo "<tr>";
+                echo "<td>" . $value["id_bien"] . "</td>";
+                echo "<td>" . $value["descripcion"] . "</td>";
+                echo "<td>" . $value["serie"] . "</td>";
+                echo "<td>" . $value["rpe"] . "</td>";
+                echo "<td>" . $value["motivo_baja"] . "</td>";
+                echo "<td>" . $value["fecha_baja"] . "</td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+    <?php
+        }    
+    ?>
     <div id="footer2">
         <div class="page-number"></div>
     </div>

@@ -79,6 +79,23 @@ function hoy_input_date() {
     var today = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
     return today;
 }
+ var open = function(verb, url, data, target) {
+        var form = document.createElement("form");
+        form.action = url;
+        form.method = verb;
+        form.target = target || "_self";
+        if (data) {
+            for (var key in data) {
+                var input = document.createElement("input");
+                input.name = key;
+                input.value = typeof data[key] === "object" ? JSON.stringify(data[key]) : data[key];
+                form.appendChild(input);
+            }
+        }
+        form.style.display = 'none';
+        document.body.appendChild(form);
+        form.submit();
+    };
 // // Se edita el formato de retorno de la primer columna de la tabla a imprimir, el resultado es una numeración de las filas
 // function stateFormatter(value, row, index) {
 //     // Iniciamos desde el numero 1

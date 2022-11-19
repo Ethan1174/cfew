@@ -106,7 +106,7 @@ function ilustrarReportesClase()
     $plantilla = new Plantilla;
     $plantilla->ilustrar('pHeader.php');
     $plantilla->ilustrar('pNavBar.php');
-    $plantilla->ilustrar('.php');
+    $plantilla->ilustrar('reportes_ClaseVista.php');
     $plantilla->ilustrar('pFooter.php');
 }
 function ilustrar401()

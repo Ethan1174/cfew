@@ -256,14 +256,14 @@ if (!isset($_SESSION)) {
         <table id="tablaReporteBajas" data-multiple-select-row="true" data-click-to-select="true" data-show-copy-rows="true" data-show-print="true" data-show-refresh="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequestRepoBaja" data-query-params="queryParams">
             <thead>
                 <tr>
-                    <th class="d-none" data-field="state" data-checkbox="true" data-print-ignore="true"></th>
+                    <th class="d-none" data-checkbox="true"></th>
                     <th data-field="id_bien" data-sortable="true">ID</th>
                     <th data-field="descripcion" data-sortable="true">Descripcion</th>
                     <th data-field="serie" data-sortable="true">Serie</th>
                     <th data-field="rpe" data-sortable="true">RPE</th>
                     <th data-field="motivo_baja" data-sortable="true">Motivo de Baja</th>
                     <th data-field="fecha_baja" data-sortable="true">Fecha de baja</th>
-                    <th data-field="archivo" data-sortable="true" data-print-ignore="true" data-formatter="operateFormatter">Dictamen</th>
+                    <th data-field="archivo" data-sortable="true" data-formatter="operateFormatter">Dictamen</th>
                 </tr>
             </thead>
             <tbody>

@@ -179,7 +179,7 @@ if (!isset($_SESSION)) {
     <div class="container">
         <div id="toolbar">
             <!-- <button type="button" class="btn btn-success" id="btnAgregarResguardo" data-bs-toggle="modal" data-bs-target="#modalOperarResguardo"><i class="bi bi-plus-circle-fill"></i> Agregar</button> -->
-            <button type="button"  class="btn btn-primary" id="btnEditarResguardoClase" disabled><i class="bi bi-pencil-fill"></i> Editar</button>
+            <button type="button" class="btn btn-primary" id="btnEditarResguardoClase" disabled><i class="bi bi-pencil-fill"></i> Editar</button>
             <button id="btnReportes" class="btn btn-secondary"><i class="bi bi-file-earmark-pdf-fill"></i> Generar Reporte</button>
         </div>
         <table id="tablaReporteClases" data-show-columns="true" data-multiple-select-row="true" data-click-to-select="true" data-show-refresh="true" data-toolbar="#toolbar" data-pagination="true" data-search="true" data-method="post" data-ajax="ajaxRequest" data-query-params="queryParams">
@@ -195,6 +195,8 @@ if (!isset($_SESSION)) {
                     <th data-field="fecha_captura" data-sortable="true">Fecha Captura</th>
                     <th data-field="clase" data-sortable="true">Clase</th>
                     <th data-field="subclase" data-sortable="true">Sublase</th>
+                    <th data-field="archivo" data-sortable="true" data-formatter="operateFormatter">Factura</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -255,7 +257,7 @@ if (!isset($_SESSION)) {
             }, function(data) {
                 $(" #PanelClase").empty();
                 $.each(data, function(key, value) {
-                    
+
                     $("#PanelClase").append('<option value="' + value.id_clase + '" >' + value.descripcion + '</option>');
                 });
                 $("#PanelClase").trigger("change");
@@ -263,20 +265,20 @@ if (!isset($_SESSION)) {
         });
 
         $("#PanelClase").off("change").on("change", function(e) {
-              f_datos("php/subclases.php", {
-                    id_clase: $("#PanelClase option:selected").val(),
-                    key: keySeguridad
-                }, function(data) {
-                    $("#PanelSubclase").empty();
-                    $("#PanelSubclase").append('<option value="%" ><pre>Todas las Subclases</pre></option>');	
-                    $.each(data, function(key, value) {
-                        // console.log(value);
-                        $("#PanelSubclase").append('<option value="' + value.id_subclase + '" >' + value.id_subclase + ' ' + value.descripcion + '</option>');
-                    });
-                    $("#PanelSubclase").trigger("change"); 
+            f_datos("php/subclases.php", {
+                id_clase: $("#PanelClase option:selected").val(),
+                key: keySeguridad
+            }, function(data) {
+                $("#PanelSubclase").empty();
+                $("#PanelSubclase").append('<option value="%" ><pre>Todas las Subclases</pre></option>');
+                $.each(data, function(key, value) {
+                    // console.log(value);
+                    $("#PanelSubclase").append('<option value="' + value.id_subclase + '" >' + value.id_subclase + ' ' + value.descripcion + '</option>');
                 });
+                $("#PanelSubclase").trigger("change");
+            });
         });
-        
+
         $("#PanelSubclase").off('change').on('change', function(e) {
             $table.bootstrapTable('refresh');
         });
@@ -310,7 +312,7 @@ if (!isset($_SESSION)) {
             modificar();
         });
 
-       
+
         // $("#btnDetalles").click(function() {
         //     detallesShow();
         // });
@@ -387,7 +389,7 @@ if (!isset($_SESSION)) {
         });
 
 
-    
+
 
         function modificar() {
             f_datos("php/clases.php", {
@@ -457,7 +459,6 @@ if (!isset($_SESSION)) {
                     });
                 });
             });
-
             $("select#claseSelRes").change(function(event, valor) {
                 f_datos("php/subclases.php", {
                     id_clase: $("#claseSelRes option:selected").val(),
@@ -474,8 +475,6 @@ if (!isset($_SESSION)) {
                 });
             });
         }
-
-
         function eliminarPDF(id, rpe, nombreArchivo, accion) {
             $.ajax({
                 url: 'php/operacionesResguardo.php',
@@ -491,8 +490,6 @@ if (!isset($_SESSION)) {
                 }
             });
         }
-
-       
         function detallesShow() {
             $("#modalDetalles #exampleModalLabel").html("Detalles de resguardo Id." + auxResguardos.id_bien);
             $('#rpeResDetalle').val(auxResguardos.rpe);
@@ -516,6 +513,21 @@ if (!isset($_SESSION)) {
         }
     });
 
+    function operateFormatter(value, row, index) {
+        // console.log(row);
+        if (row.archivo == "") {
+            return [
+                '<a href="#"><img src="imagenes/pdfNoFile.ico"></a><span>Sin archivo</span>'
+            ].join('')
+        } else {
+            return [
+                '<a href="pdf/' + row.rpe + '/'+row.archivo+'" target="_blank"><img src="imagenes/pdf.ico"></a><span>Ver archivo</span>'
+            ].join('')
+
+        }
+
+    }
+
     function queryParams(params) {
         params.key = keySeguridad;
         params.clase = $("#PanelClase option:selected").val();
@@ -537,6 +549,4 @@ if (!isset($_SESSION)) {
             }
         });
     }
-
-   
 </script>

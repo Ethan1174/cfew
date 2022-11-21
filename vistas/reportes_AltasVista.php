@@ -178,7 +178,7 @@ if (!isset($_SESSION)) {
                     <th data-field="descripcion" data-sortable="true">Descripcion</th>
                     <th data-field="serie" data-sortable="true">Serie</th>
                     <th data-field="rpe" data-sortable="true">RPE</th>
-                    <th data-field="fecha_captura" data-sortable="true">Fecha Captura</th>
+                    <th data-field="fecha_captura" data-sortable="true">Fecha</th>
                     <th data-field="archivo" data-sortable="true" data-formatter="operateFormatter">Archivo del Bien</th>
                 </tr>
             </thead>
@@ -212,7 +212,9 @@ if (!isset($_SESSION)) {
         // -----------------------------------------------------------------------------------------------------------------------------------
         // -----------------------------------------------------------Funciones del Panel Resguardo---------------------------------------------------------
         // -----------------------------------------------------------------------------------------------------------------------------------
-        f_datos("php/areas.php", {key: keySeguridad}, function(data) {
+        f_datos("php/areas.php", {
+            key: keySeguridad
+        }, function(data) {
             $("#fecha_inicioRep").val(hoy_input_date());
             $("#fecha_terminoRep").val(hoy_input_date());
             $("#area").empty();
@@ -272,12 +274,10 @@ if (!isset($_SESSION)) {
                                     icon: "success",
                                 }
                             ).then(function() {
-                                    $('#modalOperarResguardo').modal('hide');
-                                    $table.bootstrapTable('refresh');
-                                }
-                            );
-                        }
-                        else {
+                                $('#modalOperarResguardo').modal('hide');
+                                $table.bootstrapTable('refresh');
+                            });
+                        } else {
                             swal(
                                 'Error de Operacion',
                                 'Hubo un error en la base de datos. ' + data.message,
@@ -317,6 +317,7 @@ if (!isset($_SESSION)) {
                 return false;
             }
         });
+
         function modificar() {
             f_datos("php/clases.php", {
                 key: keySeguridad
@@ -329,8 +330,7 @@ if (!isset($_SESSION)) {
                     $('#fileToUpload').attr('disabled', 'disabled');
                     $('#archivoPDF').html('<a href="pdf/' + auxResguardos.rpe + '/' + auxResguardos.archivo + '" target="_blank"><img src="imagenes/pdf.ico" title="pdf' + auxResguardos.archivo + '">' + auxResguardos.archivo + '</a>');
                     $("#eliminarPdf").html('<button id="botonEliminarPDF" type="button" class="btn btn-outline-danger"><svg xmlns = "http://www.w3.org/2000/svg"width = "16"height = "16"fill = "currentColor"class = "bi bi-trash3-fill"viewBox = "0 0 16 16" ><path d = "M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" / ></svg>Eliminar PDF </button>')
-                }
-                else {
+                } else {
                     $('#fileToUpload').removeAttr('disabled');
                     $('#archivoPDF').html("No se encontrarón archivos del bien " + auxResguardos.id_bien + " del trabajador " + auxResguardos.rpe);
                     $("#eliminarPdf").html("");
@@ -397,6 +397,7 @@ if (!isset($_SESSION)) {
                 });
             });
         }
+
         function eliminarPDF(id, rpe, nombreArchivo, accion) {
             $.ajax({
                 url: 'php/operacionesResguardo.php',
@@ -412,6 +413,7 @@ if (!isset($_SESSION)) {
                 }
             });
         }
+
         function detallesShow() {
             $("#modalDetalles #exampleModalLabel").html("Detalles de resguardo Id." + auxResguardos.id_bien);
             $('#rpeResDetalle').val(auxResguardos.rpe);
@@ -434,33 +436,34 @@ if (!isset($_SESSION)) {
             });
         }
     });
+
     function operateFormatter(value, row, index) {
         if (row.archivo == "") {
             return [
                 '<a href="#"><img src="imagenes/pdfNoFile.ico"></a><span>Sin archivo</span>'
             ].join('')
-        } 
-        else {
+        } else {
             return [
-                '<a href="pdf/' + row.rpe + '/'+row.archivo+'" target="_blank"><img src="imagenes/pdf.ico"></a><span>Ver archivo</span>'
+                '<a href="pdf/' + row.rpe + '/' + row.archivo + '" target="_blank"><img src="imagenes/pdf.ico"></a><span>Ver archivo</span>'
             ].join('')
 
         }
     }
+
     function queryParams(params) {
         params.key = keySeguridad;
         params.fecha_inicio = $("#fecha_inicioRep").val();
         params.fecha_termino = $("#fecha_terminoRep").val();
         return params;
     }
+
     function ajaxRequest(params) {
         var url = 'php/selectAllResguardoAlta.php';
         var data = jQuery.parseJSON(params.data);
         $.post(url, data).then(function(res) {
             if (res.success) {
                 params.success(res.data);
-            }
-            else {
+            } else {
                 params.error(res.message);
             }
         });

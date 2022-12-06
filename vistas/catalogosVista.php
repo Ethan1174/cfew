@@ -110,7 +110,7 @@ if (!isset($_SESSION)) {
         // -----------------------------------------------------------------------------------------------------------------------------------
         $(function() {
             console.log(dataUser);
-            cargarTablaBT($table, "Lista de Clases");
+            $table.bootstrapTable();
 
         });
         getAllSubclasesById();

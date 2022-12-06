@@ -20,7 +20,6 @@ if ($user == "") {
 ob_start();
 ?>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,14 +29,12 @@ ob_start();
         @page {
             margin: 0cm 0cm;
         }
-
         body {
             margin-top: 6cm;
             margin-left: 1.7cm;
             margin-right: 1.7cm;
             margin-bottom: 3cm;
         }
-
         header {
             position: fixed;
             top: 1cm;
@@ -45,7 +42,6 @@ ob_start();
             right: 0cm;
             height: 3cm;
         }
-
         footer {
             position: absolute;
             bottom: 0cm;
@@ -53,7 +49,6 @@ ob_start();
             right: 0cm;
             height: 2.7cm;
         }
-
         #footer2 {
             position: fixed;
             bottom: 0cm;
@@ -61,19 +56,16 @@ ob_start();
             right: 0cm;
             height: 3cm;
         }
-
         #imagen {
             position: absolute;
             left: 5%;
         }
-
         #grupo1 {
             position: absolute;
             left: 30%;
             text-align: center;
-            top: 80%;
+            top: 100%;
         }
-
         #grupo2 {
             position: absolute;
             right: 5%;
@@ -82,7 +74,6 @@ ob_start();
             font-size: 14px;
             color: #009b6e;
         }
-
         #grupo3 {
             position: absolute;
             left: 10%;
@@ -90,7 +81,6 @@ ob_start();
             width: 25%;
             text-align: center;
         }
-
         #grupo4 {
             position: absolute;
             right: 10%;
@@ -98,7 +88,6 @@ ob_start();
             width: 25%;
             text-align: center;
         }
-
         table {
             padding-top: 0cm;
             border-collapse: collapse;
@@ -108,13 +97,11 @@ ob_start();
             /* margin-left: 3%;
             margin-right: 3%; */
         }
-
         table,
         th,
         td {
             border: 1px solid grey;
         }
-
         th,
         td {
             text-align: left;
@@ -122,19 +109,15 @@ ob_start();
             font-size: 11px;
             padding: 5px;
         }
-
         .page-number {
             padding-right: 1.5cm;
             padding-top: 2cm;
             text-align: center;
             color: rgb(77, 76, 76);
-
         }
-
         .page-number:before {
-
             content: "Página "counter(page);
-        }
+        }   
     </style>
 </head>
 
@@ -322,9 +305,9 @@ $dompdf = new Dompdf();
 
 // Activamos opciones que permita obtener imagenes
 $options = $dompdf->getOptions();
-$options->set(array('isRemoteEnabled' => true));
+$options->set(array('isRemoteEnabled' => true));    
 // $options->set(array('isJavascriptEnabled' => true));
-$options->set(array('isHtml5ParserEnabled' => true));
+// $options->set(array('isHtml5ParserEnabled' => true));
 $dompdf->setOptions($options);
 
 //contenido

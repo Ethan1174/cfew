@@ -951,7 +951,8 @@ if (!isset($_SESSION)) {
             $("#importeResBaja").val(auxResguardos.importe);
             $('#modalDetalles').modal('show');
             f_datos("php/selectBienesByHistorico.php", {
-                id_bien: auxResguardos.id_bien
+                id_bien: auxResguardos.id_bien,
+                key: keySeguridad
             }, function(datHist) {
                 console.log(datHist);
                 $("#historico tbody").empty();

@@ -87,7 +87,7 @@ if (!isset($_SESSION)) {
         var $table = $('#tablaSubClases');
         var select = $('#botonOpcionesSub');
         $(function() {
-            cargarTablaBT($table, "Lista de Subclases");
+            $table.bootstrapTable();
         });
         $(function() {
             $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function() {

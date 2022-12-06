@@ -3,7 +3,7 @@ error_reporting(0);
 // require('usuarios.php');
 require('functMysql.php');
 if (isset($_POST['rpe']) && isset($_POST['pass'])) {
-	$rpe=$_POST['rpe'];
+	$rpe=  $_POST['rpe'];
 	$pass=$_POST['pass'];  
 	$sql = "SELECT rpe, nombre, usuario_scate.id_tipo, activo, area_clave as area, id_depto, depto_nombre, descripcion as tipo FROM usuario_scate INNER JOIN tipo_scate ON (usuario_scate.id_tipo = tipo_scate.id_tipo) WHERE rpe='$rpe' AND password=SHA1('$pass')";
 	$resultado = getArraySQL($sql, "usuarios", false);
